@@ -22,6 +22,10 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
   useEffect(() => {
     if (!shouldAnimate) return;
 
+    // Panels START covering the screen (already at y:0)
+    gsap.set(topPanelRef.current, { yPercent: 0 });
+    gsap.set(bottomPanelRef.current, { yPercent: 0 });
+
     const tl = gsap.timeline({
       onComplete: () => {
         sessionStorage.setItem('zyamaru-shutter-played', 'true');
@@ -29,25 +33,8 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
       },
     });
 
-    // Panels start off-screen
-    gsap.set(topPanelRef.current, { yPercent: -100 });
-    gsap.set(bottomPanelRef.current, { yPercent: 100 });
-
-    // Phase 1: Panels slide in and meet in the middle
-    tl.to(topPanelRef.current, {
-      yPercent: 0,
-      duration: 0.5,
-      ease: 'power3.inOut',
-    })
-      .to(
-        bottomPanelRef.current,
-        {
-          yPercent: 0,
-          duration: 0.5,
-          ease: 'power3.inOut',
-        },
-        '<'
-      )
+    // Phase 1: Brief hold — cinematic anticipation (screen is already covered)
+    tl.to({}, { duration: 0.35 })
       // Phase 2: Subtle "snap" — tiny scale bounce
       .to([topPanelRef.current, bottomPanelRef.current], {
         scaleY: 1.005,
@@ -63,27 +50,25 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
       .call(() => {
         playSnapSound();
       })
-      // Phase 3: Hold for 0.3s (shutter closed)
-      .to({}, { duration: 0.3 })
-      // ZYAMARU text flash
+      // Phase 3: ZYAMARU text flash
       .fromTo(
         '.shutter-logo',
         { opacity: 0, scale: 0.9 },
         { opacity: 1, scale: 1, duration: 0.15, ease: 'power2.out' }
       )
-      .to({}, { duration: 0.2 })
+      .to({}, { duration: 0.25 })
       .to('.shutter-logo', { opacity: 0, duration: 0.1 })
-      // Phase 4: Panels split open
+      // Phase 4: Panels split open to reveal content
       .to(topPanelRef.current, {
         yPercent: -100,
-        duration: 0.6,
+        duration: 0.7,
         ease: 'power3.inOut',
       })
       .to(
         bottomPanelRef.current,
         {
           yPercent: 100,
-          duration: 0.6,
+          duration: 0.7,
           ease: 'power3.inOut',
         },
         '<'
@@ -91,7 +76,7 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
       // Phase 5: Fade out container
       .to(containerRef.current, {
         opacity: 0,
-        duration: 0.2,
+        duration: 0.15,
         onComplete: () => {
           if (containerRef.current) {
             containerRef.current.style.display = 'none';
@@ -112,7 +97,7 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
         pointerEvents: 'none',
       }}
     >
-      {/* Top Panel */}
+      {/* Top Panel — starts covering top half */}
       <div
         ref={topPanelRef}
         style={{
@@ -137,7 +122,7 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
         />
       </div>
 
-      {/* Bottom Panel */}
+      {/* Bottom Panel — starts covering bottom half */}
       <div
         ref={bottomPanelRef}
         style={{

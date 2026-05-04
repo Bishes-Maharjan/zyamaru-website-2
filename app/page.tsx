@@ -31,22 +31,28 @@ export default function Home() {
       <FilmGrain />
       <CustomCursor />
 
-      {shutterDone && (
-        <main>
-          <Navbar />
-          <HeroSection />
-          <StatsBar />
-          <MarqueeText />
-          <FeaturedCourses />
-          <WhyChooseUs />
-          <InstructorSection />
-          <CurriculumPreview />
-          <TestimonialSection />
-          <ShowreelSection />
-          <CTASection />
-          <Footer />
-        </main>
-      )}
+      {/* Content renders immediately but stays invisible behind the shutter.
+          When shutter opens, content is already mounted and fades in seamlessly. */}
+      <main
+        style={{
+          opacity: shutterDone ? 1 : 0,
+          transition: 'opacity 0.5s ease-out',
+        }}
+      >
+        <Navbar />
+        <HeroSection />
+        <StatsBar />
+        <MarqueeText />
+        <FeaturedCourses />
+        <WhyChooseUs />
+        <InstructorSection />
+        <CurriculumPreview />
+        <TestimonialSection />
+        <ShowreelSection />
+        <CTASection />
+        <Footer />
+      </main>
     </SmoothScroll>
   );
 }
+

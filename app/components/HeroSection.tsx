@@ -93,7 +93,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -135,8 +135,8 @@ export default function HeroSection() {
         <TextReveal
           text="Master the Art of Visual Storytelling"
           as="h1"
-          delay={2.1}
-          staggerDelay={0.06}
+          delay={0.4}
+          staggerDelay={0.05}
           className=""
         />
 
@@ -144,7 +144,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
             fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
             lineHeight: 1.7,
@@ -161,7 +161,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
           style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -192,7 +192,7 @@ export default function HeroSection() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.5, duration: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
         className="scroll-indicator"
         style={{
           position: 'absolute',
