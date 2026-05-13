@@ -3,9 +3,6 @@
 import { useState, useCallback } from 'react';
 import SmoothScroll from './components/SmoothScroll';
 import ShutterAnimation from './components/ShutterAnimation';
-import FilmGrain from './components/FilmGrain';
-import CustomCursor from './components/CustomCursor';
-import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import StatsBar from './components/StatsBar';
 import MarqueeText from './components/MarqueeText';
@@ -28,8 +25,6 @@ export default function Home() {
   return (
     <SmoothScroll>
       <ShutterAnimation onComplete={handleShutterComplete} />
-      <FilmGrain />
-      <CustomCursor />
 
       {/* Content pre-renders behind the shutter at opacity:0.
           When shutter completes, it fades in instantly — no mounting delay. */}
@@ -39,7 +34,6 @@ export default function Home() {
           transition: 'opacity 0.5s ease-out',
         }}
       >
-        <Navbar />
         <HeroSection />
         <StatsBar />
         <MarqueeText />

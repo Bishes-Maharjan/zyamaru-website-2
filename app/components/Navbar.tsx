@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const navLinks = [
   { label: 'Courses', href: '#courses' },
   { label: 'About', href: '#about' },
+  { label: 'Instructor', href: '#instructor' },
   { label: 'Curriculum', href: '#curriculum' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
@@ -14,6 +17,8 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +30,17 @@ export default function Navbar() {
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setMobileOpen(false);
+
+    if (pathname !== '/') {
+      router.push('/' + href);
+      return;
+    }
+
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
-    setMobileOpen(false);
   };
 
   return (
@@ -37,7 +48,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: 'fixed',
           top: 0,
@@ -56,8 +67,8 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
+        <Link
+          href="/"
           style={{
             fontFamily: 'var(--font-heading)',
             fontSize: '1.4rem',
@@ -68,7 +79,7 @@ export default function Navbar() {
           }}
         >
           ZYAMARU
-        </a>
+        </Link>
 
         {/* Desktop Nav Links */}
         <div

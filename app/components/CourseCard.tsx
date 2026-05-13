@@ -7,13 +7,15 @@ interface CourseCardProps {
   instructor: string;
   price: string;
   originalPrice?: string;
-  rating: number;
-  students: string;
+  rating?: number;
+  students?: string;
   duration: string;
   level: string;
   badge?: string;
   image: string;
   index: number;
+  isUpcoming?: boolean;
+  isExpectedPrice?: boolean;
 }
 
 export default function CourseCard({
@@ -28,6 +30,8 @@ export default function CourseCard({
   badge,
   image,
   index,
+  isUpcoming,
+  isExpectedPrice,
 }: CourseCardProps) {
   return (
     <motion.div
@@ -40,10 +44,11 @@ export default function CourseCard({
         background: 'var(--color-bg-card)',
         borderRadius: 'var(--radius-lg)',
         overflow: 'hidden',
-        border: '1px solid var(--color-border)',
+        border: isUpcoming ? '1px dashed var(--color-border)' : '1px solid var(--color-border)',
         transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
         cursor: 'pointer',
         position: 'relative',
+        opacity: isUpcoming ? 0.9 : 1,
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement;
@@ -52,7 +57,7 @@ export default function CourseCard({
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = 'var(--color-border)';
+        el.style.borderColor = isUpcoming ? 'rgba(255,255,255,0.1)' : 'var(--color-border)';
         el.style.boxShadow = 'none';
       }}
     >
@@ -66,6 +71,30 @@ export default function CourseCard({
           background: `linear-gradient(135deg, ${image}, #1a1a1a)`,
         }}
       >
+        {/* Upcoming Bookmark */}
+        {isUpcoming && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: '1.5rem',
+              width: '2.5rem',
+              height: '3.5rem',
+              background: 'var(--color-amber)',
+              zIndex: 10,
+              clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              paddingTop: '0.5rem',
+              color: '#0a0a0a',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+            }}
+          >
+            <span style={{ fontSize: '0.6rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.02em', lineHeight: 1 }}>Soon</span>
+          </div>
+        )}
+
         {/* Gradient overlay */}
         <div
           style={{
@@ -204,70 +233,79 @@ export default function CourseCard({
         </p>
 
         {/* Rating & Students */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            marginBottom: '1rem',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-            <span style={{ color: 'var(--color-amber)', fontSize: '0.85rem' }}>★</span>
+        {!isUpcoming && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              marginBottom: '1rem',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              <span style={{ color: 'var(--color-amber)', fontSize: '0.85rem' }}>★</span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  color: 'var(--color-text-primary)',
+                }}
+              >
+                {rating}
+              </span>
+            </div>
             <span
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                color: 'var(--color-text-primary)',
+                fontSize: '0.75rem',
+                color: 'var(--color-text-muted)',
               }}
             >
-              {rating}
+              ({students} students)
             </span>
           </div>
-          <span
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.75rem',
-              color: 'var(--color-text-muted)',
-            }}
-          >
-            ({students} students)
-          </span>
-        </div>
+        )}
 
         {/* Price */}
         <div
           style={{
             display: 'flex',
-            alignItems: 'baseline',
-            gap: '0.5rem',
+            flexDirection: 'column',
+            gap: '0.25rem',
             borderTop: '1px solid var(--color-border)',
             paddingTop: '1rem',
           }}
         >
-          <span
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: '1.3rem',
-              fontWeight: 700,
-              color: 'var(--color-text-primary)',
-            }}
-          >
-            {price}
-          </span>
-          {originalPrice && (
-            <span
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem',
-                color: 'var(--color-text-muted)',
-                textDecoration: 'line-through',
-              }}
-            >
-              {originalPrice}
+          {isExpectedPrice && (
+            <span style={{ fontSize: '0.6rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Expected Price
             </span>
           )}
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+            <span
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: '1.3rem',
+                fontWeight: 700,
+                color: 'var(--color-text-primary)',
+              }}
+            >
+              {price}
+            </span>
+            {originalPrice && (
+              <span
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.85rem',
+                  color: 'var(--color-text-muted)',
+                  textDecoration: 'line-through',
+                }}
+              >
+                {originalPrice}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { span } from 'framer-motion/client';
 
 export default function CTASection() {
   const ref = useRef(null);

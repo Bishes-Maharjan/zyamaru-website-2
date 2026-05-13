@@ -2,14 +2,22 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import ScrollReveal from './ScrollReveal';
+import { instructors } from '../data/instructors';
 
 export default function InstructorSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
+  // For now, we display the first instructor (Amar Maharjan)
+  // In a more complex site, this could be a map over instructors
+  const instructor = instructors[0];
+
   return (
     <section
+      id="instructor"
       className="section"
       ref={ref}
       style={{
@@ -56,33 +64,36 @@ export default function InstructorSection() {
             }}
           />
 
-          {/* Instructor silhouette/abstract visual */}
+          {/* Instructor visual */}
           <div
             style={{
               position: 'absolute',
-              bottom: '15%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '60%',
-              height: '70%',
-              background: 'radial-gradient(ellipse at center bottom, rgba(212, 168, 83, 0.08) 0%, transparent 70%)',
-              zIndex: 1,
-            }}
-          />
-
-          {/* Camera icon */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              fontSize: '4rem',
-              opacity: 0.15,
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               zIndex: 1,
             }}
           >
-            🎥
+            {instructor.image ? (
+              <Image
+                src={instructor.image}
+                alt={instructor.name}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+                style={{ objectFit: 'cover' }}
+              />
+            ) : (
+              <div
+                style={{
+                  fontSize: '8rem',
+                  opacity: 0.1,
+                  filter: 'grayscale(1)',
+                }}
+              >
+                👤
+              </div>
+            )}
           </div>
 
           {/* Experience badge */}
@@ -111,7 +122,7 @@ export default function InstructorSection() {
                 lineHeight: 1,
               }}
             >
-              12+
+              9+
             </div>
             <div
               style={{
@@ -144,7 +155,7 @@ export default function InstructorSection() {
               lineHeight: 1.2,
             }}
           >
-            Taught by <span style={{ color: 'var(--color-amber)' }}>Award-Winning</span> Filmmakers
+            Taught by <span style={{ color: 'var(--color-amber)' }}>{instructor.name}</span>
           </motion.h2>
 
           <motion.p
@@ -153,10 +164,7 @@ export default function InstructorSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             style={{ fontSize: '1rem', marginBottom: '1.5rem', lineHeight: 1.8 }}
           >
-            Our lead instructor has worked on over 40 feature films, 200+ commercial
-            projects, and has trained the next generation of Nepal&apos;s most talented
-            cinematographers. With experience spanning Bollywood, Kollywood, and
-            international documentary work.
+            {instructor.bio}
           </motion.p>
 
           {/* Credentials */}
@@ -171,14 +179,9 @@ export default function InstructorSection() {
               marginBottom: '2rem',
             }}
           >
-            {[
-              '🏆 National Film Award Winner',
-              '🎬 40+ Feature Films',
-              '📺 200+ Commercials',
-              '🌍 International Projects',
-            ].map((cred) => (
+            {instructor.expertise.map((exp) => (
               <span
-                key={cred}
+                key={exp}
                 style={{
                   display: 'inline-block',
                   padding: '0.5rem 1rem',
@@ -190,42 +193,48 @@ export default function InstructorSection() {
                   color: 'var(--color-text-secondary)',
                 }}
               >
-                {cred}
+                {exp}
               </span>
             ))}
           </motion.div>
 
-          {/* Social Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            style={{ display: 'flex', gap: '1rem' }}
+            style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}
           >
-            {['YouTube', 'Instagram', 'Vimeo'].map((platform) => (
-              <a
-                key={platform}
-                href="#"
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.8rem',
-                  fontWeight: 500,
-                  color: 'var(--color-text-muted)',
-                  transition: 'color 0.3s ease',
-                  borderBottom: '1px solid transparent',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLElement).style.color = 'var(--color-amber)';
-                  (e.target as HTMLElement).style.borderBottomColor = 'var(--color-amber)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLElement).style.color = 'var(--color-text-muted)';
-                  (e.target as HTMLElement).style.borderBottomColor = 'transparent';
-                }}
-              >
-                {platform}
-              </a>
-            ))}
+            <Link href={`/instructor/${instructor.slug}`} className="btn-primary">
+              <span>Learn More</span>
+            </Link>
+
+            {/* Social Links */}
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              {instructor.socials && Object.entries(instructor.socials).map(([platform, link]) => (
+                <a
+                  key={platform}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.8rem',
+                    fontWeight: 500,
+                    color: 'var(--color-text-muted)',
+                    transition: 'color 0.3s ease',
+                    textTransform: 'capitalize'
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.target as HTMLElement).style.color = 'var(--color-amber)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.target as HTMLElement).style.color = 'var(--color-text-muted)';
+                  }}
+                >
+                  {platform}
+                </a>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
