@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { courses } from '../../data/courses';
 import Footer from '../../components/Footer';
 import { useEffect, useState } from 'react';
+import EnrollButton from '../../components/EnrollButton';
 
 export default function CourseDetail() {
   const params = useParams();
@@ -131,10 +132,20 @@ export default function CourseDetail() {
               <div style={{ padding: '2rem', border: '2px dashed var(--color-border-amber)', borderRadius: 'var(--radius-lg)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', marginBottom: '1rem' }}>Enrollment Opening Soon</h3>
                 <p style={{ marginBottom: '2rem', color: 'var(--color-text-muted)' }}>Get notified as soon as this course becomes available.</p>
-                <button className="btn-primary" style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}><span>Join the Waitlist</span></button>
+                <EnrollButton 
+                  course={course.category} 
+                  style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
+                >
+                  Join the Waitlist
+                </EnrollButton>
               </div>
             ) : (
-              <button className="btn-primary" style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}><span>Enroll Now</span></button>
+              <EnrollButton 
+                course={course.category} 
+                style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
+              >
+                Enroll Now
+              </EnrollButton>
             )}
             <div style={{ marginTop: '2rem' }}>
               <Link href="/#courses" style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', textDecoration: 'underline' }}>Back to all courses</Link>

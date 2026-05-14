@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import TextReveal from './TextReveal';
+import EnrollButton from './EnrollButton';
 
 const modules = [
   {
@@ -238,9 +239,9 @@ export default function CurriculumPreview() {
         {/* CTA */}
         <ScrollReveal delay={0.3}>
           <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-            <a href="#courses" className="btn-primary">
-              <span>Enroll to Unlock Full Curriculum</span>
-            </a>
+            <EnrollButton variant="primary">
+              Enroll to Unlock Full Curriculum
+            </EnrollButton>
           </div>
         </ScrollReveal>
       </div>

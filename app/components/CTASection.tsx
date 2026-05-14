@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { span } from 'framer-motion/client';
+import EnrollButton from './EnrollButton';
 
 export default function CTASection() {
   const ref = useRef(null);
@@ -39,12 +39,18 @@ export default function CTASection() {
           Join 500+ filmmakers who transformed their careers with ZYAMARU. Limited seats available for the next cohort.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#courses" className="btn-primary" style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}>
-            <span>Explore Courses</span>
-          </a>
-          <a href="#" className="btn-secondary" style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}>
+          <EnrollButton
+            variant="primary"
+            style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
+          >
+            Explore Courses
+          </EnrollButton>
+          <EnrollButton
+            variant="secondary"
+            style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
+          >
             Book a Free Consultation
-          </a>
+          </EnrollButton>
         </motion.div>
         <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5 }} style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '1.5rem' }}>
           Next cohort starts June 2026 • Only 25 seats remaining

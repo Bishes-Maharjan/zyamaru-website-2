@@ -1,3 +1,5 @@
+import { Course as CourseCategory } from '@/types/course';
+
 export interface CurriculumItem {
   chapter: string;
   topics: string[];
@@ -21,6 +23,7 @@ export interface Course {
   description: string;
   curriculum: CurriculumItem[];
   learningOutcomes: string[];
+  category: CourseCategory;
 }
 
 export const courses: Course[] = [
@@ -58,7 +61,8 @@ export const courses: Course[] = [
         chapter: 'Module 3: Light & Sound',
         topics: ['Natural vs Artificial Light', 'Capturing Clean Audio', 'Basic Interview Setup']
       }
-    ]
+    ],
+    category: CourseCategory.CinematicMasterclassBeginner,
   },
   {
     id: 'cinematic-masterclass-advanced',
@@ -94,7 +98,8 @@ export const courses: Course[] = [
         chapter: 'Module 3: Post-Production Mastery',
         topics: ['Advanced Color Grading', 'Sound Design Layers', 'Workflow Optimization']
       }
-    ]
+    ],
+    category: CourseCategory.CinematicMasterclassAdvanced,
   },
   {
     id: 'documentary-filmmaking',
@@ -135,7 +140,8 @@ export const courses: Course[] = [
         chapter: 'Module 4: Distribution & Ethics',
         topics: ['Film Festival Strategy', 'Informed Consent & Representation', 'Online Distribution Platforms']
       }
-    ]
+    ],
+    category: CourseCategory.DocumentaryFilmmaking,
   },
   {
     id: 'advanced-color-grading',
@@ -170,7 +176,8 @@ export const courses: Course[] = [
         chapter: 'Module 3: Visual Effects',
         topics: ['3D Tracking', 'Sky Replacements', 'Clean Plate Creation']
       }
-    ]
+    ],
+    category: CourseCategory.AdvancedColorGrading,
   },
   {
     id: 'drone-cinematography',
@@ -205,6 +212,7 @@ export const courses: Course[] = [
         chapter: 'Module 3: Aerial Storytelling',
         topics: ['Establishing Shots', 'Tracking Action', 'The Cinematic Reveal']
       }
-    ]
+    ],
+    category: CourseCategory.DroneCinematography,
   }
 ];

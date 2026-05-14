@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import TextReveal from './TextReveal';
+import EnrollButton from './EnrollButton';
 
 export default function HeroSection() {
   return (
@@ -170,9 +171,9 @@ export default function HeroSection() {
             marginTop: '2.5rem',
           }}
         >
-          <a href="#courses" className="btn-primary">
-            <span>Explore Courses</span>
-          </a>
+          <EnrollButton variant="primary">
+            Explore Courses
+          </EnrollButton>
           <a href="#showreel" className="btn-secondary">
             <svg
               width="16"

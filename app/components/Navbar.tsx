@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import EnrollButton from './EnrollButton';
 
 const navLinks = [
   { label: 'Courses', href: '#courses' },
@@ -118,25 +119,18 @@ export default function Navbar() {
         </div>
 
         {/* CTA Button */}
-        <a
-          href="#courses"
-          onClick={(e) => handleClick(e, '#courses')}
-          className="nav-cta"
+        <EnrollButton
+          variant="primary"
           style={{
             padding: '0.6rem 1.5rem',
-            background: 'linear-gradient(135deg, var(--color-amber), var(--color-amber-dark))',
-            color: '#0a0a0a',
-            fontFamily: 'var(--font-body)',
             fontSize: '0.75rem',
-            fontWeight: 600,
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            borderRadius: 'var(--radius-full)',
-            transition: 'all 0.3s ease',
           }}
+          className="nav-cta"
         >
           Enroll Now
-        </a>
+        </EnrollButton>
 
         {/* Mobile Hamburger */}
         <button
@@ -209,18 +203,12 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
-            <motion.a
-              href="#courses"
-              onClick={(e) => handleClick(e, '#courses')}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: navLinks.length * 0.08 }}
-              className="btn-primary"
+            <EnrollButton
+              variant="primary"
               style={{ marginTop: '1rem' }}
             >
-              <span>Enroll Now</span>
-            </motion.a>
+              Enroll Now
+            </EnrollButton>
           </motion.div>
         )}
       </AnimatePresence>
