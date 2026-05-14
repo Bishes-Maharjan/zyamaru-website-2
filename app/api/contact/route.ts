@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     try {
         await resend.emails.send({
             from: process.env.EMAIL_FROM!,
-            to: email,
+            to: process.env.EMAIL_TO!,
             subject: `New inquiry from ${name}`,
             html: `
         <div style="font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto; border: 1px solid #ddd;">
