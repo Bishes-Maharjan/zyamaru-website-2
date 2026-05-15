@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ZYAMARU — Nepal's Premier Cinematography & Videography Academy",
+  title: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
   description:
     "Master cinematography, videography, and visual storytelling in Nepal. Professional courses taught by award-winning filmmakers. Join 500+ filmmakers who transformed their careers.",
   keywords: [
@@ -30,22 +30,26 @@ export const metadata: Metadata = {
     "drone cinematography Nepal",
   ],
   openGraph: {
-    title: "ZYAMARU — Master the Art of Visual Storytelling",
+    title: "ZYAMARU | Master the Art of Visual Storytelling",
     description:
       "Professional cinematography & videography courses taught by award-winning filmmakers in Nepal.",
     type: "website",
     locale: "en_US",
-    siteName: "ZYAMARU",
+    siteName: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZYAMARU — Nepal's Premier Film Academy",
+    title: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
     description:
-      "Professional cinematography & videography courses in Nepal.",
+      "Professional cinematography & videography courses taught by award-winning filmmakers in Nepal.",
   },
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 

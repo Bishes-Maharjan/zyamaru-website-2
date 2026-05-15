@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import EnrollButton from './EnrollButton';
 
 const navLinks = [
@@ -47,7 +48,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
+        initial={{ y: -150 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
         style={{
@@ -71,15 +72,34 @@ export default function Navbar() {
         <Link
           href="/"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            textDecoration: 'none',
+          }}
+        >
+          <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+            <Image
+              src="/logo.png"
+              alt="ZYAMARU Logo"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </div>
+
+          {/* <span style={{
             fontFamily: 'var(--font-heading)',
             fontSize: '1.4rem',
             fontWeight: 700,
             letterSpacing: '0.15em',
             color: 'var(--color-amber)',
             textTransform: 'uppercase',
-          }}
-        >
-          ZYAMARU
+          }}>
+            ZYAMARU
+          </span> */}
+
         </Link>
 
         {/* Desktop Nav Links */}
