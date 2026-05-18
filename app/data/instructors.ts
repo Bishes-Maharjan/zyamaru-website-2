@@ -125,8 +125,20 @@ He is a renowned filmmaker, known for his expertise as a writer, director, and c
     socials: {
       youtube: 'https://youtube.com/@zyamaru',
       instagram: '#',
-      vimeo: '#',
     },
     image: '/instructor/Amar1675867366.jpg',
+  },
+  {
+    id: 'sanjeev-ratna-shakya',
+    name: 'Sanjeev Ratna Shakya',
+    slug: 'sanjeev-ratna-shakya',
+    born: '1985',
+    bio: 'Sanjeev Ratna Shakya is an aspiring filmmaker from Nepal. A film graduate specializing in Direction, Editing, and Color Correction, he has worked on hundreds of TV commercials, short films, documentaries, and feature films.',
+    longBio: `Sanjeev Ratna Shakya is an aspiring filmmaker from Nepal. He is a film graduate and specializes in Direction, editing, and color correction. He has worked in hundreds of Tv commercials, Short films, documentary films, and feature films as a director, editor, and colorist. He also has worked on international franchise tv reality shows Himalaya Roadies (MTV roadies) and Ko bancha crore pati (who wants to be a millionaire) as a producer.`,
+    expertise: ['Director', 'Editor', 'Colorist'],
+    experience: '',
+    filmography: [],
+    socials: {},
+    image: '/instructor/Sanjeev1750719013.jpg'
   },
 ];

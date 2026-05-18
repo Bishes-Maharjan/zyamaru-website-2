@@ -11,36 +11,42 @@ const features = [
     title: 'Industry-Grade Equipment',
     description: 'Train with RED, ARRI, and Sony cinema cameras. The same gear used on Hollywood sets.',
     gridArea: '1 / 1 / 2 / 2',
+    bgImage: '/about/equipment.png',
   },
   {
     icon: '🏔️',
     title: 'Nepal as Your Canvas',
     description: 'From the peaks of Everest to the streets of Kathmandu — shoot in the most cinematic locations on Earth.',
     gridArea: '1 / 2 / 2 / 4',
+    bgImage: '/about/nepal.png',
   },
   {
     icon: '🎓',
     title: 'Certified Programs',
     description: 'Earn internationally recognized certificates that open doors across the film industry.',
     gridArea: '2 / 1 / 3 / 3',
+    bgImage: '/about/certified.png',
   },
   {
     icon: '🤝',
     title: 'Community of 500+ Filmmakers',
     description: 'Join an active network of creators, collaborate on projects, and grow together.',
     gridArea: '2 / 3 / 3 / 4',
+    bgImage: '/about/community.png',
   },
   {
     icon: '💼',
     title: 'Job Placement Support',
     description: 'Direct connections to production houses, agencies, and international projects.',
     gridArea: '3 / 1 / 4 / 2',
+    bgImage: '/about/job.png',
   },
   {
     icon: '🎞️',
     title: 'Lifetime Access',
     description: 'Once enrolled, access all course materials and future updates forever. Learn at your own pace.',
     gridArea: '3 / 2 / 4 / 4',
+    bgImage: '/about/lifetime.png',
   },
 ];
 
@@ -93,44 +99,54 @@ export default function WhyChooseUs() {
               }}
               style={{
                 gridArea: feature.gridArea,
-                background: 'var(--color-bg-card)',
+                background: `linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.9)), url(${feature.bgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 borderRadius: 'var(--radius-lg)',
                 padding: 'clamp(1.25rem, 3vw, 2rem)',
                 border: '1px solid var(--color-border)',
                 transition: 'border-color 0.3s ease, transform 0.3s ease',
                 cursor: 'default',
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                minHeight: '220px',
               }}
               whileHover={{
-                borderColor: 'rgba(212, 168, 83, 0.2)',
+                borderColor: 'rgba(212, 168, 83, 0.4)',
                 y: -4,
               }}
             >
-              <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>
-                {feature.icon}
-              </span>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
-                  fontWeight: 600,
-                  color: 'var(--color-text-primary)',
-                  marginBottom: '0.5rem',
-                  lineHeight: 1.3,
-                }}
-              >
-                {feature.title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  color: 'var(--color-text-secondary)',
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                {feature.description}
-              </p>
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <span style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }}>
+                  {feature.icon}
+                </span>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: 'clamp(1.1rem, 1.5vw, 1.35rem)',
+                    fontWeight: 600,
+                    color: 'var(--color-text-primary)',
+                    marginBottom: '0.5rem',
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {feature.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.9rem',
+                    color: 'var(--color-text-secondary)',
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {feature.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

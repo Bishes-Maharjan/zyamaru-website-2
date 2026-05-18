@@ -212,71 +212,76 @@ export default function InstructorProfile() {
           </section>
 
           {/* ── Bio & Experience ── */}
-          <section
-            style={{
-              marginBottom: '3rem',
-              paddingTop: '2.5rem',
-              borderTop: '1px solid var(--color-border)',
-            }}
-          >
-            <div className="instructor-bio-grid">
-              <div>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.6rem',
-                    marginBottom: '1rem',
-                    color: 'var(--color-text-primary)',
-                  }}
-                >
-                  The Journey
-                </h2>
-                <div
-                  style={{
-                    color: 'var(--color-text-secondary)',
-                    lineHeight: 1.75,
-                    fontSize: '0.95rem',
-                    whiteSpace: 'pre-wrap',
-                  }}
-                >
-                  {instructor.longBio}
-                </div>
-              </div>
-
-              <div>
-                <h2
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.4rem',
-                    marginBottom: '1rem',
-                    color: 'var(--color-text-primary)',
-                  }}
-                >
-                  Experience
-                </h2>
-                <div
-                  style={{
-                    padding: '1.25rem',
-                    borderRadius: 'var(--radius-md)',
-                    background: 'var(--color-bg-elevated)',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  <p
+          {(instructor.longBio || instructor.experience) && (
+            <section
+              style={{
+                marginBottom: '3rem',
+                paddingTop: '2.5rem',
+                borderTop: '1px solid var(--color-border)',
+              }}
+            >
+              <div className="instructor-bio-grid">
+                <div>
+                  <h2
                     style={{
-                      color: 'var(--color-text-secondary)',
-                      lineHeight: 1.7,
-                      fontSize: '0.92rem',
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.6rem',
+                      marginBottom: '1rem',
+                      color: 'var(--color-text-primary)',
                     }}
                   >
-                    {instructor.experience}
-                  </p>
+                    The Journey
+                  </h2>
+                  <div
+                    style={{
+                      color: 'var(--color-text-secondary)',
+                      lineHeight: 1.75,
+                      fontSize: '0.95rem',
+                      whiteSpace: 'pre-wrap',
+                    }}
+                  >
+                    {instructor.longBio}
+                  </div>
                 </div>
+
+                {instructor.experience && (
+                  <div>
+                    <h2
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '1.4rem',
+                        marginBottom: '1rem',
+                        color: 'var(--color-text-primary)',
+                      }}
+                    >
+                      Experience
+                    </h2>
+                    <div
+                      style={{
+                        padding: '1.25rem',
+                        borderRadius: 'var(--radius-md)',
+                        background: 'var(--color-bg-elevated)',
+                        border: '1px solid var(--color-border)',
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: 'var(--color-text-secondary)',
+                          lineHeight: 1.7,
+                          fontSize: '0.92rem',
+                        }}
+                      >
+                        {instructor.experience}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* ── Award-Winning Works ── */}
+          {instructor.filmography.filter((f) => f.awards && f.awards.length > 0).length > 0 && (
           <section
             style={{
               marginBottom: '3rem',
@@ -436,8 +441,10 @@ export default function InstructorProfile() {
                 ))}
             </div>
           </section>
+          )}
 
           {/* ── Other Works ── */}
+          {instructor.filmography.filter((f) => !f.awards && f.link).length > 0 && (
           <section
             style={{
               marginBottom: '3rem',
@@ -538,6 +545,7 @@ export default function InstructorProfile() {
                 ))}
             </div>
           </section>
+          )}
 
           {/* ── Back ── */}
           <div

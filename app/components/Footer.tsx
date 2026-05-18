@@ -1,11 +1,32 @@
 'use client';
 
+import { courses } from '../data/courses';
 import ScrollReveal from './ScrollReveal';
 
 const footerLinks = {
-  courses: ['Cinematography', 'Color Grading', 'Documentary', 'Drone', 'Editing', 'Lighting'],
-  company: ['About Us', 'Instructors', 'Blog', 'Careers', 'Press'],
-  support: ['FAQ', 'Contact', 'Community', 'Terms', 'Privacy'],
+  courses: courses.map((course) => ({
+    name: course.title,
+    link: `/course/${course.slug}`
+  })),
+  company: [
+    { name: 'About Us', link: '/#about' },
+    { name: 'Instructors', link: '/#instructor' },
+    { name: 'Blog', link: '#' },
+    { name: 'Careers', link: '#' },
+    { name: 'Press', link: '#' },
+  ],
+  support: [
+    { name: 'FAQ', link: '/#faq' },
+    { name: 'Contact', link: '/#contact' },
+    { name: 'Community', link: '#' },
+    { name: 'Terms', link: '#' },
+    { name: 'Privacy', link: '#' },
+  ],
+};
+
+const socialLinks = {
+  FB: 'https://www.facebook.com/profile.php?id=61570710927038',
+  IG: 'https://www.instagram.com/zyamarufilmsacademy/',
 };
 
 export default function Footer() {
@@ -21,8 +42,8 @@ export default function Footer() {
               Nepal&apos;s premier cinematography and videography academy. Transforming storytellers since 2014.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
-              {['YT', 'IG', 'FB', 'TW'].map((s) => (
-                <a key={s} href="#" style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 600, color: 'var(--color-text-muted)', transition: 'all 0.3s ease', fontFamily: 'var(--font-body)' }}
+              {Object.entries(socialLinks).map(([s, url]) => (
+                <a key={s} href={url} target="_blank" rel="noopener noreferrer" style={{ width: 36, height: 36, borderRadius: '50%', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 600, color: 'var(--color-text-muted)', transition: 'all 0.3s ease', fontFamily: 'var(--font-body)' }}
                   onMouseEnter={(e) => { (e.currentTarget).style.borderColor = 'var(--color-amber)'; (e.currentTarget).style.color = 'var(--color-amber)'; }}
                   onMouseLeave={(e) => { (e.currentTarget).style.borderColor = 'var(--color-border)'; (e.currentTarget).style.color = 'var(--color-text-muted)'; }}
                 >{s}</a>
@@ -32,17 +53,17 @@ export default function Footer() {
         </ScrollReveal>
 
         {/* Link Columns */}
-        {Object.entries(footerLinks).map(([title, links], i) => (
+        {Object.entries(footerLinks).map(([title, items], i) => (
           <ScrollReveal key={title} delay={0.1 * (i + 1)}>
             <div>
               <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-primary)', marginBottom: '1.25rem' }}>{title}</h4>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--color-text-muted)', transition: 'color 0.3s ease' }}
+                {items.map((item) => (
+                  <li key={item.name}>
+                    <a href={item.link} style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--color-text-muted)', transition: 'color 0.3s ease' }}
                       onMouseEnter={(e) => { (e.target as HTMLElement).style.color = 'var(--color-text-primary)'; }}
                       onMouseLeave={(e) => { (e.target as HTMLElement).style.color = 'var(--color-text-muted)'; }}
-                    >{link}</a>
+                    >{item.name}</a>
                   </li>
                 ))}
               </ul>

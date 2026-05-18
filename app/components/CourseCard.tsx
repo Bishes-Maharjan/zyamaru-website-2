@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 interface CourseCardProps {
   title: string;
   instructor: string;
-  price: string;
+  price?: string;
   originalPrice?: string;
   rating?: number;
   students?: string;
@@ -15,7 +15,6 @@ interface CourseCardProps {
   image: string;
   index: number;
   isUpcoming?: boolean;
-  isExpectedPrice?: boolean;
 }
 
 export default function CourseCard({
@@ -31,7 +30,6 @@ export default function CourseCard({
   image,
   index,
   isUpcoming,
-  isExpectedPrice,
 }: CourseCardProps) {
   return (
     <motion.div
@@ -40,6 +38,7 @@ export default function CourseCard({
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      className="course-card"
       style={{
         background: 'var(--color-bg-card)',
         borderRadius: 'var(--radius-lg)',
@@ -49,6 +48,9 @@ export default function CourseCard({
         cursor: 'pointer',
         position: 'relative',
         opacity: isUpcoming ? 0.9 : 1,
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement;
@@ -67,6 +69,7 @@ export default function CourseCard({
           position: 'relative',
           width: '100%',
           paddingBottom: '56.25%',
+          flexShrink: 0,
           overflow: 'hidden',
           background: `linear-gradient(135deg, ${image}, #1a1a1a)`,
         }}
@@ -186,7 +189,17 @@ export default function CourseCard({
       </div>
 
       {/* Content */}
-      <div style={{ padding: '1.25rem' }}>
+      <div
+        className="course-card-content"
+        style={{
+          padding: '1.25rem',
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
         {/* Level */}
         <span
           style={{
@@ -211,10 +224,6 @@ export default function CourseCard({
             marginTop: '0.5rem',
             marginBottom: '0.5rem',
             lineHeight: 1.3,
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
           }}
         >
           {title}
@@ -267,9 +276,10 @@ export default function CourseCard({
           </div>
         )}
 
-        {/* Price */}
+        {/* Price - Stick to bottom */}
         <div
           style={{
+            marginTop: 'auto',
             display: 'flex',
             flexDirection: 'column',
             gap: '0.25rem',
@@ -277,11 +287,6 @@ export default function CourseCard({
             paddingTop: '1rem',
           }}
         >
-          {isExpectedPrice && (
-            <span style={{ fontSize: '0.6rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Expected Price
-            </span>
-          )}
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
             <span
               style={{
@@ -310,7 +315,17 @@ export default function CourseCard({
       </div>
 
       <style jsx>{`
-        div:hover .course-play-overlay {
+        .course-card-content::-webkit-scrollbar {
+          width: 4px;
+        }
+        .course-card-content::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .course-card-content::-webkit-scrollbar-thumb {
+          background: rgba(212, 168, 83, 0.2);
+          border-radius: 10px;
+        }
+        .course-card:hover .course-play-overlay {
           opacity: 1 !important;
         }
       `}</style>

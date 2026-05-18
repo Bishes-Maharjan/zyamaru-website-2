@@ -68,7 +68,7 @@ export default function CourseDetail() {
                   <span style={{ fontWeight: 600, fontSize: '1.1rem' }}>{course.duration}</span>
                 </div>
                 <div>
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>{course.isExpectedPrice ? 'Expected Price' : 'Price'}</span>
+                  <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}></span>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
                     <span style={{ fontWeight: 700, fontSize: '1.5rem', color: 'var(--color-amber)' }}>{course.price}</span>
                     {course.originalPrice && <span style={{ fontSize: '1rem', color: 'var(--color-text-muted)', textDecoration: 'line-through' }}>{course.originalPrice}</span>}
@@ -132,16 +132,16 @@ export default function CourseDetail() {
               <div style={{ padding: '2rem', border: '2px dashed var(--color-border-amber)', borderRadius: 'var(--radius-lg)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', marginBottom: '1rem' }}>Enrollment Opening Soon</h3>
                 <p style={{ marginBottom: '2rem', color: 'var(--color-text-muted)' }}>Get notified as soon as this course becomes available.</p>
-                <EnrollButton 
-                  course={course.category} 
+                <EnrollButton
+                  course={course.category}
                   style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
                 >
                   Join the Waitlist
                 </EnrollButton>
               </div>
             ) : (
-              <EnrollButton 
-                course={course.category} 
+              <EnrollButton
+                course={course.category}
                 style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
               >
                 Enroll Now

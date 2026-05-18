@@ -10,7 +10,7 @@ export interface Course {
   slug: string;
   title: string;
   instructor: string;
-  price: string;
+  price?: string;
   originalPrice?: string;
   rating?: number;
   students?: string;
@@ -19,11 +19,11 @@ export interface Course {
   badge?: string;
   image: string; // Using colors for now as placeholders
   isUpcoming?: boolean;
-  isExpectedPrice?: boolean;
   description: string;
   curriculum: CurriculumItem[];
   learningOutcomes: string[];
   category: CourseCategory;
+  available: boolean;
 }
 
 export const courses: Course[] = [
@@ -63,6 +63,7 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.CinematicMasterclassBeginner,
+    available: true,
   },
   {
     id: 'cinematic-masterclass-advanced',
@@ -100,19 +101,19 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.CinematicMasterclassAdvanced,
+    available: true
   },
   {
     id: 'documentary-filmmaking',
     slug: 'documentary-filmmaking',
     title: "Documentary Filmmaking: Telling Nepal's Stories",
     instructor: 'Srijana Basnet',
-    price: 'Rs. 12,000',
-    originalPrice: 'Rs. 18,000',
     rating: 4.8,
     students: '650',
     duration: '28 hours',
     level: 'Intermediate',
-    badge: 'New',
+    badge: 'Upcoming',
+    isUpcoming: true,
     image: 'rgba(96, 165, 250, 0.12)',
     description: "Learn to craft compelling documentaries that capture the rich culture and untold stories of Nepal. From pre-production research to post-production storytelling, this course covers the complete documentary pipeline with a focus on ethical, culturally sensitive filmmaking.",
     learningOutcomes: [
@@ -142,18 +143,17 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.DocumentaryFilmmaking,
+    available: false
   },
   {
     id: 'advanced-color-grading',
     slug: 'advanced-color-grading',
     title: 'Advanced Color Grading & Visual Effects',
     instructor: 'Aayush Shrestha',
-    price: 'Rs. 18,000',
     duration: '24 hours',
     level: 'Intermediate',
-    badge: 'Popular',
+    badge: 'Upcoming',
     isUpcoming: true,
-    isExpectedPrice: true,
     image: 'rgba(96, 165, 250, 0.15)',
     description: 'Transform your footage into cinematic masterpieces. Learn professional color grading techniques and seamless VFX integration.',
     learningOutcomes: [
@@ -178,18 +178,18 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.AdvancedColorGrading,
+    available: false
+
   },
   {
     id: 'drone-cinematography',
     slug: 'drone-cinematography',
     title: 'Drone Cinematography & Aerial Storytelling',
     instructor: 'Binod Tamang',
-    price: 'Rs. 20,000',
-    originalPrice: 'Rs. 30,000',
     duration: '18 hours',
     level: 'Intermediate',
+    badge: 'Upcoming',
     isUpcoming: true,
-    isExpectedPrice: true,
     image: 'rgba(74, 222, 128, 0.15)',
     description: 'Capture the world from above. Learn safe flight operations and cinematic aerial movements that tell a compelling story.',
     learningOutcomes: [
@@ -214,5 +214,7 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.DroneCinematography,
+    available: false
+
   }
 ];

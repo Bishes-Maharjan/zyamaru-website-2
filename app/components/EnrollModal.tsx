@@ -6,6 +6,7 @@ import { useEnroll } from '../context/EnrollContext';
 import { Course } from '@/types/course';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { courses } from '../data/courses';
 
 export default function EnrollModal() {
   const { isOpen, selectedCourse, closeEnrollModal } = useEnroll();
@@ -121,7 +122,7 @@ export default function EnrollModal() {
 
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', color: 'var(--color-amber)', marginBottom: '0.5rem' }}>
-                  Join Zyamaru Academy
+                  Join Zyamaru Films Academy
                 </h2>
                 <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
                   Fill out the form below to start your cinematic journey.
@@ -255,9 +256,9 @@ export default function EnrollModal() {
                     <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>
                       Select your program
                     </option>
-                    {Object.values(Course).map((course) => (
-                      <option key={course} value={course} style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>
-                        {course}
+                    {courses.filter((course) => course.available).map((course) => (
+                      <option key={course.id} value={course.title} style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>
+                        {course.title}
                       </option>
                     ))}
                   </select>

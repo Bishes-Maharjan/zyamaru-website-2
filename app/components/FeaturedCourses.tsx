@@ -41,6 +41,7 @@ export default function FeaturedCourses() {
 
         {/* Course Grid */}
         <div
+          className="course-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
@@ -48,11 +49,31 @@ export default function FeaturedCourses() {
           }}
         >
           {courses.map((course, i) => (
-            <Link key={course.id} href={`/course/${course.slug}`}>
+            <Link
+              key={course.id}
+              href={`/course/${course.slug}`}
+              style={{ display: 'block', height: '100%', textDecoration: 'none', color: 'inherit' }}
+            >
               <CourseCard {...course} index={i} />
             </Link>
           ))}
         </div>
+
+        <style jsx>{`
+          .course-grid {
+            grid-auto-rows: 480px;
+          }
+          @media (max-width: 1024px) {
+            .course-grid {
+              grid-auto-rows: 460px;
+            }
+          }
+          @media (max-width: 768px) {
+            .course-grid {
+              grid-auto-rows: auto;
+            }
+          }
+        `}</style>
       </div>
     </section>
   );
