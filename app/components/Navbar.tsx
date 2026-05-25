@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -13,22 +13,72 @@ const navLinks = [
   { label: 'Instructor', href: '#instructor' },
   { label: 'Curriculum', href: '#curriculum' },
   { label: 'Testimonials', href: '#testimonials' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
+  const lastScrollY = useRef(0);
+  const scrollAccumulator = useRef(0);
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasEntered(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 50);
+
+      if (mobileOpen) {
+        setVisible(true);
+        return;
+      }
+
+      const delta = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY < 50) {
+        setVisible(true);
+        scrollAccumulator.current = 0;
+      } else {
+        // Accumulate scroll delta
+        scrollAccumulator.current += delta;
+
+        // If direction changes, reset the accumulator so the next threshold starts counting from 0
+        if (delta > 0 && scrollAccumulator.current < 0) {
+          scrollAccumulator.current = 0;
+        } else if (delta < 0 && scrollAccumulator.current > 0) {
+          scrollAccumulator.current = 0;
+        }
+
+        // Must scroll down by more than 15px to hide
+        if (scrollAccumulator.current > 15 && visible) {
+          setVisible(false);
+          scrollAccumulator.current = 0;
+        }
+        // Must scroll up by more than 50px to show
+        else if (scrollAccumulator.current < -50 && !visible) {
+          setVisible(true);
+          scrollAccumulator.current = 0;
+        }
+      }
+
+      lastScrollY.current = currentScrollY;
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileOpen, visible]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -47,10 +97,26 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Top trigger zone to detect mouse hover at the top when navbar is hidden */}
+      <div
+        onMouseEnter={() => setIsHovered(true)}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '20px',
+          zIndex: 999,
+          pointerEvents: (visible || isHovered) ? 'none' : 'auto',
+        }}
+      />
+
       <motion.nav
         initial={{ y: -150 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        animate={{ y: (visible || isHovered) ? 0 : -150 }}
+        transition={{ duration: 0.5, delay: hasEntered ? 0 : 1.2, ease: [0.16, 1, 0.3, 1] }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         style={{
           position: 'fixed',
           top: 0,
@@ -62,7 +128,7 @@ export default function Navbar() {
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
           borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          transition: 'padding 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',

@@ -139,6 +139,54 @@ He is a renowned filmmaker, known for his expertise as a writer, director, and c
     experience: '',
     filmography: [],
     socials: {},
-    image: '/instructor/Sanjeev1750719013.jpg'
+    image: '/instructor/Sanjeev1606403854.jpg'
   },
+  {
+    id: 'deepesh-chaudhary',
+    name: 'Deepesh Chaudhary',
+    slug: 'deepesh-chaudhary',
+    bio: 'Deepesh Chaudhary is a Senior Colorist and Co-Founder of Chomolungma Studios with over seven years of experience in color grading and post-production finishing.',
+    longBio: `Deepesh Chaudhary is a Senior Colorist and Co-Founder of Chomolungma Studios with over seven years of experience in color grading and post-production finishing. Based in Nepal, he trained at Digital Film School Mumbai, completing a specialized nine-month DI Colorist Program before working with leading studios including Qlab Digital Post, Nube Studio, Nube Cirrus, and Pink Elephant Studios.
+
+Driven by a vision to strengthen Nepal's post-production industry, he co-founded Chomolungma Studios, where he collaborates with directors and cinematographers to shape the visual tone of each project — using color to enhance storytelling and bring creative visions to life on screen.`,
+    expertise: ['Colorist', 'Post-Production'],
+    experience: 'Over seven years of experience in color grading and post-production finishing. Trained at Digital Film School Mumbai, completing a specialized nine-month DI Colorist Program. Formerly worked with leading studios including Qlab Digital Post, Nube Studio, Nube Cirrus, and Pink Elephant Studios. Co-founded Chomolungma Studios.',
+    filmography: [
+      {
+        title: 'Mummy',
+        role: 'Colorist (Feature Film)'
+      },
+      {
+        title: 'Life Damage',
+        role: 'Colorist (Feature Film)'
+      },
+      {
+        title: 'Khusma',
+        role: 'DI Mastering Colorist (Feature Film)'
+      },
+      {
+        title: 'Tandavam',
+        role: 'DI Mastering Colorist (Feature Film)'
+      },
+      {
+        title: 'Abhimanyu',
+        role: 'DI Mastering Colorist (Feature Film)'
+      },
+      {
+        title: 'Crime Patrol Nepal',
+        role: 'Colorist (Television)'
+      },
+      {
+        title: 'KFC, Pizza Hut, Old Durbar, Barhasinghe, Arna, Ruslan, Pathao, Worldlink, Jeep, and more (Commercials)',
+        role: 'Colorist'
+      },
+      {
+        title: 'Ujan Shakya, Monkey Temple, Kuma Sagar, Roj Man Maharjan, Amit Jung Thapa, and more (Music Videos)',
+        role: 'Colorist'
+      }
+    ],
+    socials: {},
+    image: '/instructor/Dipesh1237892374.jpeg'
+  }
 ];
+

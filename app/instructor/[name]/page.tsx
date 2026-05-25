@@ -444,7 +444,7 @@ export default function InstructorProfile() {
           )}
 
           {/* ── Other Works ── */}
-          {instructor.filmography.filter((f) => !f.awards && f.link).length > 0 && (
+          {instructor.filmography.filter((f) => !f.awards).length > 0 && (
           <section
             style={{
               marginBottom: '3rem',
@@ -474,7 +474,7 @@ export default function InstructorProfile() {
 
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               {instructor.filmography
-                .filter((f) => !f.awards && f.link)
+                .filter((f) => !f.awards)
                 .map((film, idx) => (
                   <motion.div
                     key={film.title}
@@ -525,22 +525,24 @@ export default function InstructorProfile() {
                       </span>
                     </div>
 
-                    <a
-                      href={film.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '0.78rem',
-                        fontWeight: 500,
-                        color: 'var(--color-amber)',
-                        flexShrink: 0,
-                        transition: 'opacity 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget).style.opacity = '0.7'; }}
-                      onMouseLeave={(e) => { (e.currentTarget).style.opacity = '1'; }}
-                    >
-                      Watch ↗
-                    </a>
+                    {film.link && (
+                      <a
+                        href={film.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontSize: '0.78rem',
+                          fontWeight: 500,
+                          color: 'var(--color-amber)',
+                          flexShrink: 0,
+                          transition: 'opacity 0.2s ease',
+                        }}
+                        onMouseEnter={(e) => { (e.currentTarget).style.opacity = '0.7'; }}
+                        onMouseLeave={(e) => { (e.currentTarget).style.opacity = '1'; }}
+                      >
+                        Watch ↗
+                      </a>
+                    )}
                   </motion.div>
                 ))}
             </div>

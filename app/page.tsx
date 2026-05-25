@@ -12,6 +12,7 @@ import InstructorSection from './components/InstructorSection';
 import CurriculumPreview from './components/CurriculumPreview';
 import TestimonialSection from './components/TestimonialSection';
 import ShowreelSection from './components/ShowreelSection';
+import FAQSection from './components/FAQSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 
@@ -43,6 +44,7 @@ export default function Home() {
         <CurriculumPreview />
         <TestimonialSection />
         <ShowreelSection />
+        <FAQSection />
         <CTASection />
         <Footer />
       </main>
