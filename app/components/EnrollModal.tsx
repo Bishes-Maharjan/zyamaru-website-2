@@ -7,13 +7,20 @@ import { Course } from '@/types/course';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { courses } from '../data/courses';
+import { useLenis } from './SmoothScroll';
 
 export default function EnrollModal() {
   const { isOpen, selectedCourse, closeEnrollModal } = useEnroll();
+  const lenis = useLenis();
   const [formData, setFormData] = useState({
     name: '',
+    dob: '',
+    gender: '',
     email: '',
     phoneNumber: '',
+    permanentAddress: '',
+    temporaryAddress: '',
+    educationLevel: '',
     selectedCourse: selectedCourse as string || '',
   });
 
@@ -21,8 +28,17 @@ export default function EnrollModal() {
   React.useEffect(() => {
     if (isOpen) {
       setFormData(prev => ({ ...prev, selectedCourse: selectedCourse }));
+      document.body.style.overflow = 'hidden';
+      lenis?.stop();
+    } else {
+      document.body.style.overflow = 'unset';
+      lenis?.start();
     }
-  }, [isOpen, selectedCourse]);
+    return () => {
+      document.body.style.overflow = 'unset';
+      lenis?.start();
+    };
+  }, [isOpen, selectedCourse, lenis]);
 
   const mutation = useMutation({
     mutationFn: async (data: typeof formData) => {
@@ -38,7 +54,7 @@ export default function EnrollModal() {
       toast.success('Application sent successfully!');
       setTimeout(() => {
         closeEnrollModal();
-        setFormData({ name: '', email: '', phoneNumber: '', selectedCourse: '' });
+        setFormData({ name: '', dob: '', gender: '', email: '', phoneNumber: '', permanentAddress: '', temporaryAddress: '', educationLevel: '', selectedCourse: '' });
       }, 1500);
     },
     onError: () => {
@@ -72,6 +88,9 @@ export default function EnrollModal() {
 
           {/* Modal Container (Centering Wrapper) */}
           <div
+            onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
             style={{
               position: 'fixed',
               inset: 0,
@@ -81,6 +100,7 @@ export default function EnrollModal() {
               zIndex: 9999,
               padding: '1.5rem',
               overflowY: 'auto',
+              overscrollBehavior: 'contain',
             }}
           >
             {/* Modal */}
@@ -91,13 +111,16 @@ export default function EnrollModal() {
               style={{
                 width: '100%',
                 maxWidth: '500px',
+                maxHeight: 'calc(100vh - 3rem)',
+                overflowY: 'auto',
+                overscrollBehavior: 'contain',
                 background: 'var(--color-bg-card)',
                 border: '1px solid var(--color-border-amber)',
                 borderRadius: 'var(--radius-lg)',
                 padding: 'clamp(1.5rem, 5vw, 3rem)',
                 position: 'relative',
                 boxShadow: '0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(212, 168, 83, 0.1)',
-                margin: 'auto', // Ensures centering if content is taller than screen
+                margin: 'auto',
               }}
             >
               {/* Close Button */}
@@ -161,6 +184,76 @@ export default function EnrollModal() {
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>Date of Birth</label>
+                  <input
+                    required
+                    type="date"
+                    value={formData.dob}
+                    onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+                    style={{
+                      background: 'var(--color-bg-elevated)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '0.8rem 1rem',
+                      color: 'var(--color-text-primary)',
+                      outline: 'none',
+                      fontSize: '0.9rem',
+                      fontFamily: 'var(--font-body)',
+                      transition: 'all 0.3s ease',
+                      colorScheme: 'dark',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-amber)';
+                      e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 168, 83, 0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>Gender</label>
+                  <select
+                    required
+                    value={formData.gender}
+                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                    style={{
+                      background: 'var(--color-bg-elevated)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '0.8rem 1rem',
+                      color: 'var(--color-text-primary)',
+                      outline: 'none',
+                      cursor: 'pointer',
+                      fontSize: '0.9rem',
+                      fontFamily: 'var(--font-body)',
+                      transition: 'all 0.3s ease',
+                      appearance: 'none',
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4a853'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 1rem center',
+                      backgroundSize: '1.2rem',
+                      paddingRight: '3rem',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-amber)';
+                      e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 168, 83, 0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>Select your gender</option>
+                    <option value="Male" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>Male</option>
+                    <option value="Female" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>Female</option>
+                    <option value="Other" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>Other</option>
+                  </select>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>Email Address</label>
                   <input
                     required
@@ -218,6 +311,109 @@ export default function EnrollModal() {
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>Permanent Address</label>
+                  <input
+                    required
+                    type="text"
+                    value={formData.permanentAddress}
+                    onChange={(e) => setFormData({ ...formData, permanentAddress: e.target.value })}
+                    placeholder="Enter your permanent address"
+                    style={{
+                      background: 'var(--color-bg-elevated)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '0.8rem 1rem',
+                      color: 'var(--color-text-primary)',
+                      outline: 'none',
+                      fontSize: '0.9rem',
+                      fontFamily: 'var(--font-body)',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-amber)';
+                      e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 168, 83, 0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>Temporary Address</label>
+                  <input
+                    required
+                    type="text"
+                    value={formData.temporaryAddress}
+                    onChange={(e) => setFormData({ ...formData, temporaryAddress: e.target.value })}
+                    placeholder="Enter your temporary address"
+                    style={{
+                      background: 'var(--color-bg-elevated)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '0.8rem 1rem',
+                      color: 'var(--color-text-primary)',
+                      outline: 'none',
+                      fontSize: '0.9rem',
+                      fontFamily: 'var(--font-body)',
+                      transition: 'all 0.3s ease',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-amber)';
+                      e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 168, 83, 0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>Education Level</label>
+                  <select
+                    required
+                    value={formData.educationLevel}
+                    onChange={(e) => setFormData({ ...formData, educationLevel: e.target.value })}
+                    style={{
+                      background: 'var(--color-bg-elevated)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '0.8rem 1rem',
+                      color: 'var(--color-text-primary)',
+                      outline: 'none',
+                      cursor: 'pointer',
+                      fontSize: '0.9rem',
+                      fontFamily: 'var(--font-body)',
+                      transition: 'all 0.3s ease',
+                      appearance: 'none',
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4a853'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 1rem center',
+                      backgroundSize: '1.2rem',
+                      paddingRight: '3rem',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-amber)';
+                      e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 168, 83, 0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>Select your highest education</option>
+                    <option value="SEE" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>SEE</option>
+                    <option value="+2/Diploma" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>+2 / Diploma</option>
+                    <option value="Undergraduate (Bachelor)" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>Undergraduate (Bachelor)</option>
+                    <option value="Graduate (Master)" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>Graduate (Master)</option>
+                    <option value="PhD" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>PhD</option>
+                    <option value="Other" style={{ background: '#0a0a0a', color: 'var(--color-text-primary)' }}>Other</option>
+                  </select>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

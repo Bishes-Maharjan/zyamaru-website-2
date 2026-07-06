@@ -5,9 +5,9 @@ import { Resend } from "resend"
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
-    const { name, email, phoneNumber, selectedCourse } = await req.json()
+    const { name, email, phoneNumber, selectedCourse, dob, permanentAddress, temporaryAddress, gender, educationLevel } = await req.json()
 
-    if (!name || !email || !phoneNumber || !selectedCourse) {
+    if (!name || !email || !phoneNumber || !selectedCourse || !dob || !permanentAddress || !temporaryAddress || !gender || !educationLevel) {
         return Response.json({ error: 'All fields are required' }, { status: 400 })
     }
     if (!Object.values(Course).includes(selectedCourse)) {
@@ -23,8 +23,13 @@ export async function POST(req: Request) {
         <div style="font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto; border: 1px solid #ddd;">
           <h2>New Inquiry</h2>
           <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Date of Birth:</strong> ${dob}</p>
+          <p><strong>Gender:</strong> ${gender}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone Number:</strong> ${phoneNumber}</p>
+          <p><strong>Permanent Address:</strong> ${permanentAddress}</p>
+          <p><strong>Temporary Address:</strong> ${temporaryAddress}</p>
+          <p><strong>Education Level:</strong> ${educationLevel}</p>
           <p><strong>Selected Course:</strong> ${selectedCourse}</p>
         </div>
       `

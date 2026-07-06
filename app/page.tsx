@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import SmoothScroll from './components/SmoothScroll';
 import ShutterAnimation from './components/ShutterAnimation';
 import HeroSection from './components/HeroSection';
 import StatsBar from './components/StatsBar';
@@ -24,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <SmoothScroll>
+    <>
       <ShutterAnimation onComplete={handleShutterComplete} />
 
       {/* Content pre-renders behind the shutter at opacity:0.
@@ -48,6 +47,6 @@ export default function Home() {
         <CTASection />
         <Footer />
       </main>
-    </SmoothScroll>
+    </>
   );
 }

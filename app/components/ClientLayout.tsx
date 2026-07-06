@@ -6,17 +6,20 @@ import CustomCursor from './CustomCursor';
 import { EnrollProvider } from '../context/EnrollContext';
 import EnrollModal from './EnrollModal';
 import Providers from './Providers';
+import SmoothScroll from './SmoothScroll';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <Providers>
-      <EnrollProvider>
-        <FilmGrain />
-        <CustomCursor />
-        <Navbar />
-        <EnrollModal />
-        {children}
-      </EnrollProvider>
+      <SmoothScroll>
+        <EnrollProvider>
+          <FilmGrain />
+          <CustomCursor />
+          <Navbar />
+          <EnrollModal />
+          {children}
+        </EnrollProvider>
+      </SmoothScroll>
     </Providers>
   );
 }
