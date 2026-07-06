@@ -108,6 +108,7 @@ export default function Navbar() {
           height: '20px',
           zIndex: 999,
           pointerEvents: (visible || isHovered) ? 'none' : 'auto',
+
         }}
       />
 

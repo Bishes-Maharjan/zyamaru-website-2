@@ -6,7 +6,7 @@
 
 :root {
   /* ── Colors ── */
-  --color-bg: #0a0a0a;
+  --color-bg: #f2e9e9;
   --color-bg-elevated: #141414;
   --color-bg-card: #1a1a1a;
   --color-bg-card-hover: #222222;
@@ -292,7 +292,8 @@ a {
   transition: all 0.4s var(--ease-out-expo);
   position: relative;
   overflow: hidden;
-  isolation: isolate; /* Creates a clean stacking context */
+  isolation: isolate;
+  /* Creates a clean stacking context */
 }
 
 /* Base background */
@@ -328,7 +329,8 @@ a {
 
 .btn-primary span {
   position: relative;
-  z-index: 3; /* Always on top of backgrounds */
+  z-index: 3;
+  /* Always on top of backgrounds */
 }
 
 .btn-secondary {
