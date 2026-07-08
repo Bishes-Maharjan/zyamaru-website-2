@@ -70,7 +70,9 @@ export default function FeaturedCourses() {
           }
           @media (max-width: 768px) {
             .course-grid {
+              grid-template-columns: 1fr 1fr !important;
               grid-auto-rows: auto;
+              gap: 1rem !important;
             }
           }
         `}</style>

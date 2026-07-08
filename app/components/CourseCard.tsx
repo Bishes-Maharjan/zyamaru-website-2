@@ -328,6 +328,33 @@ export default function CourseCard({
         .course-card:hover .course-play-overlay {
           opacity: 1 !important;
         }
+        @media (max-width: 768px) {
+          .course-card-content {
+            padding: 0.75rem !important;
+          }
+          .course-card-content h3 {
+            font-size: 0.9rem !important;
+            margin-bottom: 0.25rem !important;
+          }
+          .course-card-content > p {
+            font-size: 0.7rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          /* Target the rating and students container */
+          .course-card-content > div:nth-child(4) {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.25rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+          /* Target the price container */
+          .course-card-content > div:last-child {
+            padding-top: 0.5rem !important;
+          }
+          .course-card-content > div:last-child span:first-child {
+            font-size: 1.1rem !important;
+          }
+        }
       `}</style>
     </motion.div>
   );

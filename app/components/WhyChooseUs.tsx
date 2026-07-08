@@ -158,8 +158,11 @@ export default function WhyChooseUs() {
             grid-template-columns: 1fr !important;
             grid-template-rows: auto !important;
           }
-          .bento-grid > * {
+          .bento-grid > div {
             grid-area: auto !important;
+            min-height: auto !important;
+            justify-content: flex-start !important;
+            padding: 1.5rem !important;
           }
         }
       `}</style>
