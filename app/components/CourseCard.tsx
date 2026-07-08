@@ -1,12 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 interface CourseCardProps {
+  slug: string;
   title: string;
   instructor: string;
   price?: string;
   originalPrice?: string;
+  instructorProfile?: string;
   rating?: number;
   students?: string;
   duration: string;
@@ -17,9 +20,13 @@ interface CourseCardProps {
   isUpcoming?: boolean;
 }
 
+import { useRouter } from 'next/navigation';
+
 export default function CourseCard({
+  slug,
   title,
   instructor,
+  instructorProfile,
   price,
   originalPrice,
   rating,
@@ -31,8 +38,10 @@ export default function CourseCard({
   index,
   isUpcoming,
 }: CourseCardProps) {
+  const router = useRouter();
   return (
     <motion.div
+      onClick={() => router.push(`/course/${slug}`)}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -238,10 +247,18 @@ export default function CourseCard({
             margin: '0 0 0.75rem 0',
           }}
         >
-          by {instructor}
+          by {instructorProfile ? (
+            <Link href={instructorProfile} onClick={(e) => e.stopPropagation()} style={{ color: 'var(--color-text-primary)', fontWeight: 500 }}>
+              {instructor}
+            </Link>
+          ) : (
+            <span style={{ color: 'var(--color-text-primary)', fontWeight: 500 }}>
+              {instructor}
+            </span>
+          )}
         </p>
 
-        {/* Rating & Students */}
+        {/* Rating & Students - Commented Out
         {!isUpcoming && (
           <div
             style={{
@@ -275,6 +292,7 @@ export default function CourseCard({
             </span>
           </div>
         )}
+        */}
 
         {/* Price - Stick to bottom */}
         <div

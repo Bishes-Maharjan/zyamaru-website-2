@@ -61,7 +61,15 @@ export default function CourseDetail() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'center' }}>
                 <div>
                   <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Instructor</span>
-                  <span style={{ fontWeight: 600, fontSize: '1.1rem' }}>{course.instructor}</span>
+                  <span style={{ fontWeight: 600, fontSize: '1.1rem' }}>
+                    {course.instructorProfile ? (
+                      <Link href={course.instructorProfile} style={{ color: 'var(--color-amber)', textDecoration: 'none' }}>
+                        {course.instructor}
+                      </Link>
+                    ) : (
+                      course.instructor
+                    )}
+                  </span>
                 </div>
                 <div>
                   <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Duration</span>

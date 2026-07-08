@@ -49,13 +49,7 @@ export default function FeaturedCourses() {
           }}
         >
           {courses.map((course, i) => (
-            <Link
-              key={course.id}
-              href={`/course/${course.slug}`}
-              style={{ display: 'block', height: '100%', textDecoration: 'none', color: 'inherit' }}
-            >
-              <CourseCard {...course} index={i} />
-            </Link>
+            <CourseCard key={course.id} {...course} index={i} />
           ))}
         </div>
 

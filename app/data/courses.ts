@@ -10,6 +10,7 @@ export interface Course {
   slug: string;
   title: string;
   instructor: string;
+  instructorProfile?: string;
   price?: string;
   originalPrice?: string;
   rating?: number;
@@ -31,12 +32,14 @@ export const courses: Course[] = [
     id: 'cinematic-masterclass-beginner',
     slug: 'cinematic-masterclass-beginner',
     title: 'Cinematic Masterclass: The Fundamentals',
-    instructor: 'Amar Maharjan',
+    instructor: 'Bijesh Maharjan',
+    // instructorProfile: '/instructor/bijesh-maharjan',
+
     price: 'Rs. 10,000',
     originalPrice: 'Rs. 15,000',
-    rating: 4.8,
-    students: '850',
-    duration: '20 hours',
+    // rating: 4.8,
+    // students: '850',
+    duration: '10 Days (20 hours)',
     level: 'Beginner',
     badge: 'Popular',
     image: 'rgba(212, 168, 83, 0.15)',
@@ -70,11 +73,12 @@ export const courses: Course[] = [
     slug: 'cinematic-masterclass-advanced',
     title: 'Cinematic Masterclass: Advanced Visual Storytelling',
     instructor: 'Amar Maharjan',
-    price: 'Rs. 25,000',
-    originalPrice: 'Rs. 35,000',
-    rating: 4.9,
-    students: '420',
-    duration: '32 hours',
+    instructorProfile: '/instructor/amar-maharjan',
+    price: 'Rs. 20,000',
+    originalPrice: 'Rs. 25,000',
+    // rating: 4.9,
+    // students: '420',
+    duration: '1 Month (52 hours)',
     level: 'Advanced',
     badge: 'Bestseller',
     image: 'rgba(212, 168, 83, 0.25)',
@@ -104,12 +108,148 @@ export const courses: Course[] = [
     available: true
   },
   {
+    id: 'basic-color-grading',
+    slug: 'basic-color-grading',
+    title: '15-Day Basic Color Grading Course',
+    instructor: 'Deepesh Chaudhary',
+    instructorProfile: `/instructor/deepesh-chaudhary`,
+    price: 'Rs. 12,500',
+    originalPrice: 'Rs. 18,000',
+    // rating: 4.7,
+    // students: '310',
+    duration: '15 Days (30 hours)',
+    level: 'Beginner to Intermediate',
+    badge: 'New',
+    isUpcoming: false,
+    image: 'rgba(96, 165, 250, 0.1)',
+    description: 'Learn the fundamentals of color grading in DaVinci Resolve. From project setup and conforming to primary/secondary corrections, shot matching, and crafting cinematic looks, this course will build a solid foundation for your color grading career.',
+    learningOutcomes: [
+      'Master the DaVinci Resolve interface, project setup, and conforming workflows',
+      'Understand primary corrections (Contrast, Exposure, White Balance)',
+      'Learn shot matching techniques for scene continuity',
+      'Use Power Windows and basic masking for selective color correction',
+      'Develop creative cinematic looks and skin tone correction'
+    ],
+    curriculum: [
+      {
+        chapter: 'Module 1: UI & Conforming (Days 1-3)',
+        topics: [
+          'DaVinci interface, project setup & importing media',
+          'Timeline creation & relinking offline media',
+          'Conforming XML/EDL workflows',
+          'Hands-on practice on editing and conforming'
+        ]
+      },
+      {
+        chapter: 'Module 2: Primary Corrections (Days 4-7)',
+        topics: [
+          'Contrast Control (Lift, Gamma, Gain, Exposure)',
+          'Adjusting temperature, tint, and saturation',
+          'Achieving natural color balance',
+          'Practical exercises on multiple clips'
+        ]
+      },
+      {
+        chapter: 'Module 3: Shot Matching (Days 8-10)',
+        topics: [
+          'Scene continuity basics',
+          'Matching multiple shots for exposure and white balance',
+          'Ensuring color consistency across scenes',
+          'Instructor-led practical shot matching'
+        ]
+      },
+      {
+        chapter: 'Module 4: Secondary Corrections & Looks (Days 11-14)',
+        topics: [
+          'Power Windows & Qualifiers',
+          'Basic masking for selective color correction',
+          'Creating cinematic looks and skin tone correction',
+          'Grading a complete clip from start to finish'
+        ]
+      },
+      {
+        chapter: 'Module 5: Final Review & Certification (Day 15)',
+        topics: [
+          'Final review of projects',
+          'Feedback session and Q&A',
+          'Certificate distribution'
+        ]
+      }
+    ],
+    category: CourseCategory.BasicColorGrading,
+    available: true
+  },
+  {
+    id: 'advanced-color-grading',
+    slug: 'advanced-color-grading',
+    title: '15-Day Advanced Color Grading Course',
+    instructor: 'Deepesh Chaudhary',
+    instructorProfile: `/instructor/deepesh-chaudhary`,
+    price: 'Rs. 24,500',
+    originalPrice: 'Rs. 32,000',
+    // rating: 4.9,
+    // students: '185',
+    duration: '15 Days (30 hours)',
+    level: 'Advanced',
+    badge: 'Advanced',
+    isUpcoming: false,
+    image: 'rgba(96, 165, 250, 0.15)',
+    description: 'Transform your footage into cinematic masterpieces with our advanced curriculum. Learn professional color-managed workflows, custom LUT creation, advanced secondary tools like Magic Mask, and recreate looks from Hollywood films.',
+    learningOutcomes: [
+      'Master advanced color science, Log/RAW workflows, and Color Management',
+      'Create, test, and manage technical and creative LUT pipelines',
+      'Master advanced secondary tools (Magic Mask, Depth Map, Relight FX)',
+      'Optimize professional workflows using Node Trees and PowerGrades',
+      'Recreate looks from references and grade complete commercial sequences'
+    ],
+    curriculum: [
+      {
+        chapter: 'Module 1: Color Science & Look Development (Days 1-6)',
+        topics: [
+          'Color spaces, gamma, dynamic range, bit depth',
+          'RAW vs Log and Color Managed workflows',
+          'Building cinematic looks and contrast design',
+          'Technical vs Creative LUTs and LUT pipeline management',
+          'Creating, exporting, and testing custom LUTs'
+        ]
+      },
+      {
+        chapter: 'Module 2: Advanced Secondary Tools (Days 7-10)',
+        topics: [
+          'Advanced Qualifiers, Power Windows, and Magic Mask',
+          'Depth Map and Relight FX',
+          'Advanced tracking and combining secondary tools',
+          'Selective grading and beauty work'
+        ]
+      },
+      {
+        chapter: 'Module 3: Professional Workflow & Workshop (Days 11-13)',
+        topics: [
+          'Node tree organization and PowerGrades',
+          'Gallery Stills, Shared Nodes, Groups, and Versions',
+          'Grading a commercial or music video',
+          'Recreating looks from references (Creative Grading Workshop)'
+        ]
+      },
+      {
+        chapter: 'Module 4: Final Project & Certification (Days 14-15)',
+        topics: [
+          'Grade a complete sequence using advanced techniques',
+          'Final project presentation and portfolio guidance',
+          'Feedback session and certificate distribution'
+        ]
+      }
+    ],
+    category: CourseCategory.AdvancedColorGrading,
+    available: true
+  },
+  {
     id: 'documentary-filmmaking',
     slug: 'documentary-filmmaking',
     title: "Documentary Filmmaking: Telling Nepal's Stories",
     instructor: 'Srijana Basnet',
-    rating: 4.8,
-    students: '650',
+    // rating: 4.8,
+    // students: '650',
     duration: '28 hours',
     level: 'Intermediate',
     badge: 'Upcoming',
@@ -144,42 +284,6 @@ export const courses: Course[] = [
     ],
     category: CourseCategory.DocumentaryFilmmaking,
     available: false
-  },
-  {
-    id: 'advanced-color-grading',
-    slug: 'advanced-color-grading',
-    title: 'Advanced Color Grading',
-    instructor: 'Aayush Shrestha',
-    duration: '24 hours',
-    level: 'Intermediate',
-    badge: 'Upcoming',
-    isUpcoming: true,
-    image: 'rgba(96, 165, 250, 0.15)',
-    description: 'Transform your footage into cinematic masterpieces. Learn professional color grading techniques and seamless VFX integration.',
-    learningOutcomes: [
-      'Master the DaVinci Resolve color page',
-      'Understand Log and RAW workflows',
-      'Secondary color correction (Qualifiers & Masks)',
-      'Match looks across different cameras',
-      'Basic VFX compositing and tracking'
-    ],
-    curriculum: [
-      {
-        chapter: 'Module 1: Color Science',
-        topics: ['Color Spaces & Gamut', 'Input vs Output Transforms', 'Node Tree Efficiency']
-      },
-      {
-        chapter: 'Module 2: The Art of Grading',
-        topics: ['Creating Skin Tones', 'Building Custom Looks', 'Film Print Emulation']
-      },
-      {
-        chapter: 'Module 3: Visual Effects',
-        topics: ['3D Tracking', 'Sky Replacements', 'Clean Plate Creation']
-      }
-    ],
-    category: CourseCategory.AdvancedColorGrading,
-    available: false
-
   },
   {
     id: 'drone-cinematography',
