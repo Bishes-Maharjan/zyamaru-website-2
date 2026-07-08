@@ -148,7 +148,7 @@ export const courses: Course[] = [
   {
     id: 'advanced-color-grading',
     slug: 'advanced-color-grading',
-    title: 'Advanced Color Grading & Visual Effects',
+    title: 'Advanced Color Grading',
     instructor: 'Aayush Shrestha',
     duration: '24 hours',
     level: 'Intermediate',
