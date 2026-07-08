@@ -15,6 +15,11 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1
+}
+
 export const metadata: Metadata = {
   title: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
   description:
