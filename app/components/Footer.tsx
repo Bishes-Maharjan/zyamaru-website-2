@@ -64,7 +64,7 @@ export default function Footer() {
   return (
     <footer id="contact" style={{ background: 'var(--color-surface)', borderTop: '1px solid var(--color-border)' }}>
       {/* Main Footer */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem,8vh,5rem) var(--section-padding-x)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '3rem' }}>
+      <div className="footer-grid" style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem,8vh,5rem) var(--section-padding-x)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '3rem' }}>
         {/* Brand Column */}
         <ScrollReveal>
           <div>
@@ -144,7 +144,7 @@ export default function Footer() {
 
         {/* Map Column */}
         {/* Standard HTML wrapper so the grid layout can actually see it */}
-        <div style={{ gridColumn: 'span 3' }}>
+        <div className="footer-map" style={{ gridColumn: 'span 3' }}>
           <ScrollReveal delay={0.5}>
             <div>
               <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-primary)', marginBottom: '1.25rem' }}>Find Us</h4>
@@ -175,6 +175,18 @@ export default function Footer() {
           Made with ❤️ in Nepal 🇳🇵
         </p>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+          .footer-map {
+            grid-column: auto !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

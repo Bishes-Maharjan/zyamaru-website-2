@@ -516,4 +516,21 @@ a {
     --section-padding-x: 1.25rem;
     --section-padding-y: 3rem;
   }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Disable expensive film grain animation on mobile */
+  .film-grain {
+    display: none !important;
+  }
+
+  /* Reduce expensive backdrop-filter on mobile GPUs */
+  .glass {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(20, 20, 20, 0.85);
+  }
 }

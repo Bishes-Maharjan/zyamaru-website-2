@@ -10,9 +10,10 @@ export default function ShutterAnimation({ onComplete }: { onComplete: () => voi
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
-    // Only animate on first visit per session
+    // Only animate on first visit per session, and skip on mobile for performance
     const hasPlayed = sessionStorage.getItem('zyamaru-shutter-played');
-    if (hasPlayed) {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (hasPlayed || isTouchDevice) {
       onComplete();
       return;
     }

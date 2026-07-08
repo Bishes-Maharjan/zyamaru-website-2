@@ -145,7 +145,7 @@ export default function Navbar() {
             textDecoration: 'none',
           }}
         >
-          <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+          <div className="nav-logo" style={{ position: 'relative', width: '100px', height: '100px' }}>
             <Image
               src="/logo.png"
               alt="ZYAMARU Logo"
@@ -310,6 +310,10 @@ export default function Navbar() {
           }
           .nav-hamburger {
             display: flex !important;
+          }
+          .nav-logo {
+            width: 60px !important;
+            height: 60px !important;
           }
         }
       `}</style>

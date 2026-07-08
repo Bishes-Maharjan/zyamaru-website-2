@@ -146,7 +146,7 @@ function TestimonialCard({
     <div
       style={{
         flexShrink: 0,
-        width: '380px',
+        width: 'min(380px, 85vw)',
         padding: '1.5rem',
         background: 'var(--color-bg-card)',
         borderRadius: 'var(--radius-lg)',

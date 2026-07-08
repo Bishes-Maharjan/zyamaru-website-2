@@ -14,6 +14,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const rafId = useRef<number>(0);
 
   useEffect(() => {
+    // Skip Lenis on touch/mobile devices for performance
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     const instance = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

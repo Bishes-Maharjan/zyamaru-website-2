@@ -100,7 +100,7 @@ export default function CourseDetail() {
                   style={{ padding: '2rem', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)' }}
                 >
                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: 'var(--color-amber)', marginBottom: '1rem' }}>{module.chapter}</h3>
-                  <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                  <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '1rem' }}>
                     {module.topics.map((topic) => (
                       <li key={topic} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.95rem', color: 'var(--color-text-secondary)' }}>
                         <span style={{ width: '6px', height: '6px', background: 'var(--color-amber)', borderRadius: '50%' }} />
@@ -116,7 +116,7 @@ export default function CourseDetail() {
           {/* Learning Outcomes */}
           <section style={{ marginBottom: '4rem' }}>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', marginBottom: '1.5rem' }}>What You'll Learn</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))', gap: '1.5rem' }}>
               {course.learningOutcomes.map((outcome, idx) => (
                 <div key={idx} style={{ display: 'flex', gap: '1rem', padding: '1.5rem', background: 'rgba(212,168,83,0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(212,168,83,0.1)' }}>
                   <span style={{ fontSize: '1.2rem' }}>✓</span>
