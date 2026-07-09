@@ -14,15 +14,14 @@ const footerLinks = {
     { name: 'About Us', link: '/#about' },
     { name: 'Instructors', link: '/#instructor' },
     { name: 'Blog', link: '#' },
-    { name: 'Careers', link: '#' },
-    { name: 'Press', link: '#' },
+    { name: 'Careers', link: '/career' },
+    { name: 'Press', link: 'https://www.youtube.com/@zyamarufilmmakers5114' },
   ],
   support: [
     { name: 'FAQ', link: '/#faq' },
-    { name: 'Contact', link: '/#contact' },
-    { name: 'Community', link: '#' },
-    { name: 'Terms', link: '#' },
-    { name: 'Privacy', link: '#' },
+    { name: 'Community', link: 'https://www.tiktok.com/@zyamaru.films.aca?_r=1&_t=ZS-97ns4YjsVBC' },
+    { name: 'Terms of Service', link: '/terms' },
+    { name: 'Privacy Policy', link: '/privacy' },
   ],
 };
 
@@ -32,6 +31,12 @@ const socialLinks = [
     url: 'https://www.facebook.com/profile.php?id=61570710927038',
     brandColor: socialIcons.Facebook.color,
     icon: socialIcons.Facebook.icon,
+  },
+  {
+    name: 'Youtube',
+    url: 'https://www.youtube.com/@zyamarufilmmakers5114',
+    brandColor: socialIcons.Youtube.color,
+    icon: socialIcons.Youtube.icon,
   },
   {
     name: 'Instagram',
@@ -45,47 +50,81 @@ const socialLinks = [
     brandColor: socialIcons.Tiktok.color,
     icon: socialIcons.Tiktok.icon,
   },
+  {
+    name: 'Email',
+    url: 'mailto:info@zyamarufilms.com.np',
+    brandColor: socialIcons.Email.color,
+    icon: socialIcons.Email.icon,
+  },
+  {
+    name: 'Phone',
+    url: 'tel:+9767242664',
+    brandColor: socialIcons.Phone.color,
+    icon: socialIcons.Phone.icon,
+  },
 ];
+
 
 export default function Footer() {
   return (
     <footer id="contact" style={{ background: 'var(--color-surface)', borderTop: '1px solid var(--color-border)' }}>
       {/* Main Footer */}
       <div className="footer-grid" style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(3rem,8vh,5rem) var(--section-padding-x)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '3rem' }}>
+
         {/* Brand Column */}
         <ScrollReveal>
           <div>
-            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--color-amber)', textTransform: 'uppercase', marginBottom: '1rem' }}>ZYAMARU</div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--color-amber)', textTransform: 'uppercase', marginBottom: '1rem' }}>
+              ZYAMARU
+            </div>
             <p style={{ fontSize: '0.85rem', lineHeight: 1.7, marginBottom: '1.5rem', maxWidth: 280 }}>
               Nepal&apos;s premier cinematography and videography academy. Transforming storytellers since 2014.
             </p>
+
+            {/* Direct Contact Details */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.85rem' }}>
+              <a href="mailto:info@zyamarufilms.com.np" style={{ color: 'var(--color-amber)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-white)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
+                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>✉</span> info@zyamarufilms.com.np
+              </a>
+              <a href="tel:+9779867242664" style={{ color: 'var(--color-amber)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.2s' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-white)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
+                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📞</span> +977 9867242664
+              </a>
+            </div>
+
+            {/* Social Media Only Icons */}
             <div style={{ display: 'flex', gap: '0.75rem' }}>
-              {socialLinks.map(({ name, url, icon, brandColor }) => (
-                <a
-                  key={name}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#ffffff',
-                    background: brandColor,
-                    outline: '1px solid transparent',
-                    outlineOffset: '2px',
-                    transition: 'outline-color 0.25s ease',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.outlineColor = '#D4A853'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.outlineColor = 'transparent'; }}
-                >
-                  {icon}
-                </a>
-              ))}
+              {socialLinks
+                .filter(link => !['Email', 'Phone'].includes(link.name)) // Filters out email/phone from icon strip
+                .map(({ name, url, icon, brandColor }) => (
+                  <a
+                    key={name}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name}
+                    style={{
+                      width: 38,
+                      height: 38,
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#ffffff',
+                      background: brandColor,
+                      outline: '1px solid transparent',
+                      outlineOffset: '2px',
+                      transition: 'outline-color 0.25s ease',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.outlineColor = '#D4A853'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.outlineColor = 'transparent'; }}
+                  >
+                    {icon}
+                  </a>
+                ))}
             </div>
           </div>
         </ScrollReveal>

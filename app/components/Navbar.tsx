@@ -11,7 +11,8 @@ const navLinks = [
   { label: 'Courses', href: '#courses' },
   { label: 'About', href: '#about' },
   { label: 'Instructor', href: '#instructor' },
-  { label: 'Curriculum', href: '#curriculum' },
+  // { label: 'Curriculum', href: '#curriculum' },
+  { label: 'Careers', href: '#career' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
@@ -89,9 +90,11 @@ export default function Navbar() {
       return;
     }
 
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (href.includes('#')) {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -115,7 +118,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -150 }}
         animate={{ y: (visible || isHovered) ? 0 : -150 }}
-        transition={{ duration: 0.5, delay: hasEntered ? 0 : 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.2, delay: hasEntered ? 0 : 1.2, ease: [0.16, 1, 0.3, 1] }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{

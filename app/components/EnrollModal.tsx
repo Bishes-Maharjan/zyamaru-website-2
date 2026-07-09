@@ -421,7 +421,7 @@ export default function EnrollModal() {
                   <select
                     required
                     value={formData.selectedCourse}
-                    onChange={(e) => setFormData({ ...formData, selectedCourse: e.target.value as Course })}
+                    onChange={(e) => setFormData({ ...formData, selectedCourse: e.target.value })}
                     style={{
                       background: 'var(--color-bg-elevated)',
                       border: '1px solid var(--color-border)',
@@ -433,7 +433,7 @@ export default function EnrollModal() {
                       fontSize: '0.9rem',
                       fontFamily: 'var(--font-body)',
                       transition: 'all 0.3s ease',
-                      appearance: 'none', // Reset default browser style
+                      appearance: 'none',
                       backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4a853'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'right 1rem center',
@@ -460,15 +460,35 @@ export default function EnrollModal() {
                   </select>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={mutation.isPending}
-                  className="btn-primary"
-                  style={{ marginTop: '1rem', width: '100%', height: '3.5rem' }}
-                >
-                  <span>{mutation.isPending ? 'Sending...' : 'Submit Application'}</span>
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem', alignItems: 'center' }}>
+                  <button
+                    type="submit"
+                    disabled={mutation.isPending}
+                    className="btn-primary"
+                    style={{ width: '100%', height: '3.5rem' }}
+                  >
+                    <span>{mutation.isPending ? 'Sending...' : 'Submit Application'}</span>
+                  </button>
 
+                  <a
+                    href='/career'
+                    onClick={() => closeEnrollModal()}
+                    style={{
+                      color: 'var(--color-amber)',
+                      textDecoration: 'underline',
+                      textDecorationColor: 'var(--color-amber)',
+                      textUnderlineOffset: '4px',
+                      fontSize: '0.8rem',
+                      fontWeight: 500,
+                      padding: '0.25rem 0',
+                      transition: 'color 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-amber)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}
+                  >
+                    Join as an Instructor →
+                  </a>
+                </div>
               </form>
             </motion.div>
           </div>

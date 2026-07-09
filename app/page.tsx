@@ -14,6 +14,8 @@ import ShowreelSection from './components/ShowreelSection';
 import FAQSection from './components/FAQSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import CareerPage from './career/page';
+import CareerPreview from './components/CareerPreview';
 
 export default function Home() {
   const [shutterDone, setShutterDone] = useState(false);
@@ -40,7 +42,8 @@ export default function Home() {
         <FeaturedCourses />
         <WhyChooseUs />
         <InstructorSection />
-        <CurriculumPreview />
+        <CareerPreview />
+        {/* <CurriculumPreview /> */}
         <TestimonialSection />
         <ShowreelSection />
         <FAQSection />

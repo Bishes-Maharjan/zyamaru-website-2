@@ -10,17 +10,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 1,
         },
+        {
+            url: 'https://zyamarufilms.com.np/career',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: 'https://zyamarufilms.com.np/privacy',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        {
+            url: 'https://zyamarufilms.com.np/terms',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
     ]
 
     const instructorRoutes: MetadataRoute.Sitemap = instructors.map((instructor) => ({
-        url: `https://zyamarufilms.com.np/instructor/${instructor.id}`,
+        url: `https://zyamarufilms.com.np/instructor/${instructor.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
     }))
 
     const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
-        url: `https://zyamarufilms.com.np/course/${course.id}`,
+        url: `https://zyamarufilms.com.np/course/${course.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.9,
