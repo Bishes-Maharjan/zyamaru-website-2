@@ -1,8 +1,40 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { OPEN_POSITIONS } from './position';
+
+// ── Validation ───────────────────────────────────────────────────
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+]?[\d\s\-()]{7,15}$/;
+const URL_RE = /^https?:\/\/.+/;
+
+type CareerForm = {
+  name: string;
+  email: string;
+  phone: string;
+  positionId: string;
+  portfolioUrl: string;
+  description: string;
+  cvBase64: string;
+  cvFileName: string;
+};
+
+type CareerErrors = Partial<Record<keyof CareerForm, string>>;
+
+function validate(d: CareerForm): CareerErrors {
+  const e: CareerErrors = {};
+  if (!d.name.trim())                       e.name = 'Full name is required.';
+  if (!d.email.trim())                      e.email = 'Email address is required.';
+  else if (!EMAIL_RE.test(d.email))         e.email = 'Enter a valid email address.';
+  if (!d.phone.trim())                      e.phone = 'Phone number is required.';
+  else if (!PHONE_RE.test(d.phone))         e.phone = 'Enter a valid phone number.';
+  if (!d.positionId)                        e.positionId = 'Please select a position.';
+  if (d.portfolioUrl && !URL_RE.test(d.portfolioUrl)) e.portfolioUrl = 'Enter a valid URL starting with https://';
+  if (!d.description.trim())               e.description = 'Cover letter is required.';
+  if (!d.cvBase64)                          e.cvBase64 = 'Please upload your CV (PDF, max 2.5MB).';
+  return e;
+}
 
 // Full structured position dataset matching your provided text copy
 const POSITION_DETAILS = [
@@ -152,17 +184,13 @@ export default function CareerPage() {
     const [activeJob, setActiveJob] = useState<string | null>(null);
     const formRef = useRef<HTMLDivElement>(null);
 
-    // Inside your CareerPage component:
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        positionId: '',
-        portfolioUrl: '',
-        description: '',
-        cvBase64: '', // Store encoded file string
-        cvFileName: ''
-    });
+    const emptyForm: CareerForm = {
+        name: '', email: '', phone: '', positionId: '',
+        portfolioUrl: '', description: '', cvBase64: '', cvFileName: ''
+    };
+    const [formData, setFormData] = useState<CareerForm>(emptyForm);
+    const [errors, setErrors] = useState<CareerErrors>({});
+    const [touched, setTouched] = useState(false);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -196,8 +224,12 @@ export default function CareerPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!formData.name || !formData.email || !formData.phone || !formData.positionId || !formData.description) {
-            setStatus({ type: 'error', message: 'Please fill out all required fields.' });
+        setTouched(true);
+        const errs = validate(formData);
+        setErrors(errs);
+        if (Object.keys(errs).length > 0) {
+            setStatus({ type: 'error', message: 'Please fix the highlighted fields before submitting.' });
+            formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;
         }
 
@@ -212,13 +244,25 @@ export default function CareerPage() {
 
             if (res.ok) {
                 setStatus({ type: 'success', message: 'Application sent successfully! Our team will get back to you within 7 working days.' });
-                setFormData({ name: '', email: '', phone: '', positionId: '', portfolioUrl: '', description: '', cvBase64: '', cvFileName: '' });
+                setFormData(emptyForm);
+                setErrors({});
+                setTouched(false);
             } else {
                 const data = await res.json();
                 setStatus({ type: 'error', message: data.error || 'Submission failed.' });
             }
         } catch {
             setStatus({ type: 'error', message: 'Failed to connect to the server routing pipeline.' });
+        }
+    };
+
+    // Helper: update field and live-clear its error
+    const setField = (field: keyof CareerForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const next = { ...formData, [field]: e.target.value };
+        setFormData(next);
+        if (touched && errors[field]) {
+            const newErrs = validate(next);
+            setErrors(prev => ({ ...prev, [field]: newErrs[field] }));
         }
     };
 
@@ -360,42 +404,48 @@ export default function CareerPage() {
                         </div>
                     </div>
 
-                    <div style={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', padding: '2.5rem' }}>
-                        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
+                        <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="form-split-row">
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Full Name *</label>
-                                    <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="input-field" />
+                                    <input type="text" value={formData.name} onChange={setField('name')} autoComplete="name" className={`input-field${errors.name ? ' error' : ''}`} />
+                                    {errors.name && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.name}</span>}
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Email Address *</label>
-                                    <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input-field" />
+                                    <input type="email" inputMode="email" value={formData.email} onChange={setField('email')} autoComplete="email" className={`input-field${errors.email ? ' error' : ''}`} />
+                                    {errors.email && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.email}</span>}
                                 </div>
                             </div>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="form-split-row">
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Phone Number *</label>
-                                    <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="input-field" />
+                                    <input type="tel" inputMode="tel" value={formData.phone} onChange={setField('phone')} autoComplete="tel" className={`input-field${errors.phone ? ' error' : ''}`} />
+                                    {errors.phone && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.phone}</span>}
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Target Position *</label>
-                                    <select required value={formData.positionId} onChange={(e) => setFormData({ ...formData, positionId: e.target.value })} className="input-field" style={{ height: '42px' }}>
+                                    <select value={formData.positionId} onChange={setField('positionId')} className={`input-field${errors.positionId ? ' error' : ''}`} style={{ height: '50px' }}>
                                         <option value="">-- Choose Position --</option>
                                         {OPEN_POSITIONS.map((pos) => <option key={pos.id} value={pos.id}>{pos.label}</option>)}
                                     </select>
+                                    {errors.positionId && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.positionId}</span>}
                                 </div>
                             </div>
 
                             <div>
-                                <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Work Showcase / Portfolio URL Link</label>
-                                <input type="url" placeholder="https://youtube.com/.. or vimeo/behance link" value={formData.portfolioUrl} onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })} className="input-field" />
+                                <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Work Showcase / Portfolio URL</label>
+                                <input type="url" inputMode="url" placeholder="https://youtube.com/.." value={formData.portfolioUrl} onChange={setField('portfolioUrl')} className={`input-field${errors.portfolioUrl ? ' error' : ''}`} />
+                                {errors.portfolioUrl && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.portfolioUrl}</span>}
                             </div>
 
                             <div>
-                                <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Cover Letter & Experience Summary *</label>
-                                <textarea required rows={5} placeholder="Introduce yourself, your availability, and why you want to build visual capabilities with ZYAMARU..." value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="input-field" style={{ resize: 'vertical' }} />
+                                <label style={{ display: 'block', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-secondary)', marginBottom: '0.5rem', fontWeight: 600 }}>Cover Letter &amp; Experience Summary *</label>
+                                <textarea rows={5} placeholder="Introduce yourself, your availability, and why you want to build visual capabilities with ZYAMARU..." value={formData.description} onChange={setField('description')} className={`input-field${errors.description ? ' error' : ''}`} style={{ resize: 'vertical' }} />
+                                {errors.description && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.description}</span>}
                             </div>
 
                             <div>
@@ -404,13 +454,14 @@ export default function CareerPage() {
                                 </label>
                                 <input
                                     type="file"
-                                    required
                                     accept=".pdf"
                                     onChange={handleFileChange}
-                                    className="input-field"
+                                    className={`input-field${errors.cvBase64 ? ' error' : ''}`}
                                     style={{ padding: '0.5rem' }}
                                 />
+                                {errors.cvBase64 && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.cvBase64}</span>}
                             </div>
+
                             {status.message && (
                                 <div style={{ padding: '0.75rem 1rem', borderRadius: 'var(--radius-md)', fontSize: '0.85rem', background: status.type === 'error' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)', color: status.type === 'error' ? '#f87171' : '#34d399', border: `1px solid ${status.type === 'error' ? '#ef4444' : '#10b981'}` }}>
                                     {status.message}
@@ -426,30 +477,6 @@ export default function CareerPage() {
                 </div>
             </section>
 
-            {/* Local Responsive CSS Injection Scope */}
-            <style jsx>{`
-        .input-field {
-          width: 100%;
-          padding: 0.75rem 1rem;
-          background: var(--color-bg);
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md, 6px);
-          color: var(--color-text-primary);
-          font-size: 0.85rem;
-          outline: none;
-          box-sizing: border-box;
-          transition: border-color 0.25s ease;
-        }
-        .input-field:focus {
-          border-color: var(--color-amber);
-        }
-        @media (max-width: 768px) {
-          .nav-spacer { height: 90px !important; }
-          .responsive-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          .responsive-grid-two { grid-template-columns: 1fr !important; gap: 1rem !important; }
-          .form-split-row { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-        }
-      `}</style>
         </main>
     );
 }

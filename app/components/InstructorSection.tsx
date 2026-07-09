@@ -88,7 +88,7 @@ export default function InstructorSection() {
             gap: '1rem',
           }}
         >
-          {/* Left Arrow */}
+          {/* Left Arrow
           {instructors.length > 1 && (
             <button
               onClick={() => paginate(-1)}
@@ -123,7 +123,7 @@ export default function InstructorSection() {
             >
               ←
             </button>
-          )}
+          )} */}
 
           {/* Slide Content — draggable */}
           <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
@@ -348,7 +348,7 @@ export default function InstructorSection() {
             </AnimatePresence>
           </div>
 
-          {/* Right Arrow */}
+          {/* Right Arrow
           {instructors.length > 1 && (
             <button
               onClick={() => paginate(1)}
@@ -383,7 +383,7 @@ export default function InstructorSection() {
             >
               →
             </button>
-          )}
+          )} */}
         </div>
 
         {/* Dots Indicator + swipe hint */}

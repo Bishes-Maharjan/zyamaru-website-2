@@ -26,13 +26,15 @@ export default function CareerPreview() {
                 overflow: 'hidden',
                 borderTop: '1px solid var(--color-border)',
                 borderBottom: '1px solid var(--color-border)',
-                padding: 'clamp(4rem, 8vw, 7rem) 0'
+                paddingBlock: 'clamp(4rem, 8vw, 7rem)',
+                paddingInline: 'var(--section-padding-x)',
             }}
         >
             <div
                 style={{
                     maxWidth: '1200px',
                     margin: '0 auto',
+                    width: '100%',
                 }}
             >
                 {/* Section Header */}
@@ -57,10 +59,9 @@ export default function CareerPreview() {
 
                 {/* Core Layout Grid */}
                 <div
-                    className="career-preview-grid"
-                    style={{
+                style={{
                         display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                         gap: 'clamp(2.5rem, 5vw, 5rem)',
                         alignItems: 'center',
                     }}
@@ -170,14 +171,6 @@ export default function CareerPreview() {
                 </div>
             </div>
 
-            <style jsx>{`
-        @media (max-width: 768px) {
-          .career-preview-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
-        }
-      `}</style>
         </section>
     );
 }
