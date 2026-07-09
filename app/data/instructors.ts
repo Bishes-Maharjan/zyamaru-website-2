@@ -38,7 +38,7 @@ export const instructors: Instructor[] = [
     name: 'Amar Maharjan',
     slug: 'amar-maharjan',
     born: '1993',
-    bio: 'Amar Maharjan is a renowned filmmaker, writer, director, and cinematographer based in Kathmandu, Nepal. With a career spanning since 2015, he has mentored numerous aspiring filmmakers and contributed to iconic projects like Aina Jhyal ko Pulati, the acclaimed feature movie.',
+    bio: 'Amar Maharjan is a renowned filmmaker, writer, director, and cinematographer based in Kathmandu, Nepal. With a career spanning since 2015, he has mentored numerous aspiring filmmakers and contributed to iconic projects like Aina Jhyal ko Putali, the acclaimed feature movie.',
     longBio: `Amar Maharjan was born in Kathmandu, Nepal. He completed his schoolwork at Gajurmukhi secondary boarding school, did a computer diploma in Thapathali engineering college, and later attained bachelors in film studies from Oscar International College of Film Studies, Kathmandu Nepal where he completed his scriptwriting and direction in film making.
 
 He is a renowned filmmaker, known for his expertise as a writer, director, and cinematographer. With a career spanning since 2015, he has passionately pursued his love for filmmaking. Amar works on his own film projects as a writer and director while lending his exceptional cinematography skills to other productions. He had been actively involved in the YouTube channel "Zyamaru" as a content creator. Amar's extensive experience and talent have led him to serve as a mentor in cinematography at the Film Colleges, and film institutes where he imparts his knowledge and inspires the next generation of filmmakers.`,
