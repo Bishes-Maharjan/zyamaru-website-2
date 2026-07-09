@@ -93,7 +93,6 @@ export default function InstructorSection() {
             <button
               onClick={() => paginate(-1)}
               aria-label="Previous instructor"
-              className="instructor-arrow instructor-arrow-left"
               style={{
                 flexShrink: 0,
                 width: '3.5rem',
@@ -126,7 +125,7 @@ export default function InstructorSection() {
             </button>
           )}
 
-          {/* Slide Content */}
+          {/* Slide Content — draggable */}
           <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -137,14 +136,28 @@ export default function InstructorSection() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                /* ── Drag to swipe ─────────────────────────────── */
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(_e, info) => {
+                  // Trigger on swipe velocity OR significant offset
+                  if (info.velocity.x < -300 || info.offset.x < -80) {
+                    paginate(1);
+                  } else if (info.velocity.x > 300 || info.offset.x > 80) {
+                    paginate(-1);
+                  }
+                }}
+                style={{ cursor: 'grab' }}
+                whileDrag={{ cursor: 'grabbing' }}
               >
                 <div
-                  className="instructor-grid"
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                     gap: 'clamp(2rem, 5vw, 5rem)',
                     alignItems: 'center',
+                    userSelect: 'none', // prevent text selection while dragging
                   }}
                 >
                   {/* Image Side */}
@@ -189,7 +202,8 @@ export default function InstructorSection() {
                           alt={instructor.name}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-                          style={{ objectFit: 'cover' }}
+                          style={{ objectFit: 'cover', pointerEvents: 'none' }}
+                          draggable={false}
                         />
                       ) : (
                         <div
@@ -339,7 +353,6 @@ export default function InstructorSection() {
             <button
               onClick={() => paginate(1)}
               aria-label="Next instructor"
-              className="instructor-arrow instructor-arrow-right"
               style={{
                 flexShrink: 0,
                 width: '3.5rem',
@@ -373,45 +386,37 @@ export default function InstructorSection() {
           )}
         </div>
 
-        {/* Dots Indicator */}
+        {/* Dots Indicator + swipe hint */}
         {instructors.length > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '2.5rem' }}>
-            {instructors.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setDirection(idx > activeIndex ? 1 : -1);
-                  setActiveIndex(idx);
-                }}
-                aria-label={`Go to instructor ${idx + 1}`}
-                style={{
-                  width: activeIndex === idx ? '2.5rem' : '0.5rem',
-                  height: '0.5rem',
-                  borderRadius: 'var(--radius-full)',
-                  background: activeIndex === idx ? 'var(--color-amber)' : 'rgba(255,255,255,0.15)',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  padding: 0,
-                }}
-              />
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginTop: '2.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.6rem' }}>
+              {instructors.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setDirection(idx > activeIndex ? 1 : -1);
+                    setActiveIndex(idx);
+                  }}
+                  aria-label={`Go to instructor ${idx + 1}`}
+                  style={{
+                    width: activeIndex === idx ? '2.5rem' : '0.5rem',
+                    height: '0.5rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: activeIndex === idx ? 'var(--color-amber)' : 'rgba(255,255,255,0.15)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                    padding: 0,
+                  }}
+                />
+              ))}
+            </div>
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', letterSpacing: '0.08em' }}>
+              swipe or drag to navigate
+            </p>
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .instructor-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .instructor-arrow {
-            width: 2.5rem !important;
-            height: 2.5rem !important;
-            font-size: 1rem !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
