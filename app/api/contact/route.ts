@@ -38,8 +38,8 @@ export async function POST(req: Request) {
     try {
         // 1. Admin Notification Email
         await resend.emails.send({
-            from: process.env.EMAIL_CAREER || "info@zyamarufilms.com.np",
-            to: process.env.EMAIL_CAREER || "info@zyamarufilms.com.np",
+            from: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
+            to: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
             subject: `New inquiry from ${name}`,
             html: `
         <!DOCTYPE html>
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
 
         // 2. Student Confirmation Email
         await resend.emails.send({
-            from: process.env.EMAIL_CAREER || "info@zyamarufilms.com.np",
+            from: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
             to: email,
             subject: `Thank you for your enrollment in Zyamaru Films`,
             html: `
