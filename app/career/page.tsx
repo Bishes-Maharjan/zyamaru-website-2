@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { OPEN_POSITIONS } from './position';
+import toast from 'react-hot-toast';
 
 // ── Validation ───────────────────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,7 +31,8 @@ function validate(d: CareerForm): CareerErrors {
   if (!d.phone.trim())                      e.phone = 'Phone number is required.';
   else if (!PHONE_RE.test(d.phone))         e.phone = 'Enter a valid phone number.';
   if (!d.positionId)                        e.positionId = 'Please select a position.';
-  if (d.portfolioUrl && !URL_RE.test(d.portfolioUrl)) e.portfolioUrl = 'Enter a valid URL starting with https://';
+  if (!d.portfolioUrl.trim())              e.portfolioUrl = 'Portfolio URL is required.';
+  else if (!URL_RE.test(d.portfolioUrl))   e.portfolioUrl = 'Enter a valid URL starting with https://';
   if (!d.description.trim())               e.description = 'Cover letter is required.';
   if (!d.cvBase64)                          e.cvBase64 = 'Please upload your CV (PDF, max 2.5MB).';
   return e;
@@ -196,12 +198,22 @@ export default function CareerPage() {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        // Strict 2.5MB safety check for serverless limits
-        if (file.size > 2.5 * 1024 * 1024) {
-            alert("File is too large. Please upload a CV under 2.5MB.");
-            e.target.value = ""; // reset input
+        // Reject non-PDFs regardless of accept attribute (users can bypass it)
+        if (file.type !== 'application/pdf') {
+            setErrors(prev => ({ ...prev, cvBase64: 'Only PDF files are accepted. Please upload a .pdf CV.' }));
+            e.target.value = '';
             return;
         }
+
+        // Strict 2.5MB safety check for serverless limits
+        if (file.size > 2.5 * 1024 * 1024) {
+            setErrors(prev => ({ ...prev, cvBase64: 'File is too large. Please upload a CV under 2.5MB.' }));
+            e.target.value = '';
+            return;
+        }
+
+        // Clear any previous CV error
+        setErrors(prev => ({ ...prev, cvBase64: undefined }));
 
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -215,7 +227,7 @@ export default function CareerPage() {
         };
         reader.readAsDataURL(file);
     };
-    const [status, setStatus] = useState<{ type: 'idle' | 'loading' | 'success' | 'error'; message: string }>({ type: 'idle', message: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleApplyClick = (id: string) => {
         setFormData((prev) => ({ ...prev, positionId: id }));
@@ -228,12 +240,12 @@ export default function CareerPage() {
         const errs = validate(formData);
         setErrors(errs);
         if (Object.keys(errs).length > 0) {
-            setStatus({ type: 'error', message: 'Please fix the highlighted fields before submitting.' });
+            toast.error('Please fix the highlighted fields before submitting.');
             formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;
         }
 
-        setStatus({ type: 'loading', message: 'Submitting your application profile...' });
+        setIsSubmitting(true);
 
         try {
             const res = await fetch('/api/career', {
@@ -243,16 +255,19 @@ export default function CareerPage() {
             });
 
             if (res.ok) {
-                setStatus({ type: 'success', message: 'Application sent successfully! Our team will get back to you within 7 working days.' });
+                // Reset immediately, then toast appears at top
                 setFormData(emptyForm);
                 setErrors({});
                 setTouched(false);
+                toast.success('Application sent! We\'ll get back to you within 7 working days.', { duration: 5000 });
             } else {
                 const data = await res.json();
-                setStatus({ type: 'error', message: data.error || 'Submission failed.' });
+                toast.error(data.error || 'Submission failed. Please try again.');
             }
         } catch {
-            setStatus({ type: 'error', message: 'Failed to connect to the server routing pipeline.' });
+            toast.error('Failed to connect. Please check your connection and try again.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -462,14 +477,8 @@ export default function CareerPage() {
                                 {errors.cvBase64 && <span style={{ fontSize: '0.75rem', color: '#e05252', marginTop: '0.25rem', display: 'block' }}>⚠ {errors.cvBase64}</span>}
                             </div>
 
-                            {status.message && (
-                                <div style={{ padding: '0.75rem 1rem', borderRadius: 'var(--radius-md)', fontSize: '0.85rem', background: status.type === 'error' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)', color: status.type === 'error' ? '#f87171' : '#34d399', border: `1px solid ${status.type === 'error' ? '#ef4444' : '#10b981'}` }}>
-                                    {status.message}
-                                </div>
-                            )}
-
-                            <button type="submit" className="btn-primary" disabled={status.type === 'loading'} style={{ alignSelf: 'flex-start', opacity: status.type === 'loading' ? 0.7 : 1 }}>
-                                <span>{status.type === 'loading' ? 'Sending Application...' : 'Submit Application'}</span>
+                            <button type="submit" className="btn-primary" disabled={isSubmitting} style={{ alignSelf: 'flex-start', opacity: isSubmitting ? 0.7 : 1 }}>
+                                <span>{isSubmitting ? 'Sending…' : 'Submit Application'}</span>
                             </button>
 
                         </form>

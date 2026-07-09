@@ -16,7 +16,7 @@ export default function Providers({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster 
-        position="bottom-right"
+        position="top-center"
         toastOptions={{
           style: {
             background: 'var(--color-bg-card)',

@@ -28,17 +28,17 @@ type FormErrors = Partial<Record<keyof FormData, string>>;
 
 function validate(data: FormData): FormErrors {
   const errs: FormErrors = {};
-  if (!data.name.trim())                       errs.name = 'Full name is required.';
-  if (!data.dob)                               errs.dob = 'Date of birth is required.';
-  if (!data.gender)                            errs.gender = 'Please select your gender.';
-  if (!data.email.trim())                      errs.email = 'Email address is required.';
-  else if (!EMAIL_RE.test(data.email))         errs.email = 'Enter a valid email address.';
-  if (!data.phoneNumber.trim())                errs.phoneNumber = 'Phone number is required.';
-  else if (!PHONE_RE.test(data.phoneNumber))   errs.phoneNumber = 'Enter a valid phone number.';
-  if (!data.permanentAddress.trim())           errs.permanentAddress = 'Permanent address is required.';
-  if (!data.temporaryAddress.trim())           errs.temporaryAddress = 'Temporary address is required.';
-  if (!data.educationLevel)                    errs.educationLevel = 'Please select your education level.';
-  if (!data.selectedCourse)                    errs.selectedCourse = 'Please select a course.';
+  if (!data.name.trim()) errs.name = 'Full name is required.';
+  if (!data.dob) errs.dob = 'Date of birth is required.';
+  if (!data.gender) errs.gender = 'Please select your gender.';
+  if (!data.email.trim()) errs.email = 'Email address is required.';
+  else if (!EMAIL_RE.test(data.email)) errs.email = 'Enter a valid email address.';
+  if (!data.phoneNumber.trim()) errs.phoneNumber = 'Phone number is required.';
+  else if (!PHONE_RE.test(data.phoneNumber)) errs.phoneNumber = 'Enter a valid phone number.';
+  if (!data.permanentAddress.trim()) errs.permanentAddress = 'Permanent address is required.';
+  if (!data.temporaryAddress.trim()) errs.temporaryAddress = 'Temporary address is required.';
+  if (!data.educationLevel) errs.educationLevel = 'Please select your education level.';
+  if (!data.selectedCourse) errs.selectedCourse = 'Please select a course.';
   return errs;
 }
 
@@ -298,8 +298,8 @@ export default function EnrollModal() {
                     placeholder="Enter your full name"
                     autoComplete="name"
                     style={errors.name ? errorInputStyle : baseInputStyle}
-                    onFocus={(e) => { if (!errors.name) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.name) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.name) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.name) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   />
                 </Field>
 
@@ -309,8 +309,8 @@ export default function EnrollModal() {
                     value={formData.dob}
                     onChange={set('dob')}
                     style={{ ...(errors.dob ? errorInputStyle : baseInputStyle), colorScheme: 'dark' }}
-                    onFocus={(e) => { if (!errors.dob) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.dob) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.dob) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.dob) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   />
                 </Field>
 
@@ -319,8 +319,8 @@ export default function EnrollModal() {
                     value={formData.gender}
                     onChange={set('gender')}
                     style={{ ...(errors.gender ? errorInputStyle : baseInputStyle), ...selectExtraStyle }}
-                    onFocus={(e) => { if (!errors.gender) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.gender) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.gender) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.gender) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   >
                     <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>Select your gender</option>
                     <option value="Male" style={{ background: '#0a0a0a' }}>Male</option>
@@ -338,8 +338,8 @@ export default function EnrollModal() {
                     placeholder="your@email.com"
                     autoComplete="email"
                     style={errors.email ? errorInputStyle : baseInputStyle}
-                    onFocus={(e) => { if (!errors.email) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.email) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.email) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.email) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   />
                 </Field>
 
@@ -352,8 +352,8 @@ export default function EnrollModal() {
                     placeholder="+977 98XXXXXXXX"
                     autoComplete="tel"
                     style={errors.phoneNumber ? errorInputStyle : baseInputStyle}
-                    onFocus={(e) => { if (!errors.phoneNumber) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.phoneNumber) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.phoneNumber) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.phoneNumber) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   />
                 </Field>
 
@@ -365,8 +365,8 @@ export default function EnrollModal() {
                     placeholder="District, Province"
                     autoComplete="address-level2"
                     style={errors.permanentAddress ? errorInputStyle : baseInputStyle}
-                    onFocus={(e) => { if (!errors.permanentAddress) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.permanentAddress) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.permanentAddress) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.permanentAddress) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   />
                 </Field>
 
@@ -377,8 +377,8 @@ export default function EnrollModal() {
                     onChange={set('temporaryAddress')}
                     placeholder="Current city / area"
                     style={errors.temporaryAddress ? errorInputStyle : baseInputStyle}
-                    onFocus={(e) => { if (!errors.temporaryAddress) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.temporaryAddress) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.temporaryAddress) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.temporaryAddress) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   />
                 </Field>
 
@@ -387,8 +387,8 @@ export default function EnrollModal() {
                     value={formData.educationLevel}
                     onChange={set('educationLevel')}
                     style={{ ...(errors.educationLevel ? errorInputStyle : baseInputStyle), ...selectExtraStyle }}
-                    onFocus={(e) => { if (!errors.educationLevel) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.educationLevel) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.educationLevel) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.educationLevel) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   >
                     <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>Select your highest education</option>
                     <option value="SEE" style={{ background: '#0a0a0a' }}>SEE</option>
@@ -405,8 +405,8 @@ export default function EnrollModal() {
                     value={formData.selectedCourse}
                     onChange={set('selectedCourse')}
                     style={{ ...(errors.selectedCourse ? errorInputStyle : baseInputStyle), ...selectExtraStyle }}
-                    onFocus={(e) => { if (!errors.selectedCourse) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; }}}
-                    onBlur={(e) => { if (!errors.selectedCourse) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; }}}
+                    onFocus={(e) => { if (!errors.selectedCourse) { e.currentTarget.style.borderColor = 'var(--color-amber)'; e.currentTarget.style.boxShadow = '0 0 0 2px rgba(212,168,83,0.12)'; } }}
+                    onBlur={(e) => { if (!errors.selectedCourse) { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.boxShadow = 'none'; } }}
                   >
                     <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>Select your program</option>
                     {courses.filter((c) => c.available).map((c) => (
@@ -466,7 +466,7 @@ export default function EnrollModal() {
                     e.currentTarget.style.borderColor = 'var(--color-border-amber)';
                   }}
                 >
-                  🎬 Join as an Instructor →
+                  Join as an Instructor →
                 </a>
 
               </form>
