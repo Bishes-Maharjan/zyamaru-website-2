@@ -299,32 +299,33 @@ export default function InstructorSection() {
 
                       {/* Social Links */}
                       <div style={{ display: 'flex', gap: '1rem' }}>
-                        {instructor.socials && Object.entries(instructor.socials).map(([platform, link]) => (
-                          link && (
+                        {instructor.socials && Object.entries(instructor.socials).map(([name, social]) => {
+                          return (social && (
                             <a
-                              key={platform}
-                              href={link}
+                              key={name}
+                              href={social.link}
                               target="_blank"
                               rel="noopener noreferrer"
                               style={{
-                                fontFamily: 'var(--font-body)',
-                                fontSize: '0.8rem',
-                                fontWeight: 500,
-                                color: 'var(--color-text-muted)',
-                                transition: 'color 0.3s ease',
-                                textTransform: 'capitalize'
+                                width: 38,
+                                height: 38,
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: '#ffffff',
+                                background: social.color,
+                                outline: '1px solid transparent',
+                                outlineOffset: '2px',
+                                transition: 'outline-color 0.25s ease',
                               }}
-                              onMouseEnter={(e) => {
-                                (e.target as HTMLElement).style.color = 'var(--color-amber)';
-                              }}
-                              onMouseLeave={(e) => {
-                                (e.target as HTMLElement).style.color = 'var(--color-text-muted)';
-                              }}
+                              onMouseEnter={(e) => { e.currentTarget.style.outlineColor = '#D4A853'; }}
+                              onMouseLeave={(e) => { e.currentTarget.style.outlineColor = 'transparent'; }}
                             >
-                              {platform}
+                              {social.icon}
                             </a>
-                          )
-                        ))}
+                          ))
+                        })}
                       </div>
                     </div>
                   </div>

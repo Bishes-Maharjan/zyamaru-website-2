@@ -1,3 +1,5 @@
+import { socialIcons } from "./socialIcons";
+
 export interface FilmographyItem {
   title: string;
   year?: string;
@@ -5,7 +7,11 @@ export interface FilmographyItem {
   link?: string;
   awards?: string[];
 }
-
+interface socialsDetails {
+  link?: string
+  icon?: any
+  color?: string
+}
 export interface Instructor {
   id: string;
   name: string;
@@ -17,9 +23,11 @@ export interface Instructor {
   experience: string;
   filmography: FilmographyItem[];
   socials?: {
-    youtube?: string;
-    instagram?: string;
-    vimeo?: string;
+    youtube?: socialsDetails,
+    instagram?: socialsDetails,
+    vimeo?: socialsDetails,
+    imdb?: socialsDetails,
+
   };
   image?: string;
 }
@@ -123,8 +131,23 @@ He is a renowned filmmaker, known for his expertise as a writer, director, and c
       },
     ],
     socials: {
-      youtube: 'https://youtube.com/@zyamaru',
-      instagram: '#',
+      youtube: {
+
+        link: 'https://www.youtube.com/@amanwithamoviecamera-walam8843',
+        icon: socialIcons.Youtube.icon,
+        color: socialIcons.Youtube.color,
+      },
+      instagram: {
+        link: 'https://www.instagram.com/amar_maharjan/?hl=en',
+        icon: socialIcons.Instagram.icon,
+        color: socialIcons.Instagram.color,
+
+      },
+      imdb: {
+        link: 'https://www.imdb.com/name/nm9104920/',
+        icon: socialIcons.Imdb.icon,
+        color: socialIcons.Imdb.color,
+      },
     },
     image: '/instructor/Amar1675867366.jpg',
   },

@@ -133,7 +133,36 @@ export default function InstructorProfile() {
                     </span>
                   ))}
                 </div>
-
+                {/* Social Links */}
+                <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  {instructor.socials && Object.entries(instructor.socials).map(([name, social]) => {
+                    return (social && (
+                      <a
+                        key={name}
+                        href={social.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          width: 38,
+                          height: 38,
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#ffffff',
+                          background: social.color,
+                          outline: '1px solid transparent',
+                          outlineOffset: '2px',
+                          transition: 'outline-color 0.25s ease',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.outlineColor = '#D4A853'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.outlineColor = 'transparent'; }}
+                      >
+                        {social.icon}
+                      </a>
+                    ))
+                  })}
+                </div>
                 <p
                   style={{
                     fontSize: '0.95rem',
@@ -151,6 +180,7 @@ export default function InstructorProfile() {
                     Born {instructor.born}, Kathmandu
                   </p>
                 )}
+
               </motion.div>
 
               {/* Image side */}
@@ -282,271 +312,271 @@ export default function InstructorProfile() {
 
           {/* ── Award-Winning Works ── */}
           {instructor.filmography.filter((f) => f.awards && f.awards.length > 0).length > 0 && (
-          <section
-            style={{
-              marginBottom: '3rem',
-              paddingTop: '2.5rem',
-              borderTop: '1px solid var(--color-border)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem' }}>
-              <span style={{ fontSize: '1.1rem' }}>🏆</span>
-              <h2
+            <section
+              style={{
+                marginBottom: '3rem',
+                paddingTop: '2.5rem',
+                borderTop: '1px solid var(--color-border)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem' }}>
+                <span style={{ fontSize: '1.1rem' }}>🏆</span>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+                    color: 'var(--color-amber)',
+                    margin: 0,
+                  }}
+                >
+                  Award-Winning Films
+                </h2>
+              </div>
+              <p
                 style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-                  color: 'var(--color-amber)',
-                  margin: 0,
+                  color: 'var(--color-text-muted)',
+                  fontSize: '0.85rem',
+                  marginBottom: '1.5rem',
                 }}
               >
-                Award-Winning Films
-              </h2>
-            </div>
-            <p
-              style={{
-                color: 'var(--color-text-muted)',
-                fontSize: '0.85rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              Recognized at international film festivals worldwide
-            </p>
+                Recognized at international film festivals worldwide
+              </p>
 
-            <div style={{ display: 'grid', gap: '1.25rem' }}>
-              {instructor.filmography
-                .filter((f) => f.awards && f.awards.length > 0)
-                .map((film, idx) => (
-                  <motion.div
-                    key={film.title}
-                    initial={{ opacity: 0, y: 25 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ delay: idx * 0.12, duration: 0.6 }}
-                    className="award-card"
-                    style={{
-                      padding: '1.75rem',
-                      borderRadius: 'var(--radius-lg)',
-                      background: 'linear-gradient(135deg, rgba(212,168,83,0.06) 0%, rgba(10,10,10,0.95) 100%)',
-                      border: '1px solid var(--color-border-amber)',
-                      position: 'relative',
-                      overflow: 'hidden',
-                      transition: 'transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease',
-                    }}
-                  >
-                    {/* Subtle glow accent */}
-                    <div
+              <div style={{ display: 'grid', gap: '1.25rem' }}>
+                {instructor.filmography
+                  .filter((f) => f.awards && f.awards.length > 0)
+                  .map((film, idx) => (
+                    <motion.div
+                      key={film.title}
+                      initial={{ opacity: 0, y: 25 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ delay: idx * 0.12, duration: 0.6 }}
+                      className="award-card"
                       style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: '1px',
-                        background: 'linear-gradient(90deg, transparent, var(--color-amber), transparent)',
-                        opacity: 0.4,
+                        padding: '1.75rem',
+                        borderRadius: 'var(--radius-lg)',
+                        background: 'linear-gradient(135deg, rgba(212,168,83,0.06) 0%, rgba(10,10,10,0.95) 100%)',
+                        border: '1px solid var(--color-border-amber)',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        transition: 'transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease',
                       }}
-                    />
-
-                    {/* Year badge */}
-                    {film.year && (
+                    >
+                      {/* Subtle glow accent */}
                       <div
                         style={{
-                          display: 'inline-block',
-                          padding: '0.2rem 0.6rem',
-                          background: 'rgba(212,168,83,0.12)',
-                          border: '1px solid rgba(212,168,83,0.25)',
-                          borderRadius: 'var(--radius-sm)',
-                          fontSize: '0.75rem',
-                          fontFamily: 'monospace',
-                          fontWeight: 700,
-                          color: 'var(--color-amber)',
-                          marginBottom: '0.75rem',
-                          letterSpacing: '0.05em',
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: '1px',
+                          background: 'linear-gradient(90deg, transparent, var(--color-amber), transparent)',
+                          opacity: 0.4,
                         }}
-                      >
-                        {film.year}
-                      </div>
-                    )}
+                      />
 
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.35rem',
-                        fontWeight: 600,
-                        color: 'var(--color-text-primary)',
-                        margin: '0 0 0.3rem 0',
-                      }}
-                    >
-                      {film.title}
-                    </h3>
-
-                    <p
-                      style={{
-                        color: 'var(--color-text-muted)',
-                        fontSize: '0.82rem',
-                        marginBottom: '1rem',
-                      }}
-                    >
-                      {film.role}
-                    </p>
-
-                    {/* Awards list */}
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: '0.4rem',
-                        marginBottom: film.link ? '1rem' : 0,
-                      }}
-                    >
-                      {film.awards!.map((award, i) => (
-                        <span
-                          key={i}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.35rem',
-                            fontSize: '0.72rem',
-                            color: 'var(--color-amber-light)',
-                            background: 'rgba(212,168,83,0.08)',
-                            padding: '0.3rem 0.7rem',
-                            borderRadius: 'var(--radius-sm)',
-                            border: '1px solid rgba(212,168,83,0.15)',
-                            lineHeight: 1.3,
-                          }}
-                        >
-                          <span style={{ fontSize: '0.6rem' }}>★</span>
-                          {award}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Watch button */}
-                    {film.link && (
-                      <a
-                        href={film.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary"
-                        style={{
-                          padding: '0.5rem 1.25rem',
-                          fontSize: '0.78rem',
-                          display: 'inline-flex',
-                          gap: '0.4rem',
-                        }}
-                      >
-                        <span>▶ Watch Film</span>
-                      </a>
-                    )}
-                  </motion.div>
-                ))}
-            </div>
-          </section>
-          )}
-
-          {/* ── Other Works ── */}
-          {instructor.filmography.filter((f) => !f.awards).length > 0 && (
-          <section
-            style={{
-              marginBottom: '3rem',
-              paddingTop: '2.5rem',
-              borderTop: '1px solid var(--color-border)',
-            }}
-          >
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(1.4rem, 3vw, 1.8rem)',
-                color: 'var(--color-text-primary)',
-                marginBottom: '0.35rem',
-              }}
-            >
-              More Works
-            </h2>
-            <p
-              style={{
-                color: 'var(--color-text-muted)',
-                fontSize: '0.85rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              Documentaries, commercials & music videos
-            </p>
-
-            <div style={{ display: 'grid', gap: '0.6rem' }}>
-              {instructor.filmography
-                .filter((f) => !f.awards)
-                .map((film, idx) => (
-                  <motion.div
-                    key={film.title}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-30px' }}
-                    transition={{ delay: Math.min(idx * 0.04, 0.3), duration: 0.4 }}
-                    className="film-card"
-                    style={{
-                      padding: '1rem 1.25rem',
-                      borderRadius: 'var(--radius-md)',
-                      background: 'var(--color-bg-card)',
-                      border: '1px solid var(--color-border)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '1rem',
-                      flexWrap: 'wrap',
-                      transition: 'border-color 0.3s ease, background 0.3s ease',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      {/* Year badge */}
                       {film.year && (
-                        <span
+                        <div
                           style={{
-                            color: 'var(--color-amber)',
-                            fontWeight: 600,
-                            fontSize: '0.78rem',
+                            display: 'inline-block',
+                            padding: '0.2rem 0.6rem',
+                            background: 'rgba(212,168,83,0.12)',
+                            border: '1px solid rgba(212,168,83,0.25)',
+                            borderRadius: 'var(--radius-sm)',
+                            fontSize: '0.75rem',
                             fontFamily: 'monospace',
+                            fontWeight: 700,
+                            color: 'var(--color-amber)',
+                            marginBottom: '0.75rem',
+                            letterSpacing: '0.05em',
                           }}
                         >
                           {film.year}
-                        </span>
+                        </div>
                       )}
+
                       <h3
                         style={{
                           fontFamily: 'var(--font-heading)',
-                          fontSize: '1rem',
+                          fontSize: '1.35rem',
                           fontWeight: 600,
                           color: 'var(--color-text-primary)',
-                          margin: 0,
+                          margin: '0 0 0.3rem 0',
                         }}
                       >
                         {film.title}
                       </h3>
-                      <span style={{ color: 'var(--color-text-muted)', fontSize: '0.78rem' }}>
-                        — {film.role}
-                      </span>
-                    </div>
 
-                    {film.link && (
-                      <a
-                        href={film.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <p
                         style={{
-                          fontSize: '0.78rem',
-                          fontWeight: 500,
-                          color: 'var(--color-amber)',
-                          flexShrink: 0,
-                          transition: 'opacity 0.2s ease',
+                          color: 'var(--color-text-muted)',
+                          fontSize: '0.82rem',
+                          marginBottom: '1rem',
                         }}
-                        onMouseEnter={(e) => { (e.currentTarget).style.opacity = '0.7'; }}
-                        onMouseLeave={(e) => { (e.currentTarget).style.opacity = '1'; }}
                       >
-                        Watch ↗
-                      </a>
-                    )}
-                  </motion.div>
-                ))}
-            </div>
-          </section>
+                        {film.role}
+                      </p>
+
+                      {/* Awards list */}
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexWrap: 'wrap',
+                          gap: '0.4rem',
+                          marginBottom: film.link ? '1rem' : 0,
+                        }}
+                      >
+                        {film.awards!.map((award, i) => (
+                          <span
+                            key={i}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem',
+                              fontSize: '0.72rem',
+                              color: 'var(--color-amber-light)',
+                              background: 'rgba(212,168,83,0.08)',
+                              padding: '0.3rem 0.7rem',
+                              borderRadius: 'var(--radius-sm)',
+                              border: '1px solid rgba(212,168,83,0.15)',
+                              lineHeight: 1.3,
+                            }}
+                          >
+                            <span style={{ fontSize: '0.6rem' }}>★</span>
+                            {award}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Watch button */}
+                      {film.link && (
+                        <a
+                          href={film.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary"
+                          style={{
+                            padding: '0.5rem 1.25rem',
+                            fontSize: '0.78rem',
+                            display: 'inline-flex',
+                            gap: '0.4rem',
+                          }}
+                        >
+                          <span>▶ Watch Film</span>
+                        </a>
+                      )}
+                    </motion.div>
+                  ))}
+              </div>
+            </section>
+          )}
+
+          {/* ── Other Works ── */}
+          {instructor.filmography.filter((f) => !f.awards).length > 0 && (
+            <section
+              style={{
+                marginBottom: '3rem',
+                paddingTop: '2.5rem',
+                borderTop: '1px solid var(--color-border)',
+              }}
+            >
+              <h2
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(1.4rem, 3vw, 1.8rem)',
+                  color: 'var(--color-text-primary)',
+                  marginBottom: '0.35rem',
+                }}
+              >
+                More Works
+              </h2>
+              <p
+                style={{
+                  color: 'var(--color-text-muted)',
+                  fontSize: '0.85rem',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                Documentaries, commercials & music videos
+              </p>
+
+              <div style={{ display: 'grid', gap: '0.6rem' }}>
+                {instructor.filmography
+                  .filter((f) => !f.awards)
+                  .map((film, idx) => (
+                    <motion.div
+                      key={film.title}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-30px' }}
+                      transition={{ delay: Math.min(idx * 0.04, 0.3), duration: 0.4 }}
+                      className="film-card"
+                      style={{
+                        padding: '1rem 1.25rem',
+                        borderRadius: 'var(--radius-md)',
+                        background: 'var(--color-bg-card)',
+                        border: '1px solid var(--color-border)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        flexWrap: 'wrap',
+                        transition: 'border-color 0.3s ease, background 0.3s ease',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        {film.year && (
+                          <span
+                            style={{
+                              color: 'var(--color-amber)',
+                              fontWeight: 600,
+                              fontSize: '0.78rem',
+                              fontFamily: 'monospace',
+                            }}
+                          >
+                            {film.year}
+                          </span>
+                        )}
+                        <h3
+                          style={{
+                            fontFamily: 'var(--font-heading)',
+                            fontSize: '1rem',
+                            fontWeight: 600,
+                            color: 'var(--color-text-primary)',
+                            margin: 0,
+                          }}
+                        >
+                          {film.title}
+                        </h3>
+                        <span style={{ color: 'var(--color-text-muted)', fontSize: '0.78rem' }}>
+                          — {film.role}
+                        </span>
+                      </div>
+
+                      {film.link && (
+                        <a
+                          href={film.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontSize: '0.78rem',
+                            fontWeight: 500,
+                            color: 'var(--color-amber)',
+                            flexShrink: 0,
+                            transition: 'opacity 0.2s ease',
+                          }}
+                          onMouseEnter={(e) => { (e.currentTarget).style.opacity = '0.7'; }}
+                          onMouseLeave={(e) => { (e.currentTarget).style.opacity = '1'; }}
+                        >
+                          Watch ↗
+                        </a>
+                      )}
+                    </motion.div>
+                  ))}
+              </div>
+            </section>
           )}
 
           {/* ── Back ── */}
@@ -562,7 +592,7 @@ export default function InstructorProfile() {
           </div>
 
         </div>{/* end gold border wrapper */}
-      </main>
+      </main >
 
       <Footer />
 
@@ -597,6 +627,6 @@ export default function InstructorProfile() {
           }
         }
       `}</style>
-    </div>
+    </div >
   );
 }
