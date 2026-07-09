@@ -50,18 +50,6 @@ const socialLinks = [
     brandColor: socialIcons.Tiktok.color,
     icon: socialIcons.Tiktok.icon,
   },
-  {
-    name: 'Email',
-    url: 'mailto:info@zyamarufilms.com.np',
-    brandColor: socialIcons.Email.color,
-    icon: socialIcons.Email.icon,
-  },
-  {
-    name: 'Phone',
-    url: 'tel:+9702626853',
-    brandColor: socialIcons.Phone.color,
-    icon: socialIcons.Phone.icon,
-  },
 ];
 
 
@@ -88,10 +76,10 @@ export default function Footer() {
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
                 <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>✉</span> info@zyamarufilms.com.np
               </a>
-              <a href="tel:+9779867242664" style={{ color: 'var(--color-amber)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.2s' }}
+              <a href={`tel:+9779802626853`} style={{ color: 'var(--color-amber)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-white)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
-                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📞</span> +977 9867242664
+                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📞</span> +977 9802626853
               </a>
             </div>
 
