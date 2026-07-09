@@ -74,9 +74,9 @@ function StatItem({ value, suffix, label, delay }: StatItemProps) {
 }
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Students Trained' },
-  { value: 50, suffix: '+', label: 'Courses Available' },
-  { value: 12, suffix: '', label: 'Years Experience' },
+  { value: 20, suffix: '+', label: 'Students Trained' },
+  { value: 4, suffix: '', label: 'Courses Available' },
+  { value: 1, suffix: '+', label: 'Years Experience' },
   { value: 98, suffix: '%', label: 'Success Rate' },
 ];
 

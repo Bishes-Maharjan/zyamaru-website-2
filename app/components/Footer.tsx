@@ -58,7 +58,7 @@ const socialLinks = [
   },
   {
     name: 'Phone',
-    url: 'tel:+9767242664',
+    url: 'tel:+9702626853',
     brandColor: socialIcons.Phone.color,
     icon: socialIcons.Phone.icon,
   },
