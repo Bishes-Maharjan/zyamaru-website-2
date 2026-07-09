@@ -62,7 +62,7 @@ export default function TermsOfServicePage() {
 
             <div className="legal-content" style={{ fontSize: '0.98rem', lineHeight: 1.8, color: 'var(--color-text-secondary)' }}>
               <p>
-                Welcome to ZYAMARU Films Academy. By accessing our website at <span style={{ color: 'var(--color-amber)' }}>zyamaru-website-2.vercel.app</span>, enrolling in any course, or using any of our services, you agree to be bound by these Terms of Service. Please read them carefully before proceeding.
+                Welcome to ZYAMARU Films Academy. By accessing our website at <span style={{ color: 'var(--color-amber)' }}>zyamarufilms.com.np</span>, enrolling in any course, or using any of our services, you agree to be bound by these Terms of Service. Please read them carefully before proceeding.
               </p>
               <p style={{ marginBottom: '2rem' }}>
                 These Terms apply to all visitors, students, and anyone who interacts with ZYAMARU&apos;s website, courses, or services. If you do not agree with any part of these Terms, please do not use our website or enroll in our programs.
@@ -181,7 +181,7 @@ export default function TermsOfServicePage() {
               <p>
                 All content on the ZYAMARU website and in course materials is the intellectual property of ZYAMARU Films Academy. Unauthorized reproduction or commercial use is strictly prohibited.
               </p>
-              
+
               <h3 style={{ color: 'var(--color-text-primary)', fontSize: '1.1rem', marginTop: '1.5rem', marginBottom: '0.5rem' }}>
                 7.2 Student Work
               </h3>

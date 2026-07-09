@@ -65,7 +65,7 @@ export default function PrivacyPolicyPage() {
                 ZYAMARU Films Academy (&quot;ZYAMARU&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is committed to protecting the privacy of everyone who visits our website, enrolls in our courses, or interacts with us. This Privacy Policy explains what personal information we collect, how we use it, how we protect it, and your rights in relation to it.
               </p>
               <p style={{ marginBottom: '2rem' }}>
-                By using our website at <span style={{ color: 'var(--color-amber)' }}>zyamaru-website-2.vercel.app</span> or enrolling in any ZYAMARU program, you consent to the practices described in this Privacy Policy. If you do not agree, please do not use our website or services.
+                By using our website at <span style={{ color: 'var(--color-amber)' }}>zyamarufilms.com.np</span> or enrolling in any ZYAMARU program, you consent to the practices described in this Privacy Policy. If you do not agree, please do not use our website or services.
               </p>
 
               <h2 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)', fontSize: '1.4rem', marginTop: '2.5rem', marginBottom: '1rem' }}>
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
               <h2 style={{ fontFamily: 'var(--font-heading)', color: 'var(--color-text-primary)', fontSize: '1.4rem', marginTop: '2.5rem', marginBottom: '1rem' }}>
                 2. What Information We Collect
               </h2>
-              
+
               <h3 style={{ color: 'var(--color-text-primary)', fontSize: '1.1rem', marginTop: '1.5rem', marginBottom: '0.5rem' }}>
                 2.1 Information You Provide Directly
               </h3>
