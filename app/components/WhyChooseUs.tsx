@@ -13,12 +13,6 @@ const pillars = [
       'Every concept is practiced on real camera systems in real-world shooting environments. We believe craft is built through doing, not watching.',
   },
   {
-    icon: '🏔️',
-    title: 'Nepal as Your Canvas',
-    description:
-      'From the ancient streets of Kathmandu to the peaks of the Himalayas — our location is unlike any other film school in the world. We shoot where it matters.',
-  },
-  {
     icon: '🎓',
     title: 'Industry-Led Curriculum',
     description:
@@ -59,102 +53,129 @@ export default function WhyChooseUs() {
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
 
-        {/* ── Header ─────────────────────────────── */}
-        <ScrollReveal>
-          <div className="section-label">About ZYAMARU Films Academy</div>
-        </ScrollReveal>
+        {/* ── Top Layout: Split-screen text and cards ─────────────────────────── */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '3.5rem',
+            alignItems: 'flex-start',
+            marginBottom: '3.5rem'
+          }}
+        >
+          {/* Left Column: Text Content */}
+          <div style={{ flex: '1 1 450px', maxWidth: '620px' }}>
+            <ScrollReveal>
+              <div className="section-label">About ZYAMARU Films Academy</div>
+            </ScrollReveal>
 
-        <TextReveal text="We Don't Teach Film. We Make Filmmakers." as="h2" />
+            <TextReveal text="We Don't Teach Film. We Make Filmmakers." as="h2" />
 
-        <ScrollReveal delay={0.2}>
-          <p
-            style={{
-              maxWidth: '720px',
-              marginTop: '1.5rem',
-              marginBottom: '1rem',
-              fontSize: '1.05rem',
-              lineHeight: 1.8,
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            ZYAMARU Films Academy was born in Kathmandu from a simple belief: Nepal deserves a world-class
-            filmmaking institution that speaks its own cinematic language. We are not a generalist media
-            school. We are a focused, craft-driven academy dedicated entirely to the art and technique of
-            visual storytelling.
-          </p>
-          <p
-            style={{
-              maxWidth: '720px',
-              marginBottom: '3.5rem',
-              fontSize: '1.05rem',
-              lineHeight: 1.8,
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            Our programs are short, intensive, and built around real production work. Students don&apos;t
-            spend months in theory — they pick up a camera on day one. Whether you&apos;re learning
-            cinematography fundamentals, mastering advanced color grading in DaVinci Resolve, documenting
-            Nepal&apos;s living culture, or taking to the sky with a drone, every course is taught by
-            practitioners who have done exactly that work professionally.
-          </p>
-        </ScrollReveal>
-
-        {/* ── Why Choose Us Grid ─────────────────── */}
-        <ScrollReveal delay={0.1}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {pillars.map((pillar, i) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -4, borderColor: 'rgba(212, 168, 83, 0.45)' }}
+            <ScrollReveal delay={0.2}>
+              <p
                 style={{
-                  background: 'var(--color-surface)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: 'var(--radius-lg)',
-                  padding: 'clamp(1.4rem, 2.5vw, 2.2rem)',
-                  transition: 'border-color 0.3s ease',
-                  cursor: 'default',
-                  minWidth: 0,
+                  marginTop: '1.5rem',
+                  marginBottom: '1rem',
+                  fontSize: '1.05rem',
+                  lineHeight: 1.8,
+                  color: 'var(--color-text-secondary)',
                 }}
               >
-                <span style={{ fontSize: '1.9rem', display: 'block', marginBottom: '1rem' }}>
-                  {pillar.icon}
-                </span>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: 'clamp(1rem, 1.3vw, 1.2rem)',
-                    fontWeight: 600,
-                    color: 'var(--color-text-primary)',
-                    marginBottom: '0.6rem',
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {pillar.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '0.9rem',
-                    color: 'var(--color-text-secondary)',
-                    lineHeight: 1.7,
-                    margin: 0,
-                  }}
-                >
-                  {pillar.description}
-                </p>
-              </motion.div>
-            ))}
+                ZYAMARU Films Academy was born in Kathmandu from a simple belief: Nepal deserves a world-class
+                filmmaking institution that speaks its own cinematic language. We are not a generalist media
+                school. We are a focused, craft-driven academy dedicated entirely to the art and technique of
+                visual storytelling.
+              </p>
+              <p
+                style={{
+                  marginBottom: '1rem',
+                  fontSize: '1.05rem',
+                  lineHeight: 1.8,
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                Our programs are short, intensive, and built around real production work. Students don&apos;t
+                spend months in theory — they pick up a camera on day one. Whether you&apos;re learning
+                cinematography fundamentals, mastering advanced color grading in DaVinci Resolve, documenting
+                Nepal&apos;s living culture, or taking to the sky with a drone, every course is taught by
+                practitioners who have done exactly that work professionally.
+              </p>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: '1.05rem',
+                  lineHeight: 1.8,
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                While an introductory track may look like an intensive one-month course, the true foundation of our academy
+                begins right after. Every student who is genuinely passionate about filmmaking, photography, and
+                cinematography can seamlessly continue their creative journey with us. We provide long-term, free
+                mentorship on real, live projects directly under ZYAMARU Films Production, walking alongside you as
+                your career evolves.
+              </p>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+
+          {/* Right Column: Cards Grid filling the gap */}
+          <div style={{ flex: '1 1 450px', width: '100%' }}>
+            <ScrollReveal delay={0.1}>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                  gap: '1.2rem',
+                }}
+              >
+                {pillars.map((pillar, i) => (
+                  <motion.div
+                    key={pillar.title}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.55, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ y: -4, borderColor: 'rgba(212, 168, 83, 0.45)' }}
+                    style={{
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: '1.5rem',
+                      transition: 'border-color 0.3s ease',
+                      cursor: 'default',
+                      minWidth: 0,
+                    }}
+                  >
+                    <span style={{ fontSize: '1.8rem', display: 'block', marginBottom: '0.8rem' }}>
+                      {pillar.icon}
+                    </span>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '1.1rem',
+                        fontWeight: 600,
+                        color: 'var(--color-text-primary)',
+                        marginBottom: '0.5rem',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {pillar.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '0.88rem',
+                        color: 'var(--color-text-secondary)',
+                        lineHeight: 1.6,
+                        margin: 0,
+                      }}
+                    >
+                      {pillar.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
 
         {/* ── Closing statement ──────────────────── */}
         <ScrollReveal delay={0.3}>
