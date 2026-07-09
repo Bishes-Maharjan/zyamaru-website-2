@@ -36,7 +36,7 @@ export default function CTASection() {
           Ready to Tell <span style={{ color: 'var(--color-amber)' }}>Your Story</span>?
         </motion.h2>
         <motion.p initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }} style={{ fontSize: '1.05rem', maxWidth: 500, margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-          Join 500+ filmmakers who transformed their careers with ZYAMARU. Limited seats available for the next cohort.
+          Join 20+ filmmakers who transformed their careers with ZYAMARU. Limited seats available for the next cohort.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <EnrollButton

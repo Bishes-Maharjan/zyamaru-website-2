@@ -23,7 +23,7 @@ export const viewport = {
 export const metadata: Metadata = {
   title: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
   description:
-    "Master cinematography, videography, and visual storytelling in Nepal. Professional courses taught by award-winning filmmakers. Join 500+ filmmakers who transformed their careers.",
+    "Master cinematography, videography, and visual storytelling in Nepal. Professional courses taught by award-winning filmmakers. Join 20+ filmmakers who transformed their careers.",
   keywords: [
     "cinematography course Nepal",
     "videography training Kathmandu",
