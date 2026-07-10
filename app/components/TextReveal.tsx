@@ -25,7 +25,7 @@ export default function TextReveal({
   return (
     <Tag ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3em' }}>
       {words.map((word, i) => (
-        <span key={i} style={{ overflow: 'hidden', display: 'inline-block' }}>
+        <span key={i} style={{ overflow: 'hidden', display: 'inline-block', paddingBottom: '0.3rem' }}>
           <motion.span
             style={{ display: 'inline-block' }}
             initial={{ y: '110%', rotateX: -80 }}
