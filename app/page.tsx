@@ -16,6 +16,7 @@ import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import CareerPage from './career/page';
 import CareerPreview from './components/CareerPreview';
+import FAQSchema from './components/FAQSchema';
 
 export default function Home() {
   const [shutterDone, setShutterDone] = useState(false);
@@ -46,6 +47,7 @@ export default function Home() {
         {/* <CurriculumPreview /> */}
         <TestimonialSection />
         <ShowreelSection />
+        <FAQSchema />
         <FAQSection />
         <CTASection />
         <Footer />
