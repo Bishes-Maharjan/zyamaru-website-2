@@ -41,12 +41,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Zyamaru Films Academy - Cinematography & Videography in Nepal",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ZYAMARU | Premier Cinematography & Videography Academy in Nepal",
     description:
       "Professional cinematography & videography courses taught by award-winning filmmakers in Nepal.",
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
