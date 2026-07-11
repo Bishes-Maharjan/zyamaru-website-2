@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./components/ClientLayout";
+import OrganizationSchema from "./components/OrganizationSchema";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -79,6 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body style={{ margin: 0 }}>
+        <OrganizationSchema />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
