@@ -22,7 +22,10 @@ export default function OrganizationSchema() {
             'Zyamaru Films Academy is a cinematography and videography school based in Tahachal, Kathmandu, Nepal, offering courses in cinematography, documentary filmmaking, drone filmmaking, and color grading.',
         address: {
             '@type': 'PostalAddress',
-            addressLocality: 'Tahachal, Kathmandu',
+            streetAddress: 'Kalanki-14, Tahachal Marg, Tahachal, Kathmandu',
+            addressLocality: 'Kathmandu',
+            addressRegion: 'Bagmati Province',
+            postalCode: '44600',
             addressCountry: 'NP',
         },
         sameAs: [
