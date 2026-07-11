@@ -65,6 +65,10 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
     apple: "/favicon.png",
   },
+  metadataBase: new URL('https://www.zyamarufilms.com.np'),
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({

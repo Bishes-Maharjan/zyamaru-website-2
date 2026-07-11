@@ -2,28 +2,31 @@ import { MetadataRoute } from 'next'
 // adjust path to your actual file
 import { courses } from './data/courses'         // adjust path to your actual file
 import { instructors } from './data/instructors'
+
+const BASE_URL = 'https://www.zyamarufilms.com.np'
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const staticRoutes: MetadataRoute.Sitemap = [
         {
-            url: 'https://zyamarufilms.com.np',
+            url: BASE_URL,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 1,
         },
         {
-            url: 'https://zyamarufilms.com.np/career',
+            url: `${BASE_URL}/career`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
-            url: 'https://zyamarufilms.com.np/privacy',
+            url: `${BASE_URL}/privacy`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.5,
         },
         {
-            url: 'https://zyamarufilms.com.np/terms',
+            url: `${BASE_URL}/terms`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.5,
@@ -31,14 +34,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ]
 
     const instructorRoutes: MetadataRoute.Sitemap = instructors.map((instructor) => ({
-        url: `https://zyamarufilms.com.np/instructor/${instructor.slug}`,
+        url: `${BASE_URL}/instructor/${instructor.slug}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.8,
     }))
 
     const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
-        url: `https://zyamarufilms.com.np/course/${course.slug}`,
+        url: `${BASE_URL}/course/${course.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.9,
