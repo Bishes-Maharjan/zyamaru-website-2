@@ -63,8 +63,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon-2.png",
+    apple: "/favicon-2.png",
   },
   metadataBase: new URL('https://www.zyamarufilms.com.np'),
   alternates: {
