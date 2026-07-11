@@ -66,7 +66,7 @@ export default function Footer() {
               ZYAMARU
             </div>
             <p style={{ fontSize: '0.85rem', lineHeight: 1.7, marginBottom: '1.5rem', maxWidth: 280 }}>
-              Nepal&apos;s premier cinematography and videography academy. Transforming storytellers since 2014.
+              Nepal&apos;s premier cinematography and videography academy. Transforming storytellers since 2025.
             </p>
 
             {/* Direct Contact Details */}

@@ -52,9 +52,9 @@ export default function CTASection() {
             Book a Free Consultation
           </EnrollButton>
         </motion.div>
-        <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5 }} style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '1.5rem' }}>
+        {/* <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5 }} style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '1.5rem' }}>
           Next cohort starts June 2026 • Only 25 seats remaining
-        </motion.p>
+        </motion.p> */}
       </div>
     </section>
   );
