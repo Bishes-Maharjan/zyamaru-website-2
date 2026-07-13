@@ -177,7 +177,7 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.BasicColorGrading,
-    available: true
+    available: false
   },
   {
     id: 'advanced-color-grading',
@@ -241,7 +241,7 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.AdvancedColorGrading,
-    available: true
+    available: false
   },
   {
     id: 'documentary-filmmaking',
