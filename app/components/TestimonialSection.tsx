@@ -143,8 +143,10 @@ function TestimonialCard({
   return (
     <div
       style={{
+        display: 'flex',
+        flexDirection: 'column',
         flexShrink: 0,
-        width: 'min(380px, 85vw)',
+        width: 'min(500px, 85vw)',
         padding: '1.5rem',
         background: 'var(--color-bg-card)',
         borderRadius: 'var(--radius-lg)',
@@ -170,6 +172,7 @@ function TestimonialCard({
       {/* Quote */}
       <p
         style={{
+          flex: 1,
           fontFamily: 'var(--font-body)',
           fontSize: '0.9rem',
           lineHeight: 1.7,

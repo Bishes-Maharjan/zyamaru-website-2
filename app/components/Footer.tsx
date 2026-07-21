@@ -34,7 +34,7 @@ const socialLinks = [
   },
   {
     name: 'Youtube',
-    url: 'https://www.youtube.com/@zyamarufilmmakers5114',
+    url: 'https://www.youtube.com/@zyamarufilms',
     brandColor: socialIcons.Youtube.color,
     icon: socialIcons.Youtube.icon,
   },
