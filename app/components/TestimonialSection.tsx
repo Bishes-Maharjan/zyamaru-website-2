@@ -5,46 +5,44 @@ import TextReveal from './TextReveal';
 
 const testimonials = [
   {
-    name: 'Aarav Sharma',
-    role: 'Director, Kathmandu Films',
-    quote: 'ZYAMARU completely transformed my understanding of light and composition. I went from a hobby shooter to directing my first feature film within a year.',
+    name: 'Purnima Maharjan',
+    quote: 'Before Zyamaru Films Academy, I just took pictures. I never really understood what I was doing. I just pointed and hoped it looked nice. The biggest thing I learned here is that an image isn\'t created when you press the shutter. It\'s already formed in your mind before that. The camera just captures what you\'ve already seen. Now I understand light, not just brightness, but mood and emotion, and I\'ve realized even a small change in angle can completely change how the audience feels about a photo. I genuinely see the world differently now, the way a real photographer does.',
     rating: 5,
-    course: 'Cinematic Masterclass',
   },
   {
-    name: 'Priya Thapa',
-    role: 'Freelance Cinematographer',
-    quote: 'The hands-on approach is what sets this apart. Real cameras, real sets, real projects. I was hired by a production house before I even finished the course.',
+    name: 'Ronish Shrestha',
+    quote: 'I almost didn\'t join. I thought I was too old to start learning something like this. Honestly, that was the biggest thing holding me back, not skill, just fear. But this turned out to be one of the best decisions I\'ve made. I found real confidence here, and I truly believe this is the right place to start a cinematography career, no matter your age or background. If you\'re on the fence because you think it\'s "too late" for you, it isn\'t. I\'m proof of that.',
     rating: 5,
-    course: 'Advanced Color Grading',
   },
   {
-    name: 'Bikash Gurung',
-    role: 'Documentary Filmmaker',
-    quote: 'Learning drone cinematography here opened up an entirely new career path. The instructors don\'t just teach technique — they teach vision.',
+    name: 'Anil Shahi',
+    quote: 'What made the biggest difference for me was actually holding professional cinema equipment, like real cameras, lenses, and lighting. Not just watching demonstrations. Most places talk about "professional training" but don\'t actually let you touch the gear. Here, I did, from day one. And the learning didn\'t stop when the course ended either. I still get free mentorship on real projects, and having someone experienced to turn to has given me the kind of confidence a certificate alone never could.',
     rating: 5,
-    course: 'Drone Cinematography',
   },
   {
-    name: 'Suman Maharjan',
-    role: 'Wedding Cinematographer',
-    quote: 'I tripled my pricing after completing the masterclass. The quality of my work before vs. after is incomparable. Best investment I\'ve ever made.',
+    name: 'Kushal Maharjan',
+    quote: 'What surprised me most was my mentor. He\'s not just technical, he\'s literature-aware. He genuinely understands storytelling, and that\'s the most important quality any cinematographer can have. A camera doesn\'t make a story; a storyteller does. And the mentors here aren\'t just teaching from the front of the room. They\'re facilitators, walking with you through every step. Honestly, the whole environment just feels different. It\'s friendly, easy, and fun to be in. I think any Gen Z person who loves creating will vibe with this place exactly like I did.',
     rating: 5,
-    course: 'Cinematic Masterclass',
   },
   {
-    name: 'Anita Rai',
-    role: 'Content Creator',
-    quote: 'From YouTube videos to cinematic brand films — ZYAMARU showed me the difference between recording and creating. The community alone is worth it.',
+    name: 'Ronish shrestha',
+    quote: 'As a business owner, I didn\'t join to become a full-time filmmaker. I joined to finally understand content creation and visual storytelling for my own brand. Now I don\'t have to depend entirely on others for my marketing. But before I found Zyamaru, I almost enrolled somewhere else that looked convincing on the surface.',
     rating: 5,
-    course: 'Documentary Filmmaking',
   },
   {
-    name: 'Dipesh Shrestha',
-    role: 'Music Video Director',
-    quote: 'The curriculum is world-class. I\'ve seen online courses from the US and Europe — this matches or exceeds them, and it\'s taught with Nepal\'s context in mind.',
+    name: 'Sunita Gaha',
+    quote: 'I\'ve realized that one wrong decision on which institute to choose can make your entire investment feel like garbage. Asking the right questions before enrolling anywhere, including here, genuinely matters.',
     rating: 5,
-    course: 'Camera Movement & Blocking',
+  },
+  {
+    name: 'Bijendra Maharjan',
+    quote: 'I used to just cover weddings: get the rings, get the vows, get the dance, job done. After this course, everything changed. Now I notice the quiet look between a father and daughter, the tear no one else caught, the human moments a checklist would never capture. And it\'s not just weddings. I can\'t even watch a regular movie the same way anymore. I notice the shot composition, the lighting, the camera angles, every single time. Storytelling, not just documentation, is what makes my work actually mean something now.',
+    rating: 5,
+  },
+  {
+    name: 'Prasiddha Singh',
+    quote: 'I used to just point and shoot, hoping it turned out okay. Now I actually understand white balance, shot size, and camera angle, and how each one shapes a story. What used to feel like guesswork now feels like a language I\'m learning to speak. Online tutorials never gave me this because cinematography has to be physically experienced, not just watched. This course made me better at my actual job, gave me real confidence, and honestly, if you\'re confused about whether to join, just take the course. This is where things really started for me.',
+    rating: 5,
   },
 ];
 
@@ -137,10 +135,10 @@ function TestimonialCard({
   course,
 }: {
   name: string;
-  role: string;
+  role?: string;
   quote: string;
   rating: number;
-  course: string;
+  course?: string;
 }) {
   return (
     <div
@@ -223,15 +221,17 @@ function TestimonialCard({
           >
             {name}
           </div>
-          <div
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.7rem',
-              color: 'var(--color-text-muted)',
-            }}
-          >
-            {role} • {course}
-          </div>
+          {(role || course) && (
+            <div
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.7rem',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              {[role, course].filter(Boolean).join(' • ')}
+            </div>
+          )}
         </div>
       </div>
     </div>
