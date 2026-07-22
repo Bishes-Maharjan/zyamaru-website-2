@@ -81,6 +81,9 @@ export default function Footer() {
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
                 <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📞</span> +977 9802626853
               </a>
+              <span style={{ color: 'var(--color-amber)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📄</span> PAN: 621197259
+              </span>
             </div>
 
             {/* Social Media Only Icons */}
