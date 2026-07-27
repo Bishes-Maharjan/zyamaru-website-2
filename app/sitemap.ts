@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next'
-// adjust path to your actual file
-import { courses } from './data/courses'         // adjust path to your actual file
+import { courses } from './data/courses'
 import { instructors } from './data/instructors'
 import { getPosts } from '@/lib/notion/getPosts'
 

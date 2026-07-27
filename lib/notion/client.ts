@@ -1,7 +1,11 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
+import nodeFetch from "node-fetch";
 
-export const notion = new Client({ auth: process.env.NOTION_TOKEN });
+export const notion = new Client({ 
+  auth: process.env.NOTION_TOKEN,
+  fetch: nodeFetch as any
+});
 export const databaseId = process.env.NOTION_DATABASE_ID as string;
 export const n2m = new NotionToMarkdown({ notionClient: notion });
 
@@ -22,19 +26,22 @@ n2m.setCustomTransformer("video", async (block) => {
   return `<div class="notion-video-container full-width-breakout"><iframe src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
 });
 
-let cachedDataSourceId: string | null = null;
+let cachedDataSourceIdPromise: Promise<string> | null = null;
 
-export async function getDataSourceId(dbId: string): Promise<string> {
-  if (cachedDataSourceId) return cachedDataSourceId;
+export function getDataSourceId(dbId: string): Promise<string> {
+  if (cachedDataSourceIdPromise) return cachedDataSourceIdPromise;
 
-  const db = await notion.databases.retrieve({ database_id: dbId });
+  cachedDataSourceIdPromise = notion.databases.retrieve({ database_id: dbId }).then((db) => {
+    if (!("data_sources" in db) || !db.data_sources?.length) {
+      throw new Error(
+        `No data sources found for database ${dbId} — check integration permissions`
+      );
+    }
+    return db.data_sources[0].id;
+  }).catch(err => {
+    cachedDataSourceIdPromise = null;
+    throw err;
+  });
 
-  if (!("data_sources" in db) || !db.data_sources?.length) {
-    throw new Error(
-      `No data sources found for database ${dbId} — check integration permissions`
-    );
-  }
-
-  cachedDataSourceId = db.data_sources[0].id;
-  return cachedDataSourceId;
+  return cachedDataSourceIdPromise;
 }
