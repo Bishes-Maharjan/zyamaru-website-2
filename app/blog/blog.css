@@ -1,0 +1,270 @@
+/* Blog specific styles matching the cinematic theme */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+  text-decoration: none;
+  height: 100%;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 168, 83, 0.05);
+}
+
+.blog-card-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; /* 5:3 aspect ratio */
+  overflow: hidden;
+  background-color: #111;
+}
+
+.blog-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.blog-card:hover .blog-card-image {
+  transform: scale(1.05);
+}
+
+.blog-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.blog-card-date {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blog-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-card-title {
+  color: var(--color-amber);
+}
+
+.blog-card-excerpt {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Post Detail Styles (Prose) */
+.back-to-journal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.back-to-journal:hover {
+  color: var(--color-amber);
+}
+
+.prose-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.blog-post-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.blog-post-date {
+  font-family: var(--font-body);
+  color: var(--color-amber);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.blog-post-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-cover {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 4rem;
+  aspect-ratio: 16/9;
+}
+
+.notion-content {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.notion-content h1,
+.notion-content h2,
+.notion-content h3 {
+  color: var(--color-text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.notion-content h1 { font-size: 2.5rem; }
+.notion-content h2 { font-size: 2rem; }
+.notion-content h3 { font-size: 1.5rem; }
+
+.notion-content p {
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+}
+
+.notion-content a {
+  color: var(--color-amber);
+  text-decoration: underline;
+  text-decoration-color: rgba(212, 168, 83, 0.3);
+  text-underline-offset: 4px;
+  transition: all 0.2s ease;
+}
+
+.notion-content a:hover {
+  color: var(--color-amber-light);
+  text-decoration-color: var(--color-amber);
+}
+
+.notion-content ul,
+.notion-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.notion-content li {
+  margin-bottom: 0.5rem;
+}
+
+.notion-content blockquote {
+  border-left: 4px solid var(--color-amber);
+  padding-left: 1.5rem;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: var(--color-text-primary);
+  background: rgba(212, 168, 83, 0.05);
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.notion-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: 2rem 0;
+  border: 1px solid var(--color-border);
+}
+
+.notion-content pre {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem !important;
+  margin: 2rem 0 !important;
+  overflow-x: auto;
+}
+
+.notion-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.notion-content p code, 
+.notion-content li code {
+  background: var(--color-bg-elevated);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  color: var(--color-amber-light);
+  border: 1px solid var(--color-border);
+}
+
+.notion-content hr {
+  border: 0;
+  height: 1px;
+  background: var(--color-border);
+  margin: 3rem 0;
+}
+
+.notion-video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  margin: 2rem 0;
+}
+
+.notion-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .notion-content {
+    font-size: 1rem;
+  }
+  
+  .notion-content h1 { font-size: 2rem; }
+  .notion-content h2 { font-size: 1.5rem; }
+}

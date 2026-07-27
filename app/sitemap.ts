@@ -2,10 +2,11 @@ import { MetadataRoute } from 'next'
 // adjust path to your actual file
 import { courses } from './data/courses'         // adjust path to your actual file
 import { instructors } from './data/instructors'
+import { getPosts } from '@/lib/notion/getPosts'
 
 const BASE_URL = 'https://www.zyamarufilms.com.np'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticRoutes: MetadataRoute.Sitemap = [
         {
             url: BASE_URL,
@@ -31,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.5,
         },
+        {
+            url: `${BASE_URL}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
     ]
 
     const instructorRoutes: MetadataRoute.Sitemap = instructors.map((instructor) => ({
@@ -47,5 +54,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.9,
     }))
 
-    return [...staticRoutes, ...instructorRoutes, ...courseRoutes]
+    let blogRoutes: MetadataRoute.Sitemap = [];
+    try {
+        const posts = await getPosts();
+        blogRoutes = posts.map((post) => ({
+            url: `${BASE_URL}/blog/${post.slug}`,
+            lastModified: new Date(post.date || new Date()),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        }));
+    } catch (e) {
+        console.error("Failed to generate blog sitemap routes", e);
+    }
+
+    return [...staticRoutes, ...instructorRoutes, ...courseRoutes, ...blogRoutes]
 }

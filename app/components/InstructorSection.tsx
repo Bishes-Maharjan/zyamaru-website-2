@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScrollReveal from './ScrollReveal';
@@ -40,8 +40,14 @@ export default function InstructorSection() {
     }),
   };
 
-  const yearsInFilm = instructor.born
-    ? new Date().getFullYear() - parseInt(instructor.born) - 18
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
+  const yearsInFilm = instructor.born && currentYear
+    ? currentYear - parseInt(instructor.born) - 18
     : null;
 
   return (

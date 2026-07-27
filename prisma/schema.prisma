@@ -4,8 +4,8 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -33,4 +33,35 @@ model StayUpdatedEmail {
   id        Int      @id @default(autoincrement())
   email     String
   createdAt DateTime @default(now())
+}
+
+model BlogPostCache {
+  id           String   @id @default(cuid())
+  pageId       String   @unique
+  slug         String   @unique
+  title        String
+  description  String?
+  coverUrl     String?
+  status       String
+  author       String?
+  markdown     String   @db.Text
+  lastSyncedAt DateTime @default(now())
+
+  images NotionImage[] @relation("PostImages")
+}
+
+model NotionImage {
+  id        String   @id @default(cuid())
+  blockId   String   @unique
+  hostedUrl String
+  notionUrl String?
+  width     Int?
+  height    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  postId String
+  post   BlogPostCache @relation("PostImages", fields: [postId], references: [id])
+
+  @@index([postId])
 }

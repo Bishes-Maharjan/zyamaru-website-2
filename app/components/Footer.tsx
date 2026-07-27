@@ -13,7 +13,7 @@ const footerLinks = {
   company: [
     { name: 'About Us', link: '/#about' },
     { name: 'Instructors', link: '/#instructor' },
-    { name: 'Blog', link: '#' },
+    { name: 'Blog', link: '/blog' },
     { name: 'Careers', link: '/career' },
     { name: 'Press', link: 'https://www.youtube.com/@zyamarufilmmakers5114' },
   ],
