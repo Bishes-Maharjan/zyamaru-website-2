@@ -48,6 +48,7 @@ export default function NotionContent({ content }: NotionContentProps) {
             return (
               <span style={{ display: 'block', position: 'relative', width: '100%', height: 'auto', minHeight: '300px' }}>
                 <Image
+                  loading="eager"
                   src={imgSrc}
                   alt={alt || 'Blog Image'}
                   width={800}
@@ -62,18 +63,29 @@ export default function NotionContent({ content }: NotionContentProps) {
               </span>
             );
           },
+          iframe({ node, ...props }) {
+            return (
+              <div className="notion-video-container" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', maxWidth: '100%', borderRadius: '0.75rem', margin: '2rem 0' }}>
+                <iframe
+                  {...(props as any)}
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                />
+              </div>
+            );
+          },
           a({ href, children }) {
             // Check if link is a YouTube video
             if (href) {
               const ytId = getYouTubeId(href);
               if (ytId && children?.toString().includes(href)) {
                 return (
-                  <div className="notion-video-container">
+                  <div className="notion-video-container" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', width: '100%', maxWidth: '100%', borderRadius: '0.75rem', margin: '2rem 0' }}>
                     <iframe
                       src={`https://www.youtube.com/embed/${ytId}`}
                       title="YouTube video player"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
+                      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
                     ></iframe>
                   </div>
                 );

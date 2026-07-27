@@ -38,6 +38,7 @@ export default async function BlogPage() {
                 {post.coverImage ? (
                   <div className="blog-card-image-wrap">
                     <Image
+                      loading="eager"
                       src={post.coverImage}
                       alt={post.title}
                       fill
@@ -50,7 +51,7 @@ export default async function BlogPage() {
                     <span style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-heading)' }}>ZYAMARU</span>
                   </div>
                 )}
-                
+
                 <div className="blog-card-content">
                   <span className="blog-card-date">
                     {post.date ? new Date(post.date).toLocaleDateString('en-US', {

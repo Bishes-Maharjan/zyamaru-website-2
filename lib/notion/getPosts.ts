@@ -47,7 +47,7 @@ export function getDateProperty(
  * Get the cover image URL from a Notion page.
  */
 export function getCoverImage(page: PageObjectResponse): string | null {
-  console.log("from getCoverImage, page:", JSON.stringify(page, null, 2));
+
   if (!page.cover) return null;
 
   if (page.cover.type === 'external') {
@@ -103,6 +103,6 @@ export async function getPosts(): Promise<BlogPostMeta[]> {
       author: post.author ?? "",
     }));
 
-  console.log(posts);
+
   return posts;
 }

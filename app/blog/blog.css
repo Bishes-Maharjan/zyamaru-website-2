@@ -242,6 +242,7 @@
   padding-bottom: 56.25%; /* 16:9 */
   height: 0;
   overflow: hidden;
+  width: 100%;
   max-width: 100%;
   border-radius: var(--radius-md);
   margin: 2rem 0;

@@ -96,6 +96,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.coverImage && (
           <div className="blog-post-cover">
             <Image
+              loading="eager"
               src={post.coverImage}
               alt={post.title}
               fill
