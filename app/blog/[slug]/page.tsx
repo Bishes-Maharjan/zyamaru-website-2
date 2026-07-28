@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <main className="section" style={{ paddingTop: '120px', minHeight: '100vh' }}>
+    <main className="section" style={{ paddingTop: '190px', minHeight: '100vh' }}>
       <div className="prose-container">
         <Link
           href="/blog"
