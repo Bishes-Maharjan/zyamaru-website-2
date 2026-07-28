@@ -54,6 +54,15 @@ function getCoverImage(page: PageObjectResponse): string | null {
   return null;
 }
 
+function getMultiSelectProperty(
+  page: PageObjectResponse,
+  propertyName: string
+): string[] {
+  const prop = page.properties[propertyName];
+  if (!prop || prop.type !== 'multi_select') return [];
+  return prop.multi_select.map((item) => item.name);
+}
+
 /**
  * Check if the cached page is stale.
  */
@@ -182,6 +191,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       description: cached.description ?? "",
       coverImage: cached.coverUrl ?? null,
       author: cached.author ?? "",
+      tags: cached.tag ? cached.tag.split(',').map((t: string) => t.trim()).filter(Boolean) : [],
       markdown: cached.markdown,
       lastEditedTime: typedPage.last_edited_time,
     };
@@ -206,6 +216,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   const description = getTextProperty(typedPage, 'Description');
   const author = getTextProperty(typedPage, 'Author');
   const status = getTextProperty(typedPage, 'Status') || 'Published'; // Though we filtered by Published
+  const tags = getMultiSelectProperty(typedPage, 'Tag');
   const lastSyncedAt = new Date();
 
   const data = {
@@ -215,6 +226,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     coverUrl: coverImageURL ?? undefined,
     status,
     author,
+    tag: tags.length > 0 ? tags.join(', ') : null,
     lastSyncedAt,
   };
 
@@ -245,6 +257,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     description: upserted.description ?? "",
     coverImage: upserted.coverUrl ?? null,
     author: upserted.author ?? "",
+    tags: upserted.tag ? upserted.tag.split(',').map((t) => t.trim()).filter(Boolean) : [],
     markdown: upserted.markdown,
     lastEditedTime: typedPage.last_edited_time,
   };

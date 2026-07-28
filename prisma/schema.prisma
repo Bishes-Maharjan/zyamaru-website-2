@@ -44,6 +44,7 @@ model BlogPostCache {
   coverUrl     String?
   status       String
   author       String?
+  tag          String?
   markdown     String   @db.Text
   lastSyncedAt DateTime @default(now())
 

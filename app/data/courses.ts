@@ -29,9 +29,9 @@ export interface Course {
 
 export const courses: Course[] = [
   {
-    id: 'cinematic-masterclass-beginner',
-    slug: 'cinematic-masterclass-beginner',
-    title: 'Cinematic Masterclass: The Fundamentals',
+    id: 'photography-the-fundamentals',
+    slug: 'photography-the-fundamentals',
+    title: 'Photography: The Fundamentals',
     instructor: 'Bijesh Maharjan',
     // instructorProfile: '/instructor/bijesh-maharjan',
 
@@ -69,9 +69,9 @@ export const courses: Course[] = [
     available: true,
   },
   {
-    id: 'cinematic-masterclass-advanced',
-    slug: 'cinematic-masterclass-advanced',
-    title: 'Cinematic Masterclass: Advanced Visual Storytelling',
+    id: 'photography-to-advanced-cinnetography',
+    slug: 'photography-to-advanced-cinnetography',
+    title: 'Photography to Advanced Cinmetography',
     instructor: 'Amar Maharjan',
     instructorProfile: '/instructor/amar-maharjan',
     price: 'Rs. 20,000',
@@ -79,6 +79,45 @@ export const courses: Course[] = [
     // rating: 4.9,
     // students: '420',
     duration: '1 Month (52 hours)',
+    level: 'Advanced',
+    badge: 'Bestseller',
+    image: 'rgba(212, 168, 83, 0.25)',
+    description: 'Take your filmmaking to the professional level. Explore complex lighting, narrative direction, and high-end production workflows.',
+    learningOutcomes: [
+      'Master high-key and low-key lighting for mood',
+      'Learn advanced camera movement (Gimbals, Dollies)',
+      'Directing actors and narrative blocking',
+      'Professional color science and LUT workflows',
+      'Production management and set etiquette'
+    ],
+    curriculum: [
+      {
+        chapter: 'Module 1: Advanced Cinematography',
+        topics: ['Motivating Light', 'Color Contrast & Theory', 'The Language of Movement']
+      },
+      {
+        chapter: 'Module 2: Directing & Production',
+        topics: ['Script Breakdown', 'Working with Talent', 'Set Leadership']
+      },
+      {
+        chapter: 'Module 3: Post-Production Mastery',
+        topics: ['Advanced Color Grading', 'Sound Design Layers', 'Workflow Optimization']
+      }
+    ],
+    category: CourseCategory.CinematicMasterclassAdvanced,
+    available: true
+  },
+  {
+    id: 'advanced-cinnetography-lighting-masterclass',
+    slug: 'advanced-cinnetography-lighting-masterclass',
+    title: 'Cinematic Lighting Masterclass',
+    instructor: 'Amar Maharjan',
+    instructorProfile: '/instructor/amar-maharjan',
+    price: 'Rs. 40,000',
+    originalPrice: 'Rs. 55,000',
+    // rating: 4.9,
+    // students: '420',
+    duration: '6 Days (48 hours)',
     level: 'Advanced',
     badge: 'Bestseller',
     image: 'rgba(212, 168, 83, 0.25)',

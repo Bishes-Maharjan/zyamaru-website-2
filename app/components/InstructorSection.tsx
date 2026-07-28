@@ -204,6 +204,7 @@ export default function InstructorSection() {
                     >
                       {instructor.image ? (
                         <Image
+
                           src={instructor.image}
                           alt={instructor.name}
                           fill

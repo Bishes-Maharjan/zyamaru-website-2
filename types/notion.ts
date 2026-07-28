@@ -8,6 +8,7 @@ export interface BlogPostMeta {
     description: string;
     coverImage: string | null;
     author: string;
+    tags: string[];
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -85,6 +86,15 @@ interface BlogPostProperties {
         id: string;
         type: "title";
         title: RichTextItem[];
+    };
+    Tag: {
+        id: string;
+        type: "multi_select";
+        multi_select: {
+            id: string;
+            name: string;
+            color: string;
+        }[];
     };
 }
 

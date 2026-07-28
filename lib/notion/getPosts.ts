@@ -25,6 +25,15 @@ export function getTextProperty(
   return '';
 }
 
+export function getMultiSelectProperty(
+  page: PageObjectResponse,
+  propertyName: string
+): string[] {
+  const prop = page.properties[propertyName];
+  if (!prop || prop.type !== 'multi_select') return [];
+  return prop.multi_select.map((item) => item.name);
+}
+
 export function getStatusProperty(page: PageObjectResponse, propertyName: string): string {
   const prop = page.properties[propertyName];
   if (!prop || prop.type !== "status") return "draft";
@@ -101,8 +110,10 @@ export async function getPosts(): Promise<BlogPostMeta[]> {
       description: post.description ?? "",
       coverImage: post.coverUrl ?? null,
       author: post.author ?? "",
+      tags: post.tag ? post.tag.split(',').map((t) => t.trim()).filter(Boolean) : [],
     }));
 
 
+  console.log(JSON.stringify(posts, null, 2));
   return posts;
 }

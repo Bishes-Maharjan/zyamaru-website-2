@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { rehostImage } from "./rehostImage";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { getCoverImage, getTextProperty, getDateProperty, getStatusProperty } from "./getPosts";
+import { getCoverImage, getTextProperty, getDateProperty, getStatusProperty, getMultiSelectProperty } from "./getPosts";
 
 
 async function checkStaleness(
@@ -42,6 +42,7 @@ export async function uploadIntoDB(page: PageObjectResponse) {
     const description = getTextProperty(page, "Description");
     const status = getStatusProperty(page, "Status");
     const author = getTextProperty(page, "Author");
+    const tags = getMultiSelectProperty(page, "Tag");
 
     const data = {
         title,
@@ -50,6 +51,7 @@ export async function uploadIntoDB(page: PageObjectResponse) {
         coverUrl: coverImageURL ?? undefined,
         status,
         author,
+        tag: tags.length > 0 ? tags.join(', ') : null,
         lastSyncedAt: new Date(),
     };
 
