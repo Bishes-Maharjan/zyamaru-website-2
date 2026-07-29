@@ -84,6 +84,7 @@ model products {
   modelName            String?
   createdAt            DateTime               @default(now())
   categoryId           Int?
+  description          String?
   inventory            inventory[]
   product_images       product_images[]
   categories           categories?            @relation(fields: [categoryId], references: [id], onDelete: Restrict)

@@ -114,6 +114,6 @@ export async function getPosts(): Promise<BlogPostMeta[]> {
     }));
 
 
-  console.log(JSON.stringify(posts, null, 2));
+  // console.log(JSON.stringify(posts, null, 2));
   return posts;
 }

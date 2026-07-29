@@ -24,7 +24,6 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
-        pathname: '/del9ayxbd/**', // your cloud name, restricts to your account only
       }
     ],
   },

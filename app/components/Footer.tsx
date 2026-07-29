@@ -76,10 +76,10 @@ export default function Footer() {
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
                 <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>✉</span> info@zyamarufilms.com.np
               </a>
-              <a href={`tel:+9779802626853`} style={{ color: 'var(--color-amber)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.2s' }}
+              <a href={`tel:+9779768620239`} style={{ color: 'var(--color-amber)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-white)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-amber)'}>
-                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📞</span> +977 9802626853
+                <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📞</span> +977 9768620239
               </a>
               <span style={{ color: 'var(--color-amber)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <span style={{ fontSize: '1rem', color: 'var(--color-amber)' }}>📄</span> PAN: 621197259
