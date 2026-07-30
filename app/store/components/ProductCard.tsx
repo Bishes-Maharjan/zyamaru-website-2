@@ -9,6 +9,7 @@ interface ProductCardProps {
   category: string;
   price: number;
   image: string | null;
+  priority?: boolean;
 }
 
 export default function ProductCard({
@@ -17,7 +18,8 @@ export default function ProductCard({
   modelName,
   category,
   price,
-  image
+  image,
+  priority = false
 }: ProductCardProps) {
   // Format price as NPR
   const formattedPrice = new Intl.NumberFormat('en-NP', {
@@ -34,6 +36,7 @@ export default function ProductCard({
             src={image}
             alt={productName}
             fill
+            priority={priority}
             className="product-card-image"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />

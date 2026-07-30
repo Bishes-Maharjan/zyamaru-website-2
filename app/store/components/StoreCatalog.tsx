@@ -160,8 +160,8 @@ export default function StoreCatalog({ initialProducts, initialPagination, initi
         </div>
       ) : (
         <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard key={product.id} {...product} />
+          {products.map((product, index) => (
+            <ProductCard key={product.id} {...product} priority={index < 4} />
           ))}
         </div>
       )}
