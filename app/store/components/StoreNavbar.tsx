@@ -62,7 +62,7 @@ export default function StoreNavbar({
   ].filter(Boolean).length;
 
   return (
-    <nav className="store-navbar">
+    <aside className="store-sidebar">
       <div className="store-navbar-inner">
         {/* Logo / Brand */}
         <Link href="/store" className="store-navbar-brand">
@@ -102,7 +102,7 @@ export default function StoreNavbar({
         {/* Controls: Filters + Sort */}
         <div className="store-navbar-controls">
           {/* Filter Toggle */}
-          <div ref={filtersRef} style={{ position: 'relative' }}>
+          <div ref={filtersRef} className="store-navbar-filters-wrapper">
             <button
               className={`store-navbar-filter-btn ${filtersOpen ? 'active' : ''}`}
               onClick={() => setFiltersOpen(!filtersOpen)}
@@ -117,9 +117,8 @@ export default function StoreNavbar({
             </button>
 
             {/* Filter Dropdown */}
-            {filtersOpen && (
-              <div className="store-navbar-dropdown">
-                <div className="store-navbar-dropdown-group">
+            <div className={`store-navbar-dropdown ${filtersOpen ? 'open' : ''}`}>
+              <div className="store-navbar-dropdown-group">
                   <label className="store-navbar-dropdown-label">Category</label>
                   <select
                     value={categoryId}
@@ -183,8 +182,7 @@ export default function StoreNavbar({
                   </button>
                 )}
               </div>
-            )}
-          </div>
+            </div>
 
           {/* Sort Dropdown */}
           <select
@@ -200,6 +198,6 @@ export default function StoreNavbar({
           </select>
         </div>
       </div>
-    </nav>
+    </aside>
   );
 }

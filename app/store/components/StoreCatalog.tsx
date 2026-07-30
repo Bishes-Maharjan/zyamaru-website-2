@@ -108,7 +108,7 @@ export default function StoreCatalog({ initialProducts, initialPagination, initi
     : `${pagination.totalCount} products found`;
 
   return (
-    <>
+    <div className="store-layout">
       <StoreNavbar
         categories={categories}
         search={search}
@@ -125,8 +125,9 @@ export default function StoreCatalog({ initialProducts, initialPagination, initi
         onAvailabilityChange={setAvailability}
       />
 
-      <div className="store-results-bar">
-        <span>{resultText}</span>
+      <div className="store-main-content">
+        <div className="store-results-bar">
+          <span>{resultText}</span>
       </div>
 
       {/* Loading / Grid / Empty */}
@@ -204,6 +205,7 @@ export default function StoreCatalog({ initialProducts, initialPagination, initi
           </button>
         </div>
       )}
-    </>
+      </div>
+    </div>
   );
 }
