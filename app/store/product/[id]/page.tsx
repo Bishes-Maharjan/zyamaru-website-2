@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/erp-db';
 import ImageGallery from '../../components/ImageGallery';
+import ProductCard from '../../components/ProductCard';
 import type { Metadata } from 'next';
 
 export function generateStaticParams() {
@@ -61,7 +62,8 @@ async function getProduct(id: number) {
     price,
     images: product.product_images.map((img: any) => img.url),
     isAvailable: totalQuantity > 0,
-    description: product.description
+    description: product.description,
+    categoryId: product.categoryId
   };
 }
 
@@ -89,7 +91,57 @@ async function ProductContent({ params }: { params: Promise<{ id: string }> }) {
   const message = `Hello, I'm interested in purchasing the ${product.productName}${product.modelName ? ` (${product.modelName})` : ''} from the Zyamaru store.`;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
+  // Fetch similar products
+  let similarProductsRaw = await prisma.products.findMany({
+    where: {
+      categoryId: product.categoryId,
+      id: { not: product.id },
+      inventory: { some: { quantityAvailable: { gt: 0 } } }
+    },
+    take: 3,
+    include: {
+      product_images: true,
+      categories: true,
+      inventory: {
+        where: { quantityAvailable: { gt: 0 } },
+        orderBy: { dateAdded: 'desc' },
+        take: 1
+      }
+    },
+    orderBy: { createdAt: 'desc' }
+  });
+
+  if (similarProductsRaw.length === 0) {
+    similarProductsRaw = await prisma.products.findMany({
+      where: {
+        id: { not: product.id },
+        inventory: { some: { quantityAvailable: { gt: 0 } } }
+      },
+      take: 3,
+      include: {
+        product_images: true,
+        categories: true,
+        inventory: {
+          where: { quantityAvailable: { gt: 0 } },
+          orderBy: { dateAdded: 'desc' },
+          take: 1
+        }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+  }
+
+  const similarProducts = similarProductsRaw.map((p: any) => ({
+    id: p.id,
+    productName: p.productName,
+    modelName: p.modelName,
+    category: p.categories?.name || 'Uncategorized',
+    price: Number(p.inventory[0]?.estimatedSellingPricePerPiece || 0),
+    image: p.product_images.length > 0 ? p.product_images[0].url : null,
+  }));
+
   return (
+    <>
     <div className="product-detail-layout">
       {/* Image Gallery with main banner + thumbnails */}
       <ImageGallery images={product.images} productName={product.productName} />
@@ -151,6 +203,20 @@ async function ProductContent({ params }: { params: Promise<{ id: string }> }) {
         </a>
       </div>
     </div>
+    
+    {similarProducts.length > 0 && (
+      <div className="similar-products-section" style={{ marginTop: '4rem', borderTop: '1px solid var(--store-border)', paddingTop: '3rem' }}>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: 'var(--store-text-primary)' }}>
+          You May Also Like
+        </h2>
+        <div className="product-grid">
+          {similarProducts.map((p: any) => (
+            <ProductCard key={p.id} {...p} />
+          ))}
+        </div>
+      </div>
+    )}
+    </>
   );
 }
 

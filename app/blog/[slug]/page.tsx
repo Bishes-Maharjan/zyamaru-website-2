@@ -30,10 +30,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | ZYAMARU Blog`,
     description: post.description,
+    alternates: {
+      canonical: `https://www.zyamarufilms.com.np/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
+      url: `https://www.zyamarufilms.com.np/blog/${slug}`,
       publishedTime: post.date,
       images: post.coverImage ? [post.coverImage] : [],
     },
