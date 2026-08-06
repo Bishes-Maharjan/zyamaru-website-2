@@ -42,6 +42,7 @@ async function getInitialProducts() {
     price: Number(product.inventory[0]?.estimatedSellingPricePerPiece || 0),
     image: product.product_images.length > 0 ? product.product_images[0].url : null,
     availableQuantity: product.inventory[0]?.quantityAvailable || 0,
+    description: product.description || null,
   }));
 
   // Also fetch categories

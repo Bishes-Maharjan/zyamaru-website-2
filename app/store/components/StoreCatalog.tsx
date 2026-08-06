@@ -8,12 +8,13 @@ import { fetchStoreProducts } from '@/lib/actions/store';
 interface Product {
   id: number;
   productName: string;
-  modelName?: string;
+  modelName: string | null;
   category: string;
-  categoryId?: number;
+  categoryId: number | null;
   price: number;
   image: string | null;
   availableQuantity: number;
+  description: string | null;
 }
 
 interface Category {

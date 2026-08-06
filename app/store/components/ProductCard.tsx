@@ -5,7 +5,7 @@ import '../store.css';
 interface ProductCardProps {
   id: number;
   productName: string;
-  modelName?: string;
+  modelName?: string | null;
   category: string;
   price: number;
   image: string | null;
