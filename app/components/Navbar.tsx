@@ -13,7 +13,7 @@ const navLinks = [
   { label: 'Instructor', href: '#instructor' },
   // { label: 'Curriculum', href: '#curriculum' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Careers', href: '#career' },
+  { label: 'Careers', href: '/career' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
@@ -86,16 +86,17 @@ export default function Navbar() {
     e.preventDefault();
     setMobileOpen(false);
 
-    if (pathname !== '/') {
-      router.push('/' + href);
-      return;
-    }
-
-    if (href.includes('#')) {
-      const el = document.querySelector(href);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('#')) {
+      if (pathname !== '/') {
+        router.push('/' + href);
+      } else {
+        const el = document.querySelector(href);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
       }
+    } else {
+      router.push(href);
     }
   };
 
