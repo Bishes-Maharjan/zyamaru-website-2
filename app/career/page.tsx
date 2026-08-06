@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { OPEN_POSITIONS } from './position';
 import toast from 'react-hot-toast';
+import { submitCareerApplication } from '@/lib/actions/career';
 
 // ── Validation ───────────────────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -248,21 +249,16 @@ export default function CareerPage() {
         setIsSubmitting(true);
 
         try {
-            const res = await fetch('/api/career', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
+            const result = await submitCareerApplication(formData);
 
-            if (res.ok) {
+            if (result.success) {
                 // Reset immediately, then toast appears at top
                 setFormData(emptyForm);
                 setErrors({});
                 setTouched(false);
                 toast.success('Application sent! We\'ll get back to you within 7 working days.', { duration: 5000 });
             } else {
-                const data = await res.json();
-                toast.error(data.error || 'Submission failed. Please try again.');
+                toast.error(result.error || 'Submission failed. Please try again.');
             }
         } catch {
             toast.error('Failed to connect. Please check your connection and try again.');

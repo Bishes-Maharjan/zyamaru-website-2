@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import ProductCard from './ProductCard';
 import StoreNavbar from './StoreNavbar';
+import { fetchStoreProducts } from '@/lib/actions/store';
 
 interface Product {
   id: number;
@@ -69,21 +70,17 @@ export default function StoreCatalog({ initialProducts, initialPagination, initi
   const fetchProducts = useCallback(async (page: number) => {
     setIsLoading(true);
     try {
-      const params = new URLSearchParams();
-      params.set('page', page.toString());
-      if (debouncedSearch) params.set('search', debouncedSearch);
-      if (categoryId) params.set('categoryId', categoryId);
-      if (sortBy) params.set('sortBy', sortBy);
-      if (debouncedMinPrice) params.set('minPrice', debouncedMinPrice);
-      if (debouncedMaxPrice) params.set('maxPrice', debouncedMaxPrice);
-      if (availability !== 'all') params.set('availability', availability);
-
-      const res = await fetch(`/api/store?${params.toString()}`);
-      if (res.ok) {
-        const data = await res.json();
-        setProducts(data.products);
-        setPagination(data.pagination);
-      }
+      const data = await fetchStoreProducts({
+        page,
+        search: debouncedSearch || undefined,
+        categoryId: categoryId || undefined,
+        sortBy: sortBy || undefined,
+        minPrice: debouncedMinPrice || undefined,
+        maxPrice: debouncedMaxPrice || undefined,
+        availability: availability !== 'all' ? availability : undefined,
+      });
+      setProducts(data.products);
+      setPagination(data.pagination);
     } catch (error) {
       console.error('Failed to fetch products', error);
     } finally {

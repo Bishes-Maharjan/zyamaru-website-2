@@ -58,7 +58,6 @@ export default function NotionContent({ content }: NotionContentProps) {
                     height: 'auto',
                     objectFit: 'contain'
                   }}
-                  unoptimized={imgSrc.startsWith('/api/notion-image')} // Optimize via the proxy/Notion
                 />
               </span>
             );

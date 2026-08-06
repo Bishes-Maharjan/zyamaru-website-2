@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { courses } from '../data/courses';
 import { useLenis } from './SmoothScroll';
+import { submitContactForm } from '@/lib/actions/contact';
 
 // ── Validation rules ──────────────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -150,13 +151,9 @@ export default function EnrollModal() {
 
   const mutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error('Failed to submit');
-      return res.json();
+      const result = await submitContactForm(data);
+      if (!result.success) throw new Error(result.error || 'Failed to submit');
+      return result;
     },
     onSuccess: () => {
       toast.success('Application sent successfully!');
