@@ -156,16 +156,23 @@ export default function EnrollModal() {
       return result;
     },
     onSuccess: () => {
-      toast.success('Application sent successfully!');
       setTimeout(() => {
         closeEnrollModal();
+        toast.success('Application sent successfully!');
         setFormData(emptyForm);
         setErrors({});
         setTouched(false);
-      }, 1500);
+      }, 1000);
     },
-    onError: () => {
-      toast.error('Failed to send application. Please try again.');
+    onError: (error) => {
+      console.log(error)
+      setTimeout(() => {
+        closeEnrollModal();
+        toast.error('Failed to send application. Please try again.');
+        setFormData(emptyForm);
+        setErrors({});
+        setTouched(false);
+      }, 1000);
     },
   });
 
@@ -407,7 +414,7 @@ export default function EnrollModal() {
                   >
                     <option value="" disabled style={{ background: '#0a0a0a', color: 'var(--color-text-muted)' }}>Select your program</option>
                     {courses.filter((c) => c.available).map((c) => (
-                      <option key={c.id} value={c.title} style={{ background: '#0a0a0a' }}>{c.title}</option>
+                      <option key={c.id} value={c.title} style={{ background: '#0a0a0a', color: c.canBeSelected ? 'var(--color-text-primary)' : 'var(--color-text-muted)' }} disabled={!c.canBeSelected}>{c.title}</option>
                     ))}
                   </select>
                 </Field>

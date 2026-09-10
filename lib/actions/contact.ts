@@ -1,6 +1,5 @@
 'use server';
 
-import { Course } from "@/types/course";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -27,34 +26,31 @@ const emailStyles = `
 `;
 
 export type ContactFormData = {
-    name: string;
-    email: string;
-    phoneNumber: string;
-    selectedCourse: string;
-    dob: string;
-    permanentAddress: string;
-    temporaryAddress: string;
-    gender: string;
-    educationLevel: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  selectedCourse: string;
+  dob: string;
+  permanentAddress: string;
+  temporaryAddress: string;
+  gender: string;
+  educationLevel: string;
 };
 
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
-    const { name, email, phoneNumber, selectedCourse, dob, permanentAddress, temporaryAddress, gender, educationLevel } = data;
+  const { name, email, phoneNumber, selectedCourse, dob, permanentAddress, temporaryAddress, gender, educationLevel } = data;
 
-    if (!name || !email || !phoneNumber || !selectedCourse || !dob || !permanentAddress || !temporaryAddress || !gender || !educationLevel) {
-        return { success: false, error: 'All fields are required' };
-    }
-    if (!Object.values(Course).includes(selectedCourse as Course)) {
-        return { success: false, error: 'Invalid course' };
-    }
+  if (!name || !email || !phoneNumber || !selectedCourse || !dob || !permanentAddress || !temporaryAddress || !gender || !educationLevel) {
+    return { success: false, error: 'All fields are required' };
+  }
 
-    try {
-        // 1. Admin Notification Email
-        await resend.emails.send({
-            from: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
-            to: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
-            subject: `New inquiry from ${name}`,
-            html: `
+  try {
+    // 1. Admin Notification Email
+    await resend.emails.send({
+      from: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
+      to: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
+      subject: `New inquiry from ${name}`,
+      html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -91,14 +87,14 @@ export async function submitContactForm(data: ContactFormData): Promise<{ succes
           </body>
         </html>
       `
-        });
+    });
 
-        // 2. Student Confirmation Email
-        await resend.emails.send({
-            from: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
-            to: email,
-            subject: `Thank you for your enrollment in Zyamaru Films`,
-            html: `
+    // 2. Student Confirmation Email
+    await resend.emails.send({
+      from: process.env.EMAIL_INFO || "info@zyamarufilms.com.np",
+      to: email,
+      subject: `Thank you for your enrollment in Zyamaru Films`,
+      html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -139,11 +135,11 @@ export async function submitContactForm(data: ContactFormData): Promise<{ succes
           </body>
         </html>
       `
-        });
+    });
 
-        return { success: true };
-    } catch (error) {
-        console.error(error);
-        return { success: false, error: 'Failed to send email' };
-    }
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: 'Failed to send email' };
+  }
 }

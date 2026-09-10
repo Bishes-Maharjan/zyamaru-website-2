@@ -25,6 +25,7 @@ export interface Course {
   learningOutcomes: string[];
   category: CourseCategory;
   available: boolean;
+  canBeSelected: boolean;
 }
 
 export const courses: Course[] = [
@@ -67,11 +68,12 @@ export const courses: Course[] = [
     ],
     category: CourseCategory.CinematicMasterclassBeginner,
     available: true,
+    canBeSelected: false,
   },
   {
-    id: 'photography-to-advanced-cinnetography',
-    slug: 'photography-to-advanced-cinnetography',
-    title: 'Photography to Advanced Cinmetography',
+    id: 'photography-to-advanced-cinematography',
+    slug: 'photography-to-advanced-cinematography',
+    title: 'Photography to Advanced Cinematography',
     instructor: 'Amar Maharjan',
     instructorProfile: '/instructor/amar-maharjan',
     price: 'Rs. 20,000',
@@ -105,7 +107,9 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.CinematicMasterclassAdvanced,
-    available: true
+    available: true,
+    canBeSelected: true,
+
   },
   {
     id: 'advanced-cinnetography-lighting-masterclass',
@@ -144,7 +148,8 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.CinematicMasterclassAdvanced,
-    available: true
+    available: true,
+    canBeSelected: false,
   },
   {
     id: 'basic-color-grading',
@@ -216,7 +221,8 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.BasicColorGrading,
-    available: false
+    available: false,
+    canBeSelected: false,
   },
   {
     id: 'advanced-color-grading',
@@ -280,7 +286,8 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.AdvancedColorGrading,
-    available: false
+    available: false,
+    canBeSelected: false,
   },
   {
     id: 'documentary-filmmaking',
@@ -322,7 +329,8 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.DocumentaryFilmmaking,
-    available: false
+    available: false,
+    canBeSelected: false,
   },
   {
     id: 'drone-cinematography',
@@ -357,7 +365,8 @@ export const courses: Course[] = [
       }
     ],
     category: CourseCategory.DroneCinematography,
-    available: false
+    available: false,
+    canBeSelected: false,
 
   }
 ];

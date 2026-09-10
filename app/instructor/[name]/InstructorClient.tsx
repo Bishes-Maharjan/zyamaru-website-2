@@ -627,3 +627,4 @@ export default function InstructorProfile({ slug }: { slug: string }) {
     </div >
   );
 }
+

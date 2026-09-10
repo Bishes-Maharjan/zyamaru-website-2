@@ -1,22 +1,21 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Course } from '@/types/course';
 
 interface EnrollContextType {
   isOpen: boolean;
-  selectedCourse: Course | '';
-  openEnrollModal: (course?: Course) => void;
+  selectedCourse: string;
+  openEnrollModal: (course?: string) => void;
   closeEnrollModal: () => void;
 }
 
 const EnrollContext = createContext<EnrollContextType | undefined>(undefined);
 
 export function EnrollProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState<Course | ''>('');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedCourse, setSelectedCourse] = useState<string>('');
 
-  const openEnrollModal = (course?: Course) => {
+  const openEnrollModal = (course?: string) => {
     if (course) {
       setSelectedCourse(course);
     }
