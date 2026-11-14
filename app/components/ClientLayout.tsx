@@ -12,6 +12,7 @@ import SmoothScroll from './SmoothScroll';
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStoreRoute = pathname?.startsWith('/store');
+  const isLearnRoute = pathname?.startsWith('/learn');
 
   return (
     <Providers>
@@ -19,7 +20,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <EnrollProvider>
           <FilmGrain />
           <CustomCursor />
-          {!isStoreRoute && <Navbar />}
+          {!isStoreRoute && !isLearnRoute && <Navbar />}
           <EnrollModal />
           {children}
         </EnrollProvider>

@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #141414;
+  --color-bg-card: #1a1a1a;
+  --color-bg-card-hover: #222222;
+  --color-surface: #111111;
+  
+  --color-amber: #d4a853;
+  --color-amber-light: #e8c879;
+  --color-amber-dark: #b08a3e;
+  --color-amber-glow: rgba(212, 168, 83, 0.15);
+  
+  --color-text-primary: #f5f0e8;
+  --color-text-secondary: #a0998c;
+  --color-text-muted: #6b6560;
+  --color-text-accent: #d4a853;
+  
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-border-amber: rgba(212, 168, 83, 0.3);
+  
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
 /* ═══════════════════════════════════════════════
    ZYAMARU — Design System
    ═══════════════════════════════════════════════ */
@@ -566,4 +591,14 @@ a {
 .input-field.error {
   border-color: #e05252;
   box-shadow: 0 0 0 2px rgba(224, 82, 82, 0.15);
+}
+
+/* ═══════════════════════════════════════════════
+   Learn Course — Chapter Cards
+   ═══════════════════════════════════════════════ */
+
+.chapter-card:hover {
+  border-color: var(--color-amber) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(212, 168, 83, 0.12);
 }

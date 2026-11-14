@@ -68,7 +68,7 @@ export const courses: Course[] = [
     ],
     category: CourseCategory.CinematicMasterclassBeginner,
     available: true,
-    canBeSelected: false,
+    canBeSelected: true,
   },
   {
     id: 'photography-to-advanced-cinematography',
@@ -149,7 +149,7 @@ export const courses: Course[] = [
     ],
     category: CourseCategory.CinematicMasterclassAdvanced,
     available: true,
-    canBeSelected: false,
+    canBeSelected: true,
   },
   {
     id: 'basic-color-grading',
