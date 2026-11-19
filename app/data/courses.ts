@@ -361,7 +361,7 @@ export const courses: Course[] = [
     originalPrice: 'Rs. 30,000',
     // rating: 4.9,
     // students: '420',
-    duration: '26 Days (52 hours)',
+    duration: '1 Month (52 hours)',
     level: 'Beginner',
     badge: 'Bestseller',
     image: 'rgba(212, 168, 83, 0.25)',

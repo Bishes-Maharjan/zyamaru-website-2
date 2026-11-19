@@ -39,12 +39,13 @@ export default function CTASection() {
           Join 20+ filmmakers who transformed their careers with ZYAMARU. Limited seats available for the next cohort.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <EnrollButton
-            variant="primary"
+          <a
+            href="#courses"
+            className="btn-primary"
             style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}
           >
-            Explore Courses
-          </EnrollButton>
+            <span>Explore Courses</span>
+          </a>
           <EnrollButton
             variant="secondary"
             style={{ fontSize: '1rem', padding: '1rem 2.5rem' }}

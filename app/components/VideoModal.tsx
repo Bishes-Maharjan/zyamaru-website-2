@@ -67,8 +67,9 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
             onClick={(e) => e.stopPropagation()}
             style={{
               width: '100%',
-              maxWidth: '900px',
-              aspectRatio: '16/9',
+              maxWidth: '420px',
+              height: 'min(85vh, 750px)',
+              aspectRatio: '9/16',
               background: '#111',
               borderRadius: 'var(--radius-lg)',
               overflow: 'hidden',
@@ -77,37 +78,17 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'default',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.8)',
             }}
           >
-            {/* Placeholder — replace with actual video embed */}
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '2rem',
-              }}
-            >
-              <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.3 }}>🎬</div>
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  color: 'var(--color-text-muted)',
-                }}
-              >
-                Showreel video would play here
-              </p>
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.75rem',
-                  color: 'var(--color-text-muted)',
-                  opacity: 0.6,
-                  marginTop: '0.5rem',
-                }}
-              >
-                Embed your YouTube/Vimeo link
-              </p>
-            </div>
+            <iframe
+              src="https://www.instagram.com/reel/Dd4BZqMgqUX/embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, overflow: 'hidden', width: '100%', height: '100%' }}
+              allowFullScreen
+              loading="lazy"
+            />
           </motion.div>
         </motion.div>
       )}

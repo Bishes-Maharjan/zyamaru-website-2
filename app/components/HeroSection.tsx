@@ -171,9 +171,9 @@ export default function HeroSection() {
             marginTop: '2.5rem',
           }}
         >
-          <EnrollButton variant="primary">
-            Explore Courses
-          </EnrollButton>
+          <a href="#courses" className="btn-primary">
+            <span>Explore Courses</span>
+          </a>
           <a href="#showreel" className="btn-secondary">
             <svg
               width="16"
