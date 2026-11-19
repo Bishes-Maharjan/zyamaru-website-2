@@ -15,11 +15,11 @@ const footerLinks = {
     { name: 'Instructors', link: '/#instructor' },
     { name: 'Blog', link: '/blog' },
     { name: 'Careers', link: '/career' },
-    { name: 'Press', link: 'https://www.youtube.com/@zyamarufilmmakers5114' },
+    { name: 'Press', link: 'https://www.youtube.com/@zyamarufilms' },
   ],
   support: [
     { name: 'FAQ', link: '/#faq' },
-    { name: 'Community', link: 'https://www.tiktok.com/@zyamaru.films.aca?_r=1&_t=ZS-97ns4YjsVBC' },
+    { name: 'Community', link: 'https://www.youtube.com/@zyamarufilms' },
     { name: 'Terms of Service', link: '/terms' },
     { name: 'Privacy Policy', link: '/privacy' },
   ],
