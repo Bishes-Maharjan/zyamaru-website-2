@@ -46,7 +46,7 @@ const socialLinks = [
   },
   {
     name: 'TikTok',
-    url: 'https://www.tiktok.com/@zyamaru.films.aca?_r=1&_t=ZS-97ns4YjsVBC',
+    url: 'https://www.tiktok.com/@films.academy.zya',
     brandColor: socialIcons.Tiktok.color,
     icon: socialIcons.Tiktok.icon,
   },
