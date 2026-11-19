@@ -64,19 +64,81 @@ export default function TestimonialSection() {
           <div className="section-label">Testimonials</div>
         </ScrollReveal>
 
-        <TextReveal text="Stories From Our Graduates" as="h2" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}>
+          <div>
+            <TextReveal text="Stories From Our Graduates" as="h2" />
 
-        <ScrollReveal delay={0.2}>
-          <p
-            style={{
-              maxWidth: '500px',
-              marginTop: '1rem',
-              fontSize: '1.05rem',
-            }}
-          >
-            Real results from real students. Here&apos;s what they have to say.
-          </p>
-        </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <p
+                style={{
+                  maxWidth: '500px',
+                  marginTop: '1rem',
+                  fontSize: '1.05rem',
+                }}
+              >
+                Real results from real students. Here&apos;s what they have to say.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          <ScrollReveal delay={0.3}>
+            <a
+              href="https://www.youtube.com/watch?v=1hX3qkK7iKM&list=PLCzwH-gLwiLE"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.6rem',
+                padding: '0.75rem 1.4rem',
+                background: 'rgba(255, 0, 0, 0.08)',
+                border: '1px solid rgba(255, 0, 0, 0.3)',
+                borderRadius: 'var(--radius-full)',
+                color: '#fff',
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                letterSpacing: '0.02em',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 0, 0, 0.18)';
+                e.currentTarget.style.borderColor = 'rgba(255, 0, 0, 0.6)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(255, 0, 0, 0.25)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 0, 0, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(255, 0, 0, 0.3)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              {/* YouTube Play Icon */}
+              <span
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  background: '#ff0000',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  flexShrink: 0,
+                }}
+              >
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              </span>
+              <span>Watch on YouTube</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.7 }}>
+                <path d="M7 17l9.2-9.2M17 17V8H8" />
+              </svg>
+            </a>
+          </ScrollReveal>
+        </div>
       </div>
 
       {/* Marquee Row 1 (left) */}
