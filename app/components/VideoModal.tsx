@@ -82,7 +82,7 @@ export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
             }}
           >
             <iframe
-              // src="https://www.instagram.com/reel/Dd4BZqMgqUX/embed"
+              src="https://www.instagram.com/reel/Dd4BZqMgqUX/embed"
               // src="https://www.youtube.com/embed/1hX3qkK7iKM"
               width="100%"
               height="100%"

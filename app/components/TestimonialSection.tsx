@@ -83,7 +83,7 @@ export default function TestimonialSection() {
 
           <ScrollReveal delay={0.3}>
             <a
-              href="https://www.youtube.com/watch?v=1hX3qkK7iKM&list=PLCzwH-gLwiLE"
+              href="https://www.youtube.com/watch?v=OcEDmHZyD9c&list=PLCzwH-gLwiLE&index=1"
               target="_blank"
               rel="noopener noreferrer"
               style={{
