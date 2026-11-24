@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import '../store.css';
 
 interface ProductCardProps {
   id: number;
@@ -9,6 +8,7 @@ interface ProductCardProps {
   category: string;
   price: number;
   image: string | null;
+  availableQuantity?: number;
   priority?: boolean;
 }
 
@@ -19,17 +19,22 @@ export default function ProductCard({
   category,
   price,
   image,
-  priority = false
+  availableQuantity,
+  priority = false,
 }: ProductCardProps) {
-  // Format price as NPR
-  const formattedPrice = new Intl.NumberFormat('en-NP', {
-    style: 'currency',
-    currency: 'NPR',
-    maximumFractionDigits: 0
-  }).format(price);
+  const isOutOfStock = availableQuantity !== undefined && availableQuantity <= 0;
+
+  // Format price — show "Contact for price" when price is 0 or missing
+  const formattedPrice = price > 0
+    ? new Intl.NumberFormat('en-NP', {
+        style: 'currency',
+        currency: 'NPR',
+        maximumFractionDigits: 0,
+      }).format(price)
+    : null;
 
   return (
-    <Link href={`/store/product/${id}`} className="product-card">
+    <Link href={`/store/product/${id}`} className={`product-card ${isOutOfStock ? 'out-of-stock' : ''}`}>
       <div className="product-card-image-wrapper">
         {image ? (
           <Image
@@ -38,12 +43,20 @@ export default function ProductCard({
             fill
             priority={priority}
             className="product-card-image"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         ) : (
-          <div style={{ color: 'var(--store-text-secondary)', fontSize: '0.8rem' }}>
-            No image available
+          <div className="product-card-no-image">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" opacity="0.3">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <span>No image</span>
           </div>
+        )}
+        {isOutOfStock && (
+          <div className="product-card-badge out-of-stock-badge">Out of Stock</div>
         )}
       </div>
 
@@ -53,12 +66,15 @@ export default function ProductCard({
         {modelName && (
           <p className="product-card-model">{modelName}</p>
         )}
-        
+
         <div className="product-card-footer">
-          <div>
-            <span className="product-card-price-label">Price</span>
-            <span className="product-card-price">{formattedPrice}</span>
-          </div>
+          {formattedPrice ? (
+            <div>
+              <span className="product-card-price">{formattedPrice}</span>
+            </div>
+          ) : (
+            <span className="product-card-contact-price">Contact for price</span>
+          )}
         </div>
       </div>
     </Link>
